@@ -1,0 +1,71 @@
+<ion-header>
+
+    <ion-navbar color="secondary">
+        <ion-buttons end small>
+            <button ion-button icon-only color="ligth" small (click)="close()">
+                      <ion-icon name="close-circle"></ion-icon>
+                    </button>
+        </ion-buttons>
+        <ion-title>บันทึกเพิ่มเติมปัญหาการรับแจ้ง</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-list inset no-lines>
+        <ion-list-header>
+            <ion-avatar clear item-start>
+                <img *ngIf="ptype==1" src="./assets/icon/workstation.png">
+                <img *ngIf="ptype==2" src="./assets/icon/p.jpg">
+                <img *ngIf="ptype==3" src="./assets/icon/other.jpg">
+            </ion-avatar>
+            <h1 *ngIf="ptype==1">ปัญหาทางด้านเครื่อง</h1>
+            <h1 *ngIf="ptype==2">ปัญหาทางด้านโปรแกรม</h1>
+            <h1 *ngIf="ptype==3">ปัญหาทางด้านอื่น ๆ</h1>
+        </ion-list-header>
+        <hr>
+        <ion-item>
+            <ion-label stacked style="font-size:20px;">ปัญหาที่พบ:</ion-label>
+            <ion-textarea rows="5" cols="30" style="font-size:16px;" [(ngModel)]="detail" placeholder="ระบุรายละเอียดปัญหา"></ion-textarea>
+        </ion-item>
+        <!-- <img [src]="imageData" *ngIf="imageData" (click)="showPhoto()">
+        <img src="./assets/img/placeholder.png" *ngIf="!imageData">
+        <ion-row>
+            <ion-col>
+                <button ion-button icon-left clear small color="ptitle" (click)="takePicture()"> 
+                            <ion-icon name="camera"></ion-icon>
+                            <div>จับภาพ</div>
+                        </button>
+            </ion-col>
+            <ion-col>
+                <button ion-button icon-left clear small color="danger" (click)="removePicture()" [disabled]="!imageData">
+                    <ion-icon name="trash"></ion-icon>
+                    <div>ลบภาพ</div>
+                  </button>
+            </ion-col>
+        </ion-row>
+        <ion-item>
+            <button ion-button block (click)="saveProblem()">บันทึก</button>
+
+        </ion-item> -->
+        <ion-row>
+            <ion-col>
+                <button ion-button icon-left clear small color="ptitle" (click)="takePicture()"> 
+                                <ion-icon name="camera"></ion-icon>
+                            </button>
+                <button ion-button icon-left clear small color="danger" (click)="removePicture()" [disabled]="!imageData">
+                                <ion-icon name="trash"></ion-icon>
+                              </button>
+                <button ion-button icon-left clear small color="secondary" (click)="saveProblem()" [disabled]="!imageData&&!detail">
+                                  <div>บันทึก</div>
+                                </button>
+            </ion-col>
+        </ion-row>
+        <img [src]="imageData" *ngIf="imageData" (click)="showPhoto()">
+
+
+
+    </ion-list>
+
+</ion-content>

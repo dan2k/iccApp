@@ -1,0 +1,91 @@
+<ion-content>
+    <ion-item no-lines color="ptitle">
+        <ion-avatar item-start>
+            <img src="./assets/icon/inform.jpg">
+        </ion-avatar>
+        <h1>แจ้งปัญหา</h1>
+
+    </ion-item>
+    <div>
+        <ion-row style="background-color:#f9fafc;">
+            <ion-col>
+                <button ion-item icon-left clear small (click)="showProblem(1)">
+                  <ion-avatar>
+                    <img src="./assets/icon/workstation.png" > 
+                  </ion-avatar>
+                  <p>เครื่อง</p>
+                </button>
+
+            </ion-col>
+            <ion-col>
+                <button ion-item icon-left clear small (click)="showProblem(2)">
+                  <ion-avatar>
+                    <img src="./assets/icon/p.jpg" > 
+                  </ion-avatar>
+                  <p>โปรแกรม</p>
+                </button>
+            </ion-col>
+            <ion-col>
+                <button ion-item icon-left clear small (click)="showProblem(3)">
+                  <ion-avatar>
+                    <img src="./assets/icon/other.jpg" > 
+                  </ion-avatar>
+                  <p>อื่น ๆ</p>
+                </button>
+            </ion-col>
+        </ion-row>
+    </div>
+    <ion-item no-lines color="ptitle">
+        <ion-avatar item-start>
+            <img src="./assets/icon/monitoring.jpg">
+        </ion-avatar>
+        <h1>ตรวจสอบติดตาม</h1>
+    </ion-item>
+    <ion-item *ngIf="uType!='P'">
+        <ion-label>จังหวัด:</ion-label>
+        <ion-select [(ngModel)]="fProvince" (ionChange)="changeProvince()">
+            <ion-option value='' selected>--ทั้งหมด--</ion-option>
+            <ion-option *ngFor="let p of provinces" [value]="p.province_id">
+                {{p.province_name}}
+            </ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>ประเภทหน่วยงาน:</ion-label>
+        <ion-select [(ngModel)]="fCustptype" (ionChange)="changePtype()">
+            <ion-option selected value=''>--ทั้งหมด--</ion-option>
+            <ion-option *ngFor="let c of custptypes" [value]="c.cust_ptype">
+                {{c.cust_desc}}
+            </ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>หน่วยงาน:</ion-label>
+        <ion-select [(ngModel)]="fCustpcode" (ionChange)="changePcode()">
+            <ion-option selected value=''>--ทั้งหมด--</ion-option>
+            <ion-option *ngFor="let c of custpcodes" [value]="c.cust_pcode">
+                {{c.cust_pdesc}}
+            </ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-scroll scrollY="true" style="height: 60%;background-color:#f9fafc;">
+
+        <ion-list inset no-lines>
+            <ion-card async *ngFor="let sv of svData">
+                <button ion-item (click)="openFollow(sv)">
+                        <ion-avatar item-start>
+                            <img *ngIf="sv.msv_type==1" src="./assets/icon/workstation.png">
+                            <img *ngIf="sv.msv_type==2" src="./assets/icon/p.jpg">
+                            <img *ngIf="sv.msv_type==3" src="./assets/icon/other.jpg">
+                           
+                        </ion-avatar>
+                        <h2>ปัญหา: {{sv.msv_detail}}</h2>
+                        <p>
+                            โดย: {{sv.thiname}}
+                        </p>
+                        <p>วัน: {{sv.msv_adate}} เวลา: {{sv.msv_atime}}</p>
+                    </button>
+            </ion-card>
+        </ion-list>
+    </ion-scroll>
+</ion-content>

@@ -1,0 +1,84 @@
+<ion-header>
+
+    <ion-navbar color="ptitle">
+        <ion-title>ตรวจสอบติดตามปัญหา</ion-title>
+        <ion-buttons start small>
+            <button ion-button icon-only color="ligth" small (click)="close()">
+                  <ion-icon name="close-circle"></ion-icon>
+                </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-card>
+        <ion-item>
+            <ion-thumbnail item-start>
+                <img [src]="imageData" (click)="showPhoto()" (error)="errorHandler($event)" default="./assets/img/placeholder.png">
+                <!-- <ion-img [src]="imageData" (click)="showPhoto()"></ion-img> -->
+            </ion-thumbnail>
+
+            <h2>โดย: {{svData.thiname}}</h2>
+            <p>วันที่: {{svData.msv_adate}} เวลา: {{svData.msv_atime}}</p>
+        </ion-item>
+        <ion-card-content class="card-content">
+            <p>{{svData.msv_detail}}</p>
+        </ion-card-content>
+        <ion-row>
+            <ion-col class="byDate" text-left>
+                <button ion-button clear small style="font-size:12px;" (click)="openComment()">
+                    <ion-icon name="chatboxes"></ion-icon>
+                    &nbsp;แสดงความคิดเห็น
+                </button>
+                <h2>สถานะ: waiting</h2>
+            </ion-col>
+            <ion-col text-right *ngIf="isRG">
+                <button ion-button icon-only clear small color="warning" (click)="openFollow2(svData.msv_no2)">
+                    <ion-icon name="share-alt"></ion-icon>
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+    <ion-scroll scrollY="true" style="height: 60%;background-color:#f9fafc;padding:0;">
+        <div>
+            <ion-card *ngFor="let comment of comments">
+                <ion-item>
+                    <ion-avatar item-start>
+                        <img src="./assets/img/favicon.ico" alt="" *ngIf="comment.comment_utype==1">
+                        <img src="./assets/img/logo.jpg" alt="" *ngIf="comment.comment_utype==2">
+                    </ion-avatar>
+                    <h2>โดย: {{comment.thiname}}</h2>
+                    <p>วันที่: {{comment.comment_adate}} เวลา: {{comment.comment_atime}}</p>
+                </ion-item>
+                <ion-card-content class="card-content">
+                    <p>{{comment.comment_detail}}</p>
+                    <!-- <img [src]="xurl+'/'+comment.comment_photo" (click)="showPhoto()"> -->
+                    <ion-item>
+                        <img [src]="xurl+'/'+comment.comment_photo" (click)="showPhotox(xurl+'/'+comment.comment_photo)" style="width:50%;height:50%;" *ngIf="comment.comment_photo">
+                    </ion-item>
+                </ion-card-content>
+            </ion-card>
+        </div>
+
+    </ion-scroll>
+
+</ion-content>
+<ion-footer *ngIf="(isOpen && (svData.msv_status==1))">
+    <!-- <ion-toolbar>
+        *ngIf="(isOpen && (userData.msv_status==1||userData.msv_status==3)) "
+        <ion-nav-buttons>
+            <button ion-button>ได้รับการแก้ไขเรียบร้อยแล้ว</button>
+            <button ion-button>ยังพบปัญหาอยู่</button>
+        </ion-nav-buttons>
+
+
+        <ion-buttons text-center *ngIf="isMoi && userData.msv_status==0">
+            <button ion-button clear color="danger" (click)="openPop($event)">ปิด</button>
+            <button ion-button clear color="primary">ส่งต่อ</button>
+        </ion-buttons>
+    </ion-toolbar> -->
+
+    <ion-buttons text-center>
+        <button ion-button color="success" blocked small (click)="openSmile($event)">ได้รับการแก้ไขแล้ว</button>
+        <button ion-button color="warning" blocked small>ยังไม่ได้การแก้ไข</button>
+    </ion-buttons>
+</ion-footer>

@@ -1,0 +1,49 @@
+<ion-header>
+
+    <ion-navbar color="ptitle">
+        <ion-title>ตรวจสอบติดตามปัญหา</ion-title>
+        <ion-buttons start small>
+            <button ion-button icon-only color="ligth" small (click)="close()">
+                    <ion-icon name="close-circle"></ion-icon>
+                  </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-card>
+        <ion-item>
+            <ion-thumbnail item-start>
+                <!-- <img [src]="imageData" (click)="showPhoto()" (error)="errorHandler($event)" default="./assets/img/placeholder.png"> -->
+                <ion-img [src]="imageData" (click)="showPhoto()"></ion-img>
+            </ion-thumbnail>
+
+            <h2>โดย: {{svData?.thiname}}</h2>
+            <p>วันที่: {{svData?.msv_adate}} เวลา: {{svData?.msv_atime}}</p>
+        </ion-item>
+        <ion-card-content class="card-content">
+            <p>{{svData?.msv_detail}}</p>
+        </ion-card-content>
+
+    </ion-card>
+    <ion-scroll scrollY="true" style="height: 60%;background-color:#f9fafc;padding:0;">
+        <div>
+            <ion-card *ngFor="let comment of comments">
+                <ion-item>
+                    <ion-avatar item-start>
+                        <img src="./assets/img/favicon.ico" alt="" *ngIf="comment.comment_utype==1">
+                        <img src="./assets/img/logo.jpg" alt="" *ngIf="comment.comment_utype==2">
+                    </ion-avatar>
+                    <h2>โดย: {{comment?.thiname}}</h2>
+                    <p>วันที่: {{comment?.comment_adate}} เวลา: {{comment?.comment_atime}}</p>
+                </ion-item>
+                <ion-card-content class="card-content">
+                    <p>{{comment?.comment_detail}}</p>
+                    <!-- <img [src]="xurl+'/'+comment.comment_photo" (click)="showPhoto()"> -->
+                    <ion-item>
+                        <img [src]="xurl+'/'+comment.comment_photo" (click)="showPhotox(xurl+'/'+comment.comment_photo)" style="width:50%;height:50%;" *ngIf="comment.comment_photo">
+                    </ion-item>
+                </ion-card-content>
+            </ion-card>
+        </div>
+    </ion-scroll>
+</ion-content>

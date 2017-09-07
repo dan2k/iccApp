@@ -1,0 +1,49 @@
+<!--
+  Generated template for the RegisterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color="primary">
+        <ion-title text-center>ลงทะเบียน</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-item-group>
+        <ion-item-divider>
+            กรุณาบันทึกข้อมูล
+        </ion-item-divider>
+        <!-- <ion-item>
+            <ion-label>ประเภทหน่วยงาน</ion-label>
+            <ion-select [(ngModel)]="custPtype" #_custPtype>
+                <ion-option [value]="c.cust_ptype" *ngFor="let c of custPtypes">
+                    {{ c.cust_desc }}
+                </ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>จังหวัด</ion-label>
+            <ion-select [(ngModel)]="provinceid" #_provinceid>
+                <ion-option [value]="p.province_id" *ngFor="let p of provinces">
+                    {{p.province_name}}
+                </ion-option>
+            </ion-select>
+        </ion-item> -->
+        <ion-item>
+            <ion-label>ชื่อ</ion-label>
+            <ion-input [(ngModel)]="fname" type="input" #_fname></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>ชื่อสกุล</ion-label>
+            <ion-input [(ngModel)]="lname" type="input" #_lname></ion-input>
+        </ion-item>
+        <ion-item>
+            <button ion-button full (click)="chekRegister()">ตรวจสอบผู้ใช้งาน</button>
+        </ion-item>
+    </ion-item-group>
+</ion-content>

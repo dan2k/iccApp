@@ -1,0 +1,22 @@
+<ion-header>
+    <ion-navbar color="primary">
+
+        <ion-title>
+            ICCAPP
+
+        </ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-tabs>
+        <ion-tab tabIcon="contact" tabTitle="Water" [root]="tab1"></ion-tab>
+        <ion-tab tabIcon="chatbubbles" tabTitle="Life" [root]="tab2"></ion-tab>
+        <ion-tab tabIcon="flame" tabTitle="Fire" [root]="tab3"></ion-tab>
+        <ion-tab tabIcon="magnet" tabTitle="Force" [root]="tab4"></ion-tab>
+    </ion-tabs>
+</ion-content>

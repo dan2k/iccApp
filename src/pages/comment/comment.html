@@ -1,0 +1,37 @@
+<ion-header>
+
+    <ion-navbar color="ptitle">
+        <ion-title>แสดงความคิดเห็น {{msv_no}}</ion-title>
+        <ion-buttons start small>
+            <button ion-button icon-only color="ligth" small (click)="close()">
+                <ion-icon name="close-circle"></ion-icon>
+              </button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list inset>
+        <ion-item>
+            <ion-label stacked style="font-size:20px;">ความคิดเห็น:</ion-label>
+            <ion-textarea rows="5" cols="30" style="font-size:16px;" [(ngModel)]="detail" placeholder="ระบุความคิดเห็น"></ion-textarea>
+        </ion-item>
+        <ion-row>
+            <ion-col>
+                <button ion-button icon-left clear small color="ptitle" (click)="takePicture()"> 
+                            <ion-icon name="camera"></ion-icon>
+                        </button>
+                <button ion-button icon-left clear small color="danger" (click)="removePicture()" [disabled]="!imageData">
+                            <ion-icon name="trash"></ion-icon>
+                          </button>
+                <button ion-button icon-left clear small color="secondary" (click)="saveComment()" [disabled]="!imageData&&!detail">
+                              <div>บันทึก</div>
+                            </button>
+            </ion-col>
+        </ion-row>
+        <img [src]="imageData" *ngIf="imageData" (click)="showPhoto()">
+
+    </ion-list>
+</ion-content>

@@ -1,0 +1,28 @@
+<ion-content padding center>
+    <ion-list inset>
+        <ion-item text-center>
+            <img src="./assets/img/cas-padlock-icon.png" alt="" style="width:50%;height:35%;">
+        </ion-item>
+        <ion-item>
+            <ion-select [(ngModel)]="loginType">
+                <ion-option value="1">ใช้เบอร์โทรศัพท์ในการ Login</ion-option>
+                <ion-option value="2">ใช้ IDCODE ในการ Login</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label floating *ngIf="loginType==1">เบอร์โทร:</ion-label>
+            <ion-label floating *ngIf="loginType==2">IDCODE:</ion-label>
+            <ion-input type="text" [(ngModel)]="tel"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>รหัสผ่าน:</ion-label>
+            <ion-input type="password" [(ngModel)]="password"></ion-input>
+        </ion-item>
+        <ion-item>
+            <button ion-button color="primary" block (click)="login()" [disabled]="!tel || !password">เข้าระบบ</button>
+            <button ion-button color="primary" block (click)="register()">ลงทะเบียน</button>
+        </ion-item>
+    </ion-list>
+
+
+</ion-content>

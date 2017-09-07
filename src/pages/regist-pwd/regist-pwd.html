@@ -1,0 +1,32 @@
+<ion-header>
+
+    <ion-navbar color="primary">
+        <ion-title>ลงทะเบียน </ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list inset>
+        <ion-item text-center>
+            <p style="color:teal;font-size:18px;">กรุณาบันทึกเบอร์โทรศัพท์ และรหัสผ่าน<br> เพื่อใช้ในการ Login เข้าระบบ</p>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>เบอร์โทรศัพท์</ion-label>
+            <ion-input type="tel" [(ngModel)]="phoneNumber" mask="**-****-****"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>รหัสผ่าน</ion-label>
+            <ion-input type="password" [(ngModel)]="password"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>ยืนยันรหัสผ่าน</ion-label>
+            <ion-input type="password" [(ngModel)]="repassword"></ion-input>
+        </ion-item>
+        <ion-item>
+            <button ion-button color="primary" block (click)="checkData()" [disabled]="!phoneNumber||!password||!repassword">ยืนยัน</button>
+        </ion-item>
+    </ion-list>
+
+</ion-content>
