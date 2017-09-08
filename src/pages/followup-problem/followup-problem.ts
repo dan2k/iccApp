@@ -19,15 +19,15 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
   providers: [PhotoViewer, CommentProvider, ServiceProvider]
 })
 export class FollowupProblemPage {
-  private svData: any;
-  private imageData: any;
-  private comments: any;
-  private token: any;
-  private userData: any;
-  private xurl: any;
-  private isRG: any;
-  //private isMoi: any;
-  private isOpen: any;
+  public svData: any;
+  public imageData: any;
+  public comments: any;
+  public token: any;
+  public userData: any;
+  public xurl: any;
+  public isRG: any;
+  public isMoi: any;
+  public isOpen: any;
 
   constructor(
     public navCtrl: NavController,
@@ -41,12 +41,12 @@ export class FollowupProblemPage {
     this.token = localStorage.getItem('token');
     this.xurl = url;
     this.userData = JSON.parse(localStorage.getItem('userData'));
-    /*let jobid = this.userData.job_id;
+    let jobid = this.userData.job_id;
     if (jobid == 2 || jobid == 3 || jobid == 4) {//เอาไว้ตรวจสอบว่าเป็น สน.ท login หรือเปล่า ถ้าใช่ก็ ปิดตรงส่งจ๊อบไปก่อน
       this.isMoi = true;
     } else {
       this.isMoi = false;
-    }*/
+    }
     //console.log('isMoi=>' + this.isMoi,this.userData);
 
     this.svData = this.navParams.get('svData');
@@ -70,13 +70,13 @@ export class FollowupProblemPage {
     }
     this.imageData = `${url}/uploads/msv-pic/${msvno}.jpg`;
     this.getComment();
-    console.log(this.svData);
-    console.log('isOPen=' + this.isOpen)
-    console.log('svData.userData.cust_ptype=', this.userData.cust_ptype);
-    console.log('svData.userData.cust_pcode=', this.userData.cust_pcode);
-    console.log('svData.svData.cust_ptype=', this.svData.cust_ptype);
-    console.log('svData.svData.cust_pcode=', this.svData.cust_pcode);
-    console.log('svData.svData.msv_status=', this.svData.msv_status);
+    // console.log(this.svData);
+    // console.log('isOPen=' + this.isOpen)
+    // console.log('svData.userData.cust_ptype=', this.userData.cust_ptype);
+    // console.log('svData.userData.cust_pcode=', this.userData.cust_pcode);
+    // console.log('svData.svData.cust_ptype=', this.svData.cust_ptype);
+    // console.log('svData.svData.cust_pcode=', this.svData.cust_pcode);
+    // console.log('svData.svData.msv_status=', this.svData.msv_status);
   }
 
   ionViewDidLoad() {
@@ -126,14 +126,14 @@ export class FollowupProblemPage {
     console.debug(event);
   }
   openPop(myEvent) {
-    let pop = this.popup.create('PopSolvePage', {}, { showBackdrop: true, enableBackdropDismiss: false });
+    let pop = this.popup.create('PopSolvePage', {}, {cssClass:'custom-popover'}/*, {}, { showBackdrop: true, enableBackdropDismiss: false }*/);
     pop.present({
       ev: myEvent
     });
   }
   openSmile(myEvent) {
     if (this.isRG) {
-      let pop = this.popup.create('PopSmilePage'/*, {}, { showBackdrop: true, enableBackdropDismiss: true }*/);
+      let pop = this.popup.create('PopSmilePage', {}/*{ showBackdrop: true, enableBackdropDismiss: true }*/);
       pop.onDidDismiss((data: any) => {
         if (data.type == 1) {
           this.serviceProvider.confirmClose(this.token, this.userData.user_id, this.svData.msv_no,data.rate)

@@ -1,24 +1,13 @@
 <ion-content>
-    <ion-list>
-        <ion-row style="background-color:#34495e;color:aliceblue">
-            <ion-col>บันทึกการแก้ไข</ion-col>
-            <ion-col text-right>
-                <button ion-button color="danger" small clear (click)="close()"><ion-icon name="close-circle"></ion-icon></button>
-            </ion-col>
-        </ion-row>
-        <ion-item>
-            <ion-label stacked style="font-size:16px;">การแก้ไข</ion-label>
-            <ion-textarea rows=5 cols="30" [(ngModel)]="solve"></ion-textarea>
-        </ion-item>
-        <div padding>
-            <ion-segment [(ngModel)]="rate">
-                <ion-segment-button value="1"><img src="./assets/img/1.png" alt=""></ion-segment-button>
-                <ion-segment-button value="2"><img src="./assets/img/2.png" alt=""></ion-segment-button>
-                <ion-segment-button value="3"><img src="./assets/img/3.png" alt=""></ion-segment-button>
-                <ion-segment-button value="4"><img src="./assets/img/4.png" alt=""></ion-segment-button>
-                <ion-segment-button value="5"><img src="./assets/img/5.png" alt=""></ion-segment-button>
-            </ion-segment>
-            <button ion-button="" full small color="primary" (click)="save()">บันทึก</button>
-        </div>
-    </ion-list>
+  <ion-row style="background-color:#34495e;color:aliceblue">
+    <ion-col>บันทึกการแก้ไข</ion-col>
+    <ion-col text-right>
+      <!-- <button ion-button color="danger" small clear (click)="close()"><ion-icon name="close-circle"></ion-icon></button> -->
+    </ion-col>
+  </ion-row>
+  <ion-item>
+    <ion-label stacked style="font-size:16px;">การแก้ไข</ion-label>
+    <ion-textarea rows=5 cols="30" [(ngModel)]="solve" style="font-size:12px;"></ion-textarea>
+  </ion-item>
+  <button ion-button="" blocked small color="primary" (click)="save()">บันทึก</button>
 </ion-content>

@@ -17,9 +17,9 @@ import { IonicPage, NavController, NavParams, ModalController, App} from 'ionic-
   providers: [ServiceProvider,MessageProvider]
 })
 export class MainPage {
-  private userData: any;
-  private svData: any;
-  private token: string;
+  public userData: any;
+  public svData: any;
+  public  token: string;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -27,13 +27,13 @@ export class MainPage {
     public serviceProvider: ServiceProvider,
     public app: App,
     public msg:MessageProvider
-    
+
   ) {
     this.userData = JSON.parse(localStorage.getItem('userData'));
     this.token = localStorage.getItem('token');
     this.getJob();
   }
-  
+
   // ionViewDidLoad() {
   //   console.log('ionViewDidLoad MainPage');
   //   this.getJob();
@@ -60,7 +60,7 @@ export class MainPage {
   // }
   async getJob() {
     this.serviceProvider.getJob(this.token, this.userData.user_id, this.userData.cust_ptype, this.userData.cust_pcode,'','','')
-      .then((data:any) => { 
+      .then((data:any) => {
         if (data.status) {
           this.svData = data.data;
         }else {
@@ -73,7 +73,7 @@ export class MainPage {
         console.log(err);
       });
   }
-  
+
   showProblem(type: any) {
     let problem = this.modalCtrl.create('ModalProblemPage', { type: type });
     problem.onDidDismiss(() => {

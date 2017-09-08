@@ -12,7 +12,7 @@
             <ion-col>
                 <button ion-item icon-left clear small (click)="showProblem(1)">
                   <ion-avatar>
-                    <img src="./assets/icon/workstation.png" > 
+                    <img src="./assets/icon/workstation.png" >
                   </ion-avatar>
                   <p>เครื่อง</p>
                 </button>
@@ -21,7 +21,7 @@
             <ion-col>
                 <button ion-item icon-left clear small (click)="showProblem(2)">
                   <ion-avatar>
-                    <img src="./assets/icon/p.jpg" > 
+                    <img src="./assets/icon/p.jpg" >
                   </ion-avatar>
                   <p>โปรแกรม</p>
                 </button>
@@ -29,7 +29,7 @@
             <ion-col>
                 <button ion-item icon-left clear small (click)="showProblem(3)">
                   <ion-avatar>
-                    <img src="./assets/icon/other.jpg" > 
+                    <img src="./assets/icon/other.jpg" >
                   </ion-avatar>
                   <p>อื่น ๆ</p>
                 </button>
@@ -42,7 +42,7 @@
         </ion-avatar>
         <h1>ตรวจสอบติดตาม</h1>
     </ion-item>
-    <ion-scroll scrollY="true" style="height: 60%;background-color:#f9fafc;">
+    <ion-scroll scrollY="true" style="height: 60%;background-color:#ebebeb">
 
         <ion-list inset no-lines>
             <ion-card async *ngFor="let sv of svData">
@@ -51,7 +51,7 @@
                             <img *ngIf="sv.msv_type==1" src="./assets/icon/workstation.png">
                             <img *ngIf="sv.msv_type==2" src="./assets/icon/p.jpg">
                             <img *ngIf="sv.msv_type==3" src="./assets/icon/other.jpg">
-                           
+
                         </ion-avatar>
                         <h2>{{sv.msv_no}}</h2>
                         <h2>ปัญหา: {{sv.msv_detail}}</h2>

@@ -14,8 +14,7 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
   templateUrl: 'pop-solve.html',
 })
 export class PopSolvePage {
-  private solve: any;
-  private rate: any;
+  public solve: any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl:ViewController) {
   }
 
@@ -26,10 +25,11 @@ export class PopSolvePage {
     this.viewCtrl.dismiss();
   }
   save() {
-    if (!this.rate || !this.solve) {
+    if (!this.solve) {
       alert('กรุณาระบุการแก้ไข / ระดับความพึงพอใจ');
       return false;
     }
+    alert(this.solve);
     this.close();
 
   }

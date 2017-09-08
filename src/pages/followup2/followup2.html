@@ -16,7 +16,7 @@
                 <!-- <img [src]="imageData" (click)="showPhoto()" (error)="errorHandler($event)" default="./assets/img/placeholder.png"> -->
                 <ion-img [src]="imageData" (click)="showPhoto()"></ion-img>
             </ion-thumbnail>
-
+            <h2>{{svData.msv_no}}</h2>
             <h2>โดย: {{svData?.thiname}}</h2>
             <p>วันที่: {{svData?.msv_adate}} เวลา: {{svData?.msv_atime}}</p>
         </ion-item>
