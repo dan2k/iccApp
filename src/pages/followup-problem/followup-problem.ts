@@ -110,33 +110,48 @@ export class FollowupProblemPage {
   openComment() {
     let model = this.modalController.create('CommentPage', { msv_no: this.svData.msv_no });
     model.onDidDismiss(() => {
+
       this.getComment();
-      console.log('msg=>', 1);
+      //console.log('msg=>', 1);
     });
     model.present();
+  }
+
+  errorHandler(event) {
+    console.debug(event);
   }
   openFollow2(msvno: any) {
     let model = this.modalController.create('Followup2Page', { msv_no: msvno });
     model.onDidDismiss(() => {
-      console.log('msg=>', 1);
+      //console.log('msg=>', 1);
     });
     model.present();
   }
-  errorHandler(event) {
-    console.debug(event);
-  }
   openPop(myEvent) {
-    let pop = this.popup.create('PopSolvePage', {}, {cssClass:'custom-popover'}/*, {}, { showBackdrop: true, enableBackdropDismiss: false }*/);
+    let pop = this.popup.create('PopSolvePage', {}, { cssClass: 'custom-popover' }/*, {}, { showBackdrop: true, enableBackdropDismiss: false }*/);
+    pop.onDidDismiss((data: any) => {
+      if (data) {
+        this.serviceProvider.close(this.token, this.userData.user_id, this.svData.msv_no,data.solve)
+          .then((data: any) => {
+            console.log(data);
+            this.close();
+          }, (err) => {
+            this.close();
+            console.log(err);
+          });
+      }
+    });
     pop.present({
       ev: myEvent
     });
   }
+
   openSmile(myEvent) {
     if (this.isRG) {
       let pop = this.popup.create('PopSmilePage', {}/*{ showBackdrop: true, enableBackdropDismiss: true }*/);
       pop.onDidDismiss((data: any) => {
         if (data.type == 1) {
-          this.serviceProvider.confirmClose(this.token, this.userData.user_id, this.svData.msv_no,data.rate)
+          this.serviceProvider.confirmClose(this.token, this.userData.user_id, this.svData.msv_no, data.rate)
             .then((data: any) => {
               console.log(data);
               this.close();

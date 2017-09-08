@@ -71,6 +71,33 @@ export class ServiceProvider {
         });
     });
   }
+  close(token: string, uid: string,msv_no:any,solve?:any) {
+    this.msg.checkServer();
+    return new Promise((resolve, reject) => {
+      let headers = new Headers({
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      });
+      let options = new RequestOptions({ headers: headers });
+      let body = {
+        data: {
+          user_id: uid,
+          msv_no: msv_no,
+          solve:solve
+        }
+      };
+      this.http.post(`${url}/close`, body, options)
+        .map(res => {
+          return res.json();
+        })
+        .subscribe(data => {
+          this.msg.checkToken(data.msg);
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
   saveProblem(token: string, uid: string, cust_ptype: any, cust_pcode: any, msv_detail: string,msv_type:any) {
     this.msg.checkServer();
     return new Promise((resolve, reject) => {

@@ -29,8 +29,8 @@ export class PopSolvePage {
       alert('กรุณาระบุการแก้ไข / ระดับความพึงพอใจ');
       return false;
     }
-    alert(this.solve);
-    this.close();
+    let data = { solve: this.solve };
+    this.viewCtrl.dismiss(data);
 
   }
 
