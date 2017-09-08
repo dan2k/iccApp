@@ -39,13 +39,14 @@
 
         <ion-list inset no-lines>
             <ion-card async *ngFor="let sv of svData">
-                <button ion-item (click)="openFollow(sv)">
+                <button ion-item (click)="openJob(sv)">
                         <ion-avatar item-start>
                             <img *ngIf="sv.msv_type==1" src="./assets/icon/workstation.png">
                             <img *ngIf="sv.msv_type==2" src="./assets/icon/p.jpg">
                             <img *ngIf="sv.msv_type==3" src="./assets/icon/other.jpg">
-                           
+
                         </ion-avatar>
+                        <h2>{{sv.msv_no}}</h2>
                         <h2>ปัญหา: {{sv.msv_detail}}</h2>
                         <p>
                             โดย: {{sv.thiname}}
