@@ -121,6 +121,7 @@ export class FollowupProblemPage {
     console.debug(event);
   }
   openFollow2(msvno: any) {
+    //alert(this.svData.msv_no);
     let model = this.modalController.create('Followup2Page', { msv_no: msvno });
     model.onDidDismiss(() => {
       //console.log('msg=>', 1);

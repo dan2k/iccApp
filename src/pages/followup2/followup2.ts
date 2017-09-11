@@ -31,8 +31,8 @@ export class Followup2Page {
       let svno = this.navParams.get('msv_no');
       this.commentProvider.getSvdata(this.token, this.userData.user_id, svno)
         .then((data: any) => {
-        if (data.status) {
-          this.svData = data.data[0];
+          if (data.status) {
+            this.svData = data.data[0];
           this.imageData = `${url}/uploads/msv-pic/${this.svData.msv_no}.jpg`;
           this.getComment();
         } else {
