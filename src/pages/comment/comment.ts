@@ -35,7 +35,7 @@ export class CommentPage {
     private photoViewer: PhotoViewer,
     private commentProvider: CommentProvider,
     private msg:MessageProvider
-   
+
   ) {
     this.token = localStorage.getItem('token');
     this.userData = JSON.parse(localStorage.getItem('userData'));
@@ -52,14 +52,15 @@ export class CommentPage {
       this.token,
       this.userData.user_id,
       this.msv_no,
-      this.detail
+      this.detail,
+      this.userData.user_type
     ).then((data: any) => {
       load.dismiss();
       if (data.status) {
           this.msg.toast('บันทึกความคิดเห็นเรียบร้อยแล้ว')
           console.log(data, 'isImg:=>', isImg);
           if (isImg) {//have upload photo
-            this.upload(data.sv_no,data.comment_no,data.pno);          
+            this.upload(data.sv_no,data.comment_no,data.pno);
           } else {
             this.close();
           }
@@ -70,7 +71,7 @@ export class CommentPage {
       }, (err) => {
         load.dismiss();
         this.msg.toast(err);
-        
+
       console.log(err);
     });
   }
@@ -105,7 +106,7 @@ export class CommentPage {
         this.msg.toast('upload photo to server complete!');
         load.dismiss();
         // success
-        
+
         console.log(data);
         this.close();
       }, (err) => {
@@ -116,7 +117,7 @@ export class CommentPage {
         this.close();
       });
 
-     
+
   }
   removePicture() {
     this.imageData = null;
@@ -124,5 +125,5 @@ export class CommentPage {
   showPhoto() {
     this.photoViewer.show(this.imageData);
   }
- 
+
 }

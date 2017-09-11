@@ -69,6 +69,12 @@
     <!-- <button ion-button clear color="primary">ส่งต่อ</button> -->
   </ion-buttons>
 </ion-footer>
+<ion-footer *ngIf="userData.user_type==2 && svData.msv_status!=1">
+  <ion-buttons text-center >
+    <button ion-button clear color="danger" (click)="openJob(svData)" *ngIf="svData.msv_status==0">รับงาน</button>
+    <button ion-button clear color="primary" *ngIf="svData.msv_status!=0">ปิดงาน</button>
+  </ion-buttons>
+</ion-footer>
 <ion-footer *ngIf="(isOpen && (svData.msv_status==1))">
   <!-- <ion-toolbar>
         *ngIf="(isOpen && (userData.msv_status==1||userData.msv_status==3)) "
@@ -89,3 +95,4 @@
     <button ion-button color="warning" blocked small>ยังไม่ได้การแก้ไข</button>
   </ion-buttons>
 </ion-footer>
+

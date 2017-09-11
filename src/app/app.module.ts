@@ -10,6 +10,7 @@ import { HomePage } from '../pages/home/home';
 import { ServiceProvider } from '../providers/service/service';
 import { CommentProvider } from '../providers/comment/comment';
 import { MessageProvider } from '../providers/message/message';
+import { HwProvider } from '../providers/hw/hw';
 
 
 //import { UserProvider } from '../providers/user/user';
@@ -39,6 +40,7 @@ import { MessageProvider } from '../providers/message/message';
     ServiceProvider,
     CommentProvider,
     MessageProvider,
+    HwProvider,
     //UserProvider,
     //RegisterProvider
   ]

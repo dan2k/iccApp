@@ -178,4 +178,16 @@ export class FollowupProblemPage {
 
     }
   }
+  openJob(svData: any) {
+
+        //รับจ๊อบจาก ข้าราชการเพื่อทำการวิเคราะห์และทำการแตกจ๊อบใหม่
+        let status = svData.msv_status;
+        //let page = status != 0 ? 'FollowupProblemPage' : 'JobDistributePage';
+        let page = 'JobDistributePage';
+        let modal = this.modalController.create(page, { svData: svData });
+        modal.onDidDismiss(() => {
+          this.close();
+        });
+        modal.present();
+      }
 }

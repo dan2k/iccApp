@@ -10,7 +10,7 @@ export class CommentProvider {
   constructor(public http: Http,public msg:MessageProvider) {
     console.log('Hello CommentProvider Provider');
   }
-  saveComment(token: string, uid: string, msv_no: any, detail: string) {
+  saveComment(token: string, uid: string, msv_no: any, detail: string,user_type:any) {
     this.msg.checkServer();
     return new Promise((resolve, reject) => {
       let headers = new Headers({
@@ -23,6 +23,7 @@ export class CommentProvider {
           user_id: uid,
           msv_no:msv_no,
           comment_detail: detail,
+          user_type:user_type
         }
       };
       console.log('comment', body);

@@ -128,15 +128,22 @@ export class MaincdgPage {
 
     //รับจ๊อบจาก ข้าราชการเพื่อทำการวิเคราะห์และทำการแตกจ๊อบใหม่
     let status = svData.msv_status;
-    let page = status != 0 ? 'FollowupProblemPage' : 'JobDistributePage';
+    //let page = status != 0 ? 'FollowupProblemPage' : 'JobDistributePage';
+    let page = 'FollowupProblemPage';
     let modal = this.modalCtrol.create(page, { svData: svData });
     modal.onDidDismiss(() => {
       this.getJob();
     });
     modal.present();
-
-
   }
+  // openFollow(svData: any) {
+  //   let follow = this.modalCtrol.create('FollowupProblemPage', { svData: svData });
+  //   follow.onDidDismiss(() => {
+  //     this.getJob();
+  //     console.log('msg=>', 1);
+  //   });
+  //   follow.present();
+  // }
   ionViewDidLoad() {
     console.log('ionViewDidLoad MaincdgPage');
   }
