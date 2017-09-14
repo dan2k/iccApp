@@ -1,7 +1,7 @@
 import { url } from './../../config';
 import { MessageProvider } from './../message/message';
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Headers, Response } from '@angular/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 
@@ -46,6 +46,7 @@ export class HwProvider {
   }
 
 
+  
   getEquipset(token: string, uid: string, cust_ptype?: any, cust_pcode?: any, work_type_id?:any) {
     this.msg.checkServer();
     return new Promise((resolve, reject) => {

@@ -1,23 +1,29 @@
 page-hw {
   ion-scroll[scrollX] {
     white-space: nowrap;
-    height: 50px;
+    height:55px;
     overflow: hidden;
+    button{
+      height:50px;
+    }
     .scroll-item {
       display: inline-block;
     }
     .selectable-icon {
       margin: 0px 0px 0px 0px;
-      color: rgba(80, 104, 165, 0.23);
-      font-size: 20px;
+      color: rgba(28, 8, 170, 0.92);
+      font-size: 16px;
+      font-weight: bold;
     }
     ion-avatar img {
       margin: 0px;
+      width: 30px;
+      height: 30px;
     }
+
   }
   /* Hide ion-content scrollbar */
    ::-webkit-scrollbar {
     display: none;
   }
-
 }

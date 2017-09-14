@@ -9,25 +9,60 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-
-
-<ion-content padding>
+<ion-content style="margin:0;padding:0">
   <ion-card *ngFor="let w of worktypes;let i = index">
-    <ion-card-header>{{w.work_type_desc}}</ion-card-header>
+    <ion-card-header><ion-badge>{{w.work_type_desc}}</ion-badge></ion-card-header>
     <ion-card-content>
       <ion-row>
-        <ion-item no-lines>
-            <ion-scroll scrollX="true">
-                <button icon-only clear ion-button *ngFor="let s of equipset[i]">
+        <ion-item no-lines style="padding:0px 0px 0px 0px;">
+            <ion-scroll scrollX="true" >
+                <button icon-only clear ion-button *ngFor="let s of equipset[w.work_type_id]"  (click)="listEquip(w.work_type_id,s.equip_set_id)">
+
                     <ion-avatar class="scroll-item selectable-icon">
                         <img src="./assets/icon/workstation.png" alt="">
+                        {{s?.equip_set_desc}}
                     </ion-avatar>
-                    {{s?.equip_set_desc}}
+
                 </button>
             </ion-scroll>
         </ion-item>
     </ion-row>
     </ion-card-content>
   </ion-card>
+  <!-- <ion-row *ngFor="let w of worktypes;let i = index">
+    &nbsp;&nbsp;<p><ion-badge style="font-size:16px;">{{w.work_type_desc}}</ion-badge></p>
+    <ion-item no-lines>
+      <ion-scroll scrollX="true">
+        <button icon-only clear ion-button *ngFor="let s of equipset[i]">
+                <ion-avatar class="scroll-item selectable-icon">
+                    <img src="./assets/icon/workstation.png"  width="60%" height="60%">
+                    {{s?.equip_set_desc}}
+                </ion-avatar>
 
+            </button>
+      </ion-scroll>
+    </ion-item>
+  </ion-row> -->
+  <!-- <ion-slides parallax="true">
+      <ion-slide *ngFor="let w of worktypes;let i = index">
+          <ion-card >
+              <ion-card-header><ion-badge>{{w.work_type_desc}}</ion-badge></ion-card-header>
+              <ion-card-content>
+                <ion-row>
+                  <ion-item no-lines style="padding:0px 0px 0px 0px;">
+                      <ion-scroll scrollX="true" >
+                          <button icon-only clear ion-button *ngFor="let s of equipset[w.work_type_id]"  (click)="listEquip(w.work_type_id,s.equip_set_id)">
+                              <ion-avatar class="scroll-item selectable-icon">
+                                  <img src="./assets/icon/workstation.png" alt="">
+                                  {{s?.equip_set_desc}}
+                              </ion-avatar>
+
+                          </button>
+                      </ion-scroll>
+                  </ion-item>
+              </ion-row>
+              </ion-card-content>
+            </ion-card>
+      </ion-slide>
+  </ion-slides> -->
 </ion-content>

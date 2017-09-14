@@ -125,10 +125,7 @@ export class MaincdgPage {
     this.getJob();
   }
   openJob(svData: any) {
-
     //รับจ๊อบจาก ข้าราชการเพื่อทำการวิเคราะห์และทำการแตกจ๊อบใหม่
-    let status = svData.msv_status;
-    //let page = status != 0 ? 'FollowupProblemPage' : 'JobDistributePage';
     let page = 'FollowupProblemPage';
     let modal = this.modalCtrol.create(page, { svData: svData });
     modal.onDidDismiss(() => {
