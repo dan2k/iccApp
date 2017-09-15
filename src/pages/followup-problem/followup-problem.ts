@@ -1,6 +1,6 @@
 import { ServiceProvider } from './../../providers/service/service';
 import { CommentProvider } from './../../providers/comment/comment';
-import { Component } from '@angular/core';
+import { Component, Directive } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, PopoverController } from 'ionic-angular';
 import { url } from "../../config";
 import { PhotoViewer } from '@ionic-native/photo-viewer';
@@ -16,7 +16,8 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
 @Component({
   selector: 'page-followup-problem',
   templateUrl: 'followup-problem.html',
-  providers: [PhotoViewer, CommentProvider, ServiceProvider]
+  providers: [PhotoViewer, CommentProvider, ServiceProvider],
+
 })
 export class FollowupProblemPage {
   public svData: any;

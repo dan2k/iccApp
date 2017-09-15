@@ -1,10 +1,10 @@
 <ion-content>
-    <ion-item no-lines color="ptitle">
+    <!-- <ion-item no-lines color="ptitle">
         <ion-avatar item-start>
             <img src="./assets/icon/monitoring.jpg">
         </ion-avatar>
         <h1>ตรวจสอบติดตาม:</h1>
-    </ion-item>
+    </ion-item> -->
     <ion-item *ngIf="uType!='P'">
         <ion-label>จังหวัด:</ion-label>
         <ion-select [(ngModel)]="fProvince" (ionChange)="changeProvince()">
@@ -35,9 +35,8 @@
             </ion-option>
         </ion-select>
     </ion-item>
-    <ion-scroll scrollY="true" style="height: 90%;background-color:#f9fafc;">
-
-        <ion-list inset no-lines>
+    <ion-scroll scrollY="true" style="margin:0px;height: 90%;background-color:#ebebeb">
+        <ion-list inset no-lines style="margin:0">
             <ion-card async *ngFor="let sv of svData">
                 <button ion-item (click)="openJob(sv)">
                         <ion-avatar item-start>

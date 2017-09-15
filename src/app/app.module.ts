@@ -11,10 +11,10 @@ import { ServiceProvider } from '../providers/service/service';
 import { CommentProvider } from '../providers/comment/comment';
 import { MessageProvider } from '../providers/message/message';
 import { HwProvider } from '../providers/hw/hw';
-
-
 //import { UserProvider } from '../providers/user/user';
 //import { RegisterProvider } from '../providers/register/register';
+//import { DirectivesModule } from '../directives/directives.module';
+
 
 @NgModule({
   declarations: [
@@ -25,14 +25,16 @@ import { HwProvider } from '../providers/hw/hw';
     BrowserModule,
     IonicModule.forRoot(MyApp,{ tabsPlacement: 'top' }),
     HttpModule,
-
-    
+    //DirectivesModule,
   ],
+
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
+
   ],
+
   providers: [
     StatusBar,
     SplashScreen,

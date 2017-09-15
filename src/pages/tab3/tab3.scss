@@ -1,8 +1,17 @@
 page-tab3 {
+  .inner{
+    width: 2000px;
+    height: 100%;
+    ion-card{
+      display:table-cell;
+      border:solid 1px #ccc
+    }
+  }
     ion-scroll[scrollX] {
-        white-space: nowrap;
+        //white-space: nowrap;
         height: 70px;
-        overflow: hidden;
+        overflow:auto;
+
         .scroll-item {
             display: inline-block;
         }
