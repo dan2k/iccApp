@@ -109,4 +109,61 @@ export class HwProvider {
     });
   }
 
+  listSymptom(token: string, uid: string, pno:string) {
+    this.msg.checkServer();
+    return new Promise((resolve, reject) => {
+
+      let headers = new Headers({
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      });
+      let options = new RequestOptions({ headers: headers });
+      let body = {
+        data: {
+          user_id: uid,
+          pno:pno
+        }
+      };
+      //console.log(body);
+      this.http.post(`${url}/listSymptom`, body, options)
+        .map(res => {
+          return res.json();
+        })
+        .subscribe(data => {
+          this.msg.checkToken(data.msg);
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+  getProblemsub(token: string, uid: string, pno:string) {
+    this.msg.checkServer();
+    return new Promise((resolve, reject) => {
+
+      let headers = new Headers({
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      });
+      let options = new RequestOptions({ headers: headers });
+      let body = {
+        data: {
+          user_id: uid,
+          pno:pno
+        }
+      };
+      //console.log(body);
+      this.http.post(`${url}/getProblemsub`, body, options)
+        .map(res => {
+          return res.json();
+        })
+        .subscribe(data => {
+          this.msg.checkToken(data.msg);
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
 }

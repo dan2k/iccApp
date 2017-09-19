@@ -1,5 +1,6 @@
+import { SwProvider } from './../../providers/sw/sw';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
 
 /**
  * Generated class for the SwPage page.
@@ -14,10 +15,83 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'sw.html',
 })
 export class SwPage {
+  token: string;
+  userData: any;
+  problemgroups: any;
+  prob_gid: any;
+  problem_sub_id: any;
+  problem_sub2_id: any;
+  problemsubs: any;
+  problemsub2s: any;
+  detail: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public sw: SwProvider,
+    public view:ViewController
+  ) {
+    this.token = localStorage.getItem('token');
+    this.userData = JSON.parse(localStorage.getItem('userData'));
+    this.genProblemgroup();
+  }
+  genProblemsub() {
+    let pg=this.prob_gid.split('||')
+    this.sw.genProblemsub(this.token, this.userData.user_id,pg[0])
+    .then((data: any) => {
+      if (data.status) {
+        this.problemsubs = data.data;
+      }
+    }, (err) => {
+
+    });
+  }
+  genProblemgroup() {
+    this.sw.genProblemgroup(this.token, this.userData.user_id)
+      .then((data: any) => {
+        if (data.status) {
+          this.problemgroups = data.data;
+        }
+      }, (err) => {
+
+      });
+  }
+  genProblemsub2() {
+    let ps = this.problem_sub_id.split('||');
+    this.sw.genProblemsub2(this.token, this.userData.user_id, ps[0])
+      .then((data: any) => {
+        if (data.status) {
+          this.problemsub2s = data.data;
+        }
+      }, (err) => {
+
+      });
+  }
+  change(data) {
+    this.genProblemsub();
   }
 
+  change2(data) {
+
+    this.genProblemsub2();
+  }
+  save() {
+    let pg = this.prob_gid.split('||');
+    let ps = this.problem_sub_id.split('||');
+    let data = {
+      prob_gid: pg[0],
+      prob_gdesc:pg[1],
+      problem_sub_id: ps[0],
+      problem_sub_desc:ps[1],
+      detail: this.detail,
+      problem_type: 'P2',
+      work_type_id: '0',
+    }
+    this.view.dismiss(data);
+  }
+  close() {
+    this.view.dismiss();
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad SwPage');
   }

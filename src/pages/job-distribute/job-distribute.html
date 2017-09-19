@@ -10,14 +10,14 @@
   </ion-navbar>
   <ion-toolbar no-border-top>
     <ion-row>
-      <ion-segment style="width:100%;height:100%">
-        <ion-segment-button clear full (click)="openJob(1)" value='1' style="width:100%;height:100%;border:0px;">
+      <ion-segment>
+        <ion-segment-button clear full (click)="openJob(1)" value='1'>
           <img src="./assets/icon/workstation.png" style="width:27px;height:27px;"> เครื่อง
         </ion-segment-button>
-        <ion-segment-button clear full (click)="openJob(2)" value='2' style="width:100%;height:100%;border:0px;">
+        <ion-segment-button clear full (click)="openJob(2)" value='2'>
           <img src="./assets/icon/p.jpg" style="width:27px;height:27px;"> โปรแกรม
         </ion-segment-button>
-        <ion-segment-button clear full (click)="openJob(3)" value='3' style="width:100%;height:100%;border:0px;">
+        <ion-segment-button clear full (click)="openJob(3)" value='3'>
           <img src="./assets/icon/other.jpg" style="width:27px;height:27px;"> อื่น ๆ
         </ion-segment-button>
       </ion-segment>
@@ -27,9 +27,9 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content style="margin:0;padding:0;">
   <ion-row *ngIf="isHw">
-    <ion-item  style="background-color:#C8E6C9;padding:0px 0px 0px 0px;margin:0">
+    <ion-item style="background-color:#C8E6C9;padding:0px 0px 0px 0px;margin:0">
       <ion-scroll scrollX="true" style="margin:0">
         <button clear icon-left ion-button *ngFor="let w of worktypes" (click)="getEquipset(w.work_type_id)">
             <ion-icon name="radio-button-on" class="scroll-item selectable-icon" icon-start></ion-icon>
@@ -39,7 +39,7 @@
     </ion-item>
   </ion-row>
   <ion-row *ngIf="isSet" class="a">
-    <ion-item  style="background-color:#C8E6C9;padding:0px 0px 0px 0px;margin:0">
+    <ion-item style="background-color:#C8E6C9;padding:0px 0px 0px 0px;margin:0">
       <ion-scroll scrollX="true" style="margin:0">
         <button icon-only clear ion-button *ngFor="let s of equipset" (click)="listEquip(work_type_id,s.equip_set_id)">
                   <ion-avatar class="scroll-item selectable-icon">
@@ -51,53 +51,48 @@
     </ion-item>
   </ion-row>
   <ion-row *ngIf="isEquip" class="b">
-    <ion-item  style="background-color:#C8E6C9;padding:0px 0px 0px 0px;margin:0">
-      <ion-scroll scrollX="true" style="margin:0">
-        <button icon-only color="ptitle" ion-button *ngFor="let e of equips">
-            <ion-avatar class="scroll-item selectable-icon">
+    <ion-item style="background-color:#C8E6C9;padding:0px 0px 0px 0px;margin:0">
+      <ion-scroll scrollX="true" style="margin:0;width:100%">
+        <button icon-only color="ptitle" ion-button *ngFor="let e of equips" (click)="popEquip(e,$event)">
+              <ion-thumbnail item-start>
                 <img [src]="(urlx+e.pic+'.png')" (error)="errorHandler($event)" default="./assets/img/placeholder.png"  >
-                {{e.pno}}<br>
-                {{e.sno}}
-            </ion-avatar>
+               </ion-thumbnail>
+               <ion-thumbnail item-start>
+                 <br>
+                 <h2>{{e?.pno}}</h2>
+                 <h3>SN:{{e?.sno}}</h3>
+                 </ion-thumbnail>
+              <!-- <p>SN:{{e.sno}}</p> -->
         </button>
-
       </ion-scroll>
     </ion-item>
   </ion-row>
-  <!-- <div>
-    <ion-row style="background-color:#f9fafc;">
-      <ion-col>
-        <button ion-item icon-left clear small (click)="openJob(1)" >
-              <ion-avatar>
-                <img src="./assets/icon/workstation.png" >
-              </ion-avatar>
-              <p>เครื่อง</p>
-            </button>
-
-      </ion-col>
-      <ion-col>
-        <button ion-item icon-left clear small (click)="openJob(2)">
-              <ion-avatar>
-                <img src="./assets/icon/p.jpg" >
-              </ion-avatar>
-              <p>โปรแกรม</p>
-            </button>
-      </ion-col>
-      <ion-col>
-        <button ion-item icon-left clear small (click)="openJob(3)">
-              <ion-avatar>
-                <img src="./assets/icon/other.jpg" >
-              </ion-avatar>
-              <p>อื่น ๆ</p>
-            </button>
-      </ion-col>
-    </ion-row>
-  </div> -->
-
+  <ion-row >
+    <ion-list no-lines style="background-color:brown;margin:0px;padding:0px;width:100%">
+      <!-- <ion-scroll scrollY="true" style="margin:0px;height: 90%;background-color:#ebebeb"> -->
+      <ion-item-sliding #item *ngFor="let p of problems" style="margin:0px;padding:0px;">
+        <ion-item style="margin:0px;padding:0px;">
+          <ion-thumbnail item-start>
+            <img src="./assets/icon/p.jpg" style="width:27px;height:27px;" *ngIf="p.problem_type=='P2'">
+            <img  [src]="(urlx+p?.pic+'.png')" (error)="errorHandler($event)" default="./assets/img/placeholder.png" *ngIf="p.problem_type=='P1'">
+          </ion-thumbnail>
+          <h3 *ngIf="p.problem_type=='P1'">{{p?.work_type_desc}}&nbsp;{{p?.equip_set_desc}}&nbsp;SN:{{p?.sno}}</h3>
+          <h3 *ngIf="p.problem_type=='P2'">{{p?.prob_gdesc}}&nbsp;{{p?.problem_sub_desc}}&nbsp;</h3>
+          <p>{{p?.detail}}</p>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button (click)="delete(p?.probid)" color="danger">
+              <ion-icon name="trash"></ion-icon>ลบ
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+    <!-- </ion-scroll> -->
+  </ion-row>
 </ion-content>
 <ion-footer style="background-color:#e8e8e8">
-    <ion-buttons text-center >
-      <button ion-button clear color="danger" >ยืนยัน</button>
-      <!-- <button ion-button clear color="primary">ส่งต่อ</button> -->
-    </ion-buttons>
-  </ion-footer>
+  <ion-buttons text-center>
+    <button ion-button clear color="danger">ยืนยัน</button>
+    <!-- <button ion-button clear color="primary">ส่งต่อ</button> -->
+  </ion-buttons>
+</ion-footer>

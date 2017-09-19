@@ -1,6 +1,6 @@
 import { ServiceProvider } from './../../providers/service/service';
 import { CommentProvider } from './../../providers/comment/comment';
-import { Component, Directive } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, PopoverController } from 'ionic-angular';
 import { url } from "../../config";
 import { PhotoViewer } from '@ionic-native/photo-viewer';
@@ -182,7 +182,7 @@ export class FollowupProblemPage {
   openJob(svData: any) {
 
         //รับจ๊อบจาก ข้าราชการเพื่อทำการวิเคราะห์และทำการแตกจ๊อบใหม่
-        let status = svData.msv_status;
+        //let status = svData.msv_status;
         //let page = status != 0 ? 'FollowupProblemPage' : 'JobDistributePage';
         let page = 'JobDistributePage';
         let modal = this.modalController.create(page, { svData: svData });
