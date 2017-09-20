@@ -71,7 +71,7 @@
 </ion-footer>
 <ion-footer *ngIf="userData.user_type==2 && svData.msv_status!=1">
   <ion-buttons text-center >
-    <button ion-button clear color="danger" (click)="openJob(svData)" *ngIf="svData.msv_status==0">รับงาน</button>
+    <button ion-button full icon-left color="primary" (click)="openJob(svData)" *ngIf="svData.msv_status==0"><ion-icon name="arrow-dropdown"></ion-icon>รับงาน</button>
     <button ion-button clear color="primary" *ngIf="svData.msv_status!=0">ปิดงาน</button>
   </ion-buttons>
 </ion-footer>

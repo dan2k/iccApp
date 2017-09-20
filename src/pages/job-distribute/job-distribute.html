@@ -73,12 +73,12 @@
       <ion-item-sliding #item *ngFor="let p of problems" style="margin:0px;padding:0px;">
         <ion-item style="margin:0px;padding:0px;">
           <ion-thumbnail item-start>
-            <img src="./assets/icon/p.jpg" style="width:27px;height:27px;" *ngIf="p.problem_type=='P2'">
+            <img src="./assets/icon/p.jpg"  *ngIf="p.problem_type=='P2'">
             <img  [src]="(urlx+p?.pic+'.png')" (error)="errorHandler($event)" default="./assets/img/placeholder.png" *ngIf="p.problem_type=='P1'">
           </ion-thumbnail>
           <h3 *ngIf="p.problem_type=='P1'">{{p?.work_type_desc}}&nbsp;{{p?.equip_set_desc}}&nbsp;SN:{{p?.sno}}</h3>
-          <h3 *ngIf="p.problem_type=='P2'">{{p?.prob_gdesc}}&nbsp;{{p?.problem_sub_desc}}&nbsp;</h3>
-          <p>{{p?.detail}}</p>
+          <h3 *ngIf="p.problem_type=='P2'">{{p?.prob_gdesc}}<br>{{p?.problem_sub_desc}}&nbsp;</h3>
+          <p text-wrap>{{p?.detail}}</p>
         </ion-item>
         <ion-item-options side="right">
           <button ion-button (click)="delete(p?.probid)" color="danger">
@@ -92,7 +92,9 @@
 </ion-content>
 <ion-footer style="background-color:#e8e8e8">
   <ion-buttons text-center>
-    <button ion-button clear color="danger">ยืนยัน</button>
+    <button ion-button  color="primary" full icon-left (click)="create()">
+      <ion-icon name="add-circle"></ion-icon>สร้างรายการ service
+    </button>
     <!-- <button ion-button clear color="primary">ส่งต่อ</button> -->
   </ion-buttons>
 </ion-footer>

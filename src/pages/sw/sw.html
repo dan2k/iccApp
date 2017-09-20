@@ -17,7 +17,7 @@
         <ion-item>
           <ion-label>ระบบงาน</ion-label>
           <ion-select [(ngModel)]="prob_gid" (ionChange)="change($event)">
-            <ion-option value="">-- เลือก --</ion-option>
+            <!-- <ion-option value="">-- เลือก --</ion-option> -->
             <ion-option *ngFor="let p of problemgroups" [value]="p.prob_gid+'||'+p.prob_gdesc">
               {{p.prob_gdesc}}
             </ion-option>

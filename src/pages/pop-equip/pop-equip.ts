@@ -1,3 +1,4 @@
+import { MessageProvider } from './../../providers/message/message';
 import { url } from './../../config';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
@@ -30,7 +31,8 @@ export class PopEquipPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public viewCtrl: ViewController,
-    public hw: HwProvider
+    public hw: HwProvider,
+    public msg:MessageProvider
   ) {
     this.equip = this.navParams.get('equip');
     this.token = localStorage.getItem('token');
@@ -72,12 +74,15 @@ export class PopEquipPage {
       });
   }
   close() {
-    //let str = this.detail;
-    // console.log(str.trim());
-    if (!this.detail) {
-      alert('กรุณาระบุอาการเสีย')
+    if (!this.problem_sub2_id) {
+      this.msg.alert('กรุณาระบุอาการเสีย')
       return false;
     }
+    if (!this.detail) {
+      this.msg.alert('กรุณาระบุรายละเอียด')
+      return false;
+    }
+
     this.viewCtrl.dismiss({
       data: {
         equip: this.equip,

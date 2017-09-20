@@ -1,3 +1,4 @@
+import { MessageProvider } from './../../providers/message/message';
 import { SwProvider } from './../../providers/sw/sw';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
@@ -29,7 +30,8 @@ export class SwPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public sw: SwProvider,
-    public view:ViewController
+    public view: ViewController,
+    public msg: MessageProvider
   ) {
     this.token = localStorage.getItem('token');
     this.userData = JSON.parse(localStorage.getItem('userData'));
@@ -76,6 +78,23 @@ export class SwPage {
     this.genProblemsub2();
   }
   save() {
+    if (!this.prob_gid) {
+      this.msg.alert('กรุณาระบุระบบงานด้วย');
+      return false;
+    }
+    if (!this.problem_sub_id) {
+      this.msg.alert('กรุณาระบุโปรแกรมด้วย');
+      return false;
+    }
+    if (!this.problem_sub2_id) {
+      this.msg.alert('กรุณาระบุอาการด้วย');
+      return false;
+    }
+    if (!this.detail) {
+      this.msg.alert('กรุณาระบุรายละเอียด');
+      return false;
+    }
+
     let pg = this.prob_gid.split('||');
     let ps = this.problem_sub_id.split('||');
     let data = {

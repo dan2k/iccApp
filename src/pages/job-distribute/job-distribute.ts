@@ -2,6 +2,7 @@ import { HwProvider } from './../../providers/hw/hw';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, ModalController,PopoverController } from 'ionic-angular';
 import { url } from '../../config';
+import { MessageProvider } from '../../providers/message/message';
 
 @IonicPage()
 @Component({
@@ -31,12 +32,13 @@ export class JobDistributePage {
     public viewCtrl: ViewController,
     public modalCtrl: ModalController,
     public hw: HwProvider,
-    public pop:PopoverController
+    public pop: PopoverController,
+    public msg:MessageProvider
   ) {
     this.svData = this.navParams.get('svData');
     this.token = localStorage.getItem('token');
     this.userData = JSON.parse(localStorage.getItem('userData'));
-    //console.log(this.svData);
+    console.log(this.svData);
   }
   errorHandler(event) {
     console.debug(event);
@@ -110,8 +112,13 @@ export class JobDistributePage {
            problem_sub_id: data.data.problem_sub_id,
            problem_sub2_id:data.data.problem_sub2_id,
            detail: data.data.detail,
-           cust_ptype: this.svData.cust_ptype,
-           cust_pcode:this.svData.cust_pcode
+          //  cust_ptype: this.svData.cust_ptype,
+          //  cust_pcode: this.svData.cust_pcode,
+          //  user_id: this.svData.msv_uid,
+           //sv_date: this.svData.msv_adate,
+           //sv_time: this.svData.msv_time,
+
+
          }
          this.problems.push(p);
          let sno = data.data.equip.sno;
@@ -186,8 +193,9 @@ export class JobDistributePage {
           prob_gdesc: data.prob_gdesc,
           problem_sub_desc:data.problem_sub_desc,
           detail: data.detail,
-          cust_ptype: this.svData.cust_ptype,
-          cust_pcode:this.svData.cust_pcode
+          // cust_ptype: this.svData.cust_ptype,
+          // cust_pcode: this.svData.cust_pcode,
+          // user_id: this.svData.msv_uid,
         }
         this.problems.push(p);
         this.probid++;
@@ -195,8 +203,26 @@ export class JobDistributePage {
     });
     modal.present();
   }
+  create() {
+    console.log(this.problems);
+    let params = {
+      data: this.problems,
+      user_id: this.userData.user_id,
+      cust_ptype: this.svData.cust_ptype,
+      cust_pcode: this.svData.cust_pcode,
+      msv_uid: this.svData.msv_uid,
+      msv_no:this.svData.msv_no,
+    };
+    this.msg.postApi(this.token,'createSv',params)
+      .then((data: any) => {
+        if (data.status) {
+          console.log(data.data);
+        }
+      }, (err) => {
+        console.log(err);
+      });
+  }
   delete(probid) {
-
     this.problems = this.problems.filter(obj => (obj.probid !== probid));
     this.listEquip(this.work_type_id, this.equip_set_id)
 

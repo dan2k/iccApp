@@ -1,8 +1,8 @@
 import { url } from './../../config';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http,RequestOptions,Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { LoadingController, ToastController, ModalController,App } from 'ionic-angular';
+import { LoadingController, ToastController, ModalController,App,AlertController } from 'ionic-angular';
 /*
   Generated class for the MessageProvider provider.
 
@@ -11,12 +11,12 @@ import { LoadingController, ToastController, ModalController,App } from 'ionic-a
 */
 @Injectable()
 export class MessageProvider {
-
   constructor(
     public http: Http,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
     private modalCtrl: ModalController,
+    private altCtrl:AlertController,
     private app: App
   ) {
     console.log('Hello MessageProvider Provider');
@@ -35,6 +35,14 @@ export class MessageProvider {
       duration: 3000
     });
     toast.present();
+  }
+  alert(msg) {
+    let alert = this.altCtrl.create({
+      title: 'แจ้งเตือน',
+      subTitle: `${msg}`,
+      buttons: ['ตกลง']
+    });
+    alert.present();
   }
   checkServer() {
     let load = this.load(`กำลังประมวลผลข้อมูล`);
@@ -66,5 +74,29 @@ export class MessageProvider {
       nav.setRoot('LoginPage');
     }
   }
+  postApi(token: string, endPoint:any,params?:any) {
+    this.checkServer();
+    return new Promise((resolve, reject) => {
 
+      let headers = new Headers({
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      });
+      let options = new RequestOptions({ headers: headers });
+      let body = {
+           data: params
+       };
+      //console.log(body);
+      this.http.post(`${url}/${endPoint}`, body, options)
+        .map(res => {
+          return res.json();
+        })
+        .subscribe(data => {
+          this.checkToken(data.msg);
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
 }

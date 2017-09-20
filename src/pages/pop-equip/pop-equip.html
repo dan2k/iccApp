@@ -3,7 +3,7 @@
       <ion-item style="margin:0;">
           <ion-label floating>อาการเสีย</ion-label>
           <ion-select [(ngModel)]="problem_sub2_id" (ionChange)="change(s)">
-            <ion-option value=''>-- อาการ -- </ion-option>
+            <!-- <ion-option value=''>-- อาการ -- </ion-option> -->
             <ion-option *ngFor="let s of symptoms" [value]="s.problem_sub2_id">
               {{s.problem_sub2_desc}}
             </ion-option>
