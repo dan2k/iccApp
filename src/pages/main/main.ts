@@ -32,6 +32,7 @@ export class MainPage {
     this.userData = JSON.parse(localStorage.getItem('userData'));
     this.token = localStorage.getItem('token');
     this.getJob();
+
   }
 
   // ionViewDidLoad() {
@@ -63,6 +64,7 @@ export class MainPage {
       .then((data:any) => {
         if (data.status) {
           this.svData = data.data;
+          console.log('xxxxxxxxxxx', this.svData);
         }else {
           console.log(data);
           let isExpired = /Expired token/g.test(data.msg);
@@ -81,13 +83,14 @@ export class MainPage {
     });
     problem.present();
   }
-  openFollow(svData: any) {
-    let follow = this.modalCtrl.create('FollowupProblemPage', { svData: svData });
-    follow.onDidDismiss(() => {
-      this.getJob();
-      console.log('msg=>', 1);
-    });
-    follow.present();
+  openFollow(sv: any) {
+    console.log('sv====>', sv);
+     let follow = this.modalCtrl.create('FollowupProblemPage', { svData: sv });
+       follow.onDidDismiss(() => {
+         this.getJob();
+         console.log('msg=>', 1);
+       });
+      follow.present();
   }
 
 }

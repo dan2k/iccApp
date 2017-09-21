@@ -52,6 +52,7 @@
                         </p>
                         <p>วัน: {{sv.msv_adate}} เวลา: {{sv.msv_atime}}</p>
                     </button>
+                    <h2>สถานะ: {{sv.msv_status_desc}} <span *ngIf="sv.msv_status!=0">{{sv.kp_desc}}</span><span style="color:red;" *ngIf="(sv.msv_status==6 && sv.kp_idx!=sv.skp_idx)">(ตีกลับ)</span></h2>
             </ion-card>
         </ion-list>
     </ion-scroll>

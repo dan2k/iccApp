@@ -4,7 +4,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, PopoverController } from 'ionic-angular';
 import { url } from "../../config";
 import { PhotoViewer } from '@ionic-native/photo-viewer';
+
 //import { PopoverPage } from './followup-problem';
+import { MessageProvider } from '../../providers/message/message';
 /**
  * Generated class for the FollowupProblemPage page.
  *
@@ -38,6 +40,7 @@ export class FollowupProblemPage {
     public commentProvider: CommentProvider,
     public popup: PopoverController,
     public serviceProvider: ServiceProvider,
+    public msg:MessageProvider,
   ) {
     this.token = localStorage.getItem('token');
     this.xurl = url;
@@ -51,6 +54,8 @@ export class FollowupProblemPage {
     //console.log('isMoi=>' + this.isMoi,this.userData);
 
     this.svData = this.navParams.get('svData');
+    console.log('svDatax2=>', this.svData);
+
     let str = this.svData.msv_no.substr(0, 2);
     let msvno = '';
     //console.log('str=>' + str);
@@ -64,14 +69,14 @@ export class FollowupProblemPage {
       msvno = this.svData.msv_no;
     }
     //console.log(`imageData=>${msvno}`);
-    if ((this.svData.cust_ptype == this.userData.cust_ptype) && (this.svData.cust_pcode == this.userData.cust_pcode)) {
+
+    if ((this.svData.cust_ptype == this.userData.cust_ptype) && (this.svData.cust_pcode == this.userData.cust_pcode) && (this.svData.kp_idx == this.svData.skp_idx)) {
       this.isOpen = true;
     } else {
       this.isOpen = false;
     }
     this.imageData = `${url}/uploads/msv-pic/${msvno}.jpg`;
     this.getComment();
-    // console.log(this.svData);
     // console.log('isOPen=' + this.isOpen)
     // console.log('svData.userData.cust_ptype=', this.userData.cust_ptype);
     // console.log('svData.userData.cust_pcode=', this.userData.cust_pcode);
@@ -117,7 +122,22 @@ export class FollowupProblemPage {
     });
     model.present();
   }
-
+  returnJob() {//ส่งคืนกลับไปกรณีที่ยังไม่ได้รับการแก้ไขจริง ๆ
+    let params = {
+      user_id: this.userData.user_id,
+      svno: this.svData.msv_no
+    }
+    this.msg.postApi(this.token,'returnJob',params)
+      .then((data: any) => {
+        if (data.status) {
+          //return ok
+          console.log(data);
+          this.close();
+        }
+      }, (err) => {
+        console.log(err);
+      });
+  }
   errorHandler(event) {
     console.debug(event);
   }
@@ -179,8 +199,8 @@ export class FollowupProblemPage {
 
     }
   }
-  openJob(svData: any) {
 
+  openJob(svData: any) {
         //รับจ๊อบจาก ข้าราชการเพื่อทำการวิเคราะห์และทำการแตกจ๊อบใหม่
         //let status = svData.msv_status;
         //let page = status != 0 ? 'FollowupProblemPage' : 'JobDistributePage';
@@ -190,5 +210,5 @@ export class FollowupProblemPage {
           this.close();
         });
         modal.present();
-      }
+  }
 }

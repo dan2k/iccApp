@@ -29,7 +29,8 @@
                     <ion-icon name="chatboxes"></ion-icon>
                     &nbsp;แสดงความคิดเห็น
                 </button>
-        <h2>สถานะ: waiting</h2>
+                <h2>สถานะ: {{svData.msv_status_desc}} <span *ngIf="svData.msv_status!=0" >{{svData.kp_desc}}</span><span style="color:red;" *ngIf="(this.svData.msv_status==6 && this.svData.kp_idx!=this.svData.skp_idx)">(ตีกลับ)</span></h2>
+
       </ion-col>
       <ion-col text-right *ngIf="isRG">
         <button ion-button icon-only clear small color="warning" (click)="openFollow2(svData.msv_no2)">
@@ -63,11 +64,13 @@
   </ion-scroll>
 
 </ion-content>
-<ion-footer *ngIf="isMoi && svData.msv_status==0">
+<ion-footer *ngIf="((isMoi && svData.msv_status==0)||(isMoi && (svData.msv_status==6 )))">
   <ion-buttons text-center >
-    <button ion-button clear color="danger" (click)="openPop($event)">ปิด</button>
-    <!-- <button ion-button clear color="primary">ส่งต่อ</button> -->
+    <button ion-button full  color="danger" (click)="openPop($event)" item-end icon-left>
+      <!-- <ion-icon name="close-circle" ></ion-icon> -->
+    ปิด</button>
   </ion-buttons>
+
 </ion-footer>
 <ion-footer *ngIf="userData.user_type==2 && svData.msv_status!=1">
   <ion-buttons text-center >
@@ -75,24 +78,10 @@
     <button ion-button clear color="primary" *ngIf="svData.msv_status!=0">ปิดงาน</button>
   </ion-buttons>
 </ion-footer>
-<ion-footer *ngIf="(isOpen && (svData.msv_status==1))">
-  <!-- <ion-toolbar>
-        *ngIf="(isOpen && (userData.msv_status==1||userData.msv_status==3)) "
-        <ion-nav-buttons>
-            <button ion-button>ได้รับการแก้ไขเรียบร้อยแล้ว</button>
-            <button ion-button>ยังพบปัญหาอยู่</button>
-        </ion-nav-buttons>
-
-
-        <ion-buttons text-center *ngIf="isMoi && userData.msv_status==0">
-            <button ion-button clear color="danger" (click)="openPop($event)">ปิด</button>
-            <button ion-button clear color="primary">ส่งต่อ</button>
-        </ion-buttons>
-    </ion-toolbar> -->
-
+<ion-footer *ngIf="(isOpen && (svData.msv_status==6))">
   <ion-buttons text-center>
     <button ion-button color="success" blocked small (click)="openSmile($event)">ได้รับการแก้ไขแล้ว</button>
-    <button ion-button color="warning" blocked small>ยังไม่ได้การแก้ไข</button>
+    <button ion-button color="warning" blocked small (click)="returnJob()">ยังไม่ได้การแก้ไข</button>
   </ion-buttons>
 </ion-footer>
 

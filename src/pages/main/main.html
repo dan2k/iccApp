@@ -57,7 +57,7 @@
     </ion-item> -->
   <ion-scroll scrollY="true" style="margin:0px;height: 90%;background-color:#ebebeb">
     <ion-list inset no-lines style="margin:0">
-      <ion-card async *ngFor="let sv of svData">
+      <ion-card async *ngFor="let sv of this.svData">
         <button ion-item (click)="openFollow(sv)">
                         <ion-avatar item-start>
                             <img *ngIf="sv.msv_type==1" src="./assets/icon/workstation.png">
@@ -72,6 +72,7 @@
                         </p>
                         <p>วัน: {{sv.msv_adate}} เวลา: {{sv.msv_atime}}</p>
                     </button>
+                    <h2>สถานะ: {{sv.msv_status_desc}} <span *ngIf="sv.msv_status!=0">{{sv.kp_desc}}</span><span style="color:red;" *ngIf="(sv.msv_status==6 && sv.kp_idx!=sv.skp_idx)">(ตีกลับ)</span></h2>
       </ion-card>
     </ion-list>
   </ion-scroll>

@@ -54,9 +54,9 @@
         </ion-avatar>
         <h1>ตรวจสอบติดตาม</h1>
     </ion-item> -->
-  <ion-item *ngIf="uType!='P'" >
+  <ion-item *ngIf="uType!='P'">
     <ion-label>จังหวัด:</ion-label>
-    <ion-select [(ngModel)]="fProvince" (ionChange)="changeProvince()" >
+    <ion-select [(ngModel)]="fProvince" (ionChange)="changeProvince()">
       <ion-option value='' selected>--ทั้งหมด--</ion-option>
       <ion-option *ngFor="let p of provinces" [value]="p.province_id">
         {{p.province_name}}
@@ -72,9 +72,9 @@
       </ion-option>
     </ion-select>
   </ion-item>
-  <ion-item >
-    <ion-label >หน่วยงาน:</ion-label>
-    <ion-select  [(ngModel)]="fCustpcode" (ionChange)="changePcode()">
+  <ion-item>
+    <ion-label>หน่วยงาน:</ion-label>
+    <ion-select [(ngModel)]="fCustpcode" (ionChange)="changePcode()">
       <ion-option selected value=''>--ทั้งหมด--</ion-option>
       <ion-option *ngFor="let c of custpcodes" [value]="c.cust_pcode">
         {{c.cust_pdesc}}
@@ -85,19 +85,20 @@
     <ion-list inset no-lines style="margin:0">
       <ion-card async *ngFor="let sv of svData">
         <button ion-item (click)="openFollow(sv)">
-                        <ion-avatar item-start>
-                            <img *ngIf="sv.msv_type==1" src="./assets/icon/workstation.png">
-                            <img *ngIf="sv.msv_type==2" src="./assets/icon/p.jpg">
-                            <img *ngIf="sv.msv_type==3" src="./assets/icon/other.jpg">
+            <ion-avatar item-start>
+              <img *ngIf="sv.msv_type==1" src="./assets/icon/workstation.png">
+              <img *ngIf="sv.msv_type==2" src="./assets/icon/p.jpg">
+              <img *ngIf="sv.msv_type==3" src="./assets/icon/other.jpg">
 
-                        </ion-avatar>
-                        <h2>{{sv.msv_no}}</h2>
-                        <p text-wrap>ปัญหา: {{sv.msv_detail}}</p>
-                        <p>
-                            โดย: {{sv.thiname}}
-                        </p>
-                        <p>วัน: {{sv.msv_adate}} เวลา: {{sv.msv_atime}}</p>
-                    </button>
+            </ion-avatar>
+            <h2>{{sv.msv_no}}</h2>
+            <p text-wrap>ปัญหา: {{sv.msv_detail}}</p>
+            <p>
+              โดย: {{sv.thiname}}
+            </p>
+            <p>วัน: {{sv.msv_adate}} เวลา: {{sv.msv_atime}}</p>
+        </button>
+        <h2>สถานะ: {{sv.msv_status_desc}} <span *ngIf="sv.msv_status!=0">{{sv.kp_desc}}</span><span style="color:red;" *ngIf="(sv.msv_status==6 && sv.kp_idx!=sv.skp_idx)">(ตีกลับ)</span></h2>
       </ion-card>
     </ion-list>
   </ion-scroll>
