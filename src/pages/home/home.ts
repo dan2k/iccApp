@@ -10,12 +10,13 @@ export class HomePage {
   private tab2: any;
   private tab3: any;
   private tab4: any;
+  private userData: any;
   constructor(public navCtrl: NavController,private app:App) {
-    let userData:any = JSON.parse(localStorage.getItem('userData'));
-    //console.log(userData.fname);
-    let userType = userData.user_type;
+    this.userData= JSON.parse(localStorage.getItem('userData'));
+    //console.log(this.userData);
+    let userType = this.userData.user_type;
     if (userType == 1) {//moi
-      let jobid = userData.job_id;
+      let jobid = this.userData.job_id;
       console.log('jobid=>' + jobid);
       if (jobid == 2 || jobid == 3 || jobid == 4) {
         this.tab1 = 'MainmoiPage';
@@ -29,8 +30,8 @@ export class HomePage {
     this.tab3 = 'Tab3Page';
   }
   logout() {
-    // localStorage.removeItem('token');
-    // localStorage.removeItem('userData');
+     localStorage.removeItem('token');
+     localStorage.removeItem('userData');
      let nav = this.app.getRootNav();
      nav.setRoot('LoginPage');
   }

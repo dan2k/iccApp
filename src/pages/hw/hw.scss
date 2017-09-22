@@ -1,5 +1,5 @@
 page-hw {
-  ion-scroll[scrollX] {
+  /* ion-scroll[scrollX] {
     white-space: nowrap;
     height:55px;
     overflow: hidden;
@@ -22,8 +22,113 @@ page-hw {
     }
 
   }
+
+   ::-webkit-scrollbar {
+    display: none;
+  } */
+
+  .d{
+    height:100px;
+    ion-scroll[scrollX] {
+      height:100px;
+      white-space: nowrap;
+      .scroll-item {
+        height:100px;
+      display: inline-block;
+      }
+    }
+  }
+  .a{
+    ion-scroll[scrollX] {
+      white-space: nowrap;
+      height:50px;
+      overflow: hidden;
+      button{
+        height:50px;
+      }
+      .scroll-item {
+        display: inline-block;
+      }
+      .selectable-icon {
+        margin: 0px 0px 0px 0px;
+        color: rgba(28, 8, 170, 0.92);
+        font-size: 16px;
+        font-weight: bold;
+      }
+      ion-avatar img {
+        margin: 0px;
+        width: 30px;
+        height: 30px;
+      }
+
+    }
+  }
+  .b{
+    width:100%;
+    background-color: red;
+    ion-scroll[scrollX] {
+      width:100%;
+      white-space: nowrap;
+      height:70px;
+      overflow: hidden;
+      button{
+        margin:0 0 0 0;
+        height:70px;
+
+        ion-thumbnail{
+
+          img{
+            margin: 10px 1px 0px 0px;
+          }
+
+        }
+      }
+
+      .scroll-item {
+        display: inline-block;
+      }
+      .selectable-icon {
+        margin: 0px 0px 0px 0px;
+        color: rgba(28, 8, 170, 0.92);
+        font-size: 16px;
+        font-weight: bold;
+      }
+      ion-avatar img {
+        margin: 0px;
+        width: 30px;
+        height: 30px;
+      }
+
+    }
+  }
+
+  ion-scroll[scrollX] {
+    white-space: nowrap;
+    height: 30px;
+    overflow: hidden;
+    button {
+      height: 30px;
+    }
+    .scroll-item {
+      display: inline-block;
+    }
+    .selectable-icon {
+      margin: 0px 0px 0px 0px;
+      color: rgba(28, 8, 170, 0.92);
+      font-size: 16px;
+      font-weight: bold;
+    }
+    ion-avatar img {
+      margin: 0px;
+      width: 30px;
+      height: 30px;
+    }
+  }
   /* Hide ion-content scrollbar */
    ::-webkit-scrollbar {
     display: none;
   }
+
+
+
 }

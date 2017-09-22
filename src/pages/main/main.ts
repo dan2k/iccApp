@@ -19,7 +19,7 @@ import { IonicPage, NavController, NavParams, ModalController, App} from 'ionic-
 export class MainPage {
   public userData: any;
   public svData: any;
-  public  token: string;
+  public token: string;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,

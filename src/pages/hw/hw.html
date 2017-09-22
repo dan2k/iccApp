@@ -10,7 +10,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content style="margin:0;padding:0">
-  <ion-card *ngFor="let w of worktypes;let i = index">
+  <!-- <ion-card *ngFor="let w of worktypes;let i = index">
     <ion-card-header><ion-badge>{{w.work_type_desc}}</ion-badge></ion-card-header>
     <ion-card-content>
       <ion-row>
@@ -28,7 +28,7 @@
         </ion-item>
     </ion-row>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
   <!-- <ion-row *ngFor="let w of worktypes;let i = index">
     &nbsp;&nbsp;<p><ion-badge style="font-size:16px;">{{w.work_type_desc}}</ion-badge></p>
     <ion-item no-lines>
@@ -65,4 +65,77 @@
             </ion-card>
       </ion-slide>
   </ion-slides> -->
+
+
+  <ion-row >
+      <ion-item style="background-color:#C8E6C9;padding:0px 0px 0px 0px;margin:0">
+        <ion-scroll scrollX="true" style="margin:0">
+          <button clear icon-left ion-button *ngFor="let w of worktypes" (click)="getEquipset(w.work_type_id,w.work_type_desc)">
+              <ion-icon name="radio-button-on" class="scroll-item selectable-icon" icon-start></ion-icon>
+              {{w?.work_type_desc}}
+          </button>
+        </ion-scroll>
+      </ion-item>
+    </ion-row>
+    <ion-row *ngIf="isSet" class="a">
+        <ion-item style="background-color:#C8E6C9;padding:0px 0px 0px 0px;margin:0">
+          <ion-scroll scrollX="true" style="margin:0">
+            <button icon-only clear ion-button *ngFor="let s of equipset" (click)="listEquip(work_type_id,s.equip_set_id,s.equip_set_desc)">
+                      <ion-avatar class="scroll-item selectable-icon">
+                          <img src="./assets/icon/workstation.png"  >
+                          {{s?.equip_set_desc}}
+                      </ion-avatar>
+                  </button>
+          </ion-scroll>
+        </ion-item>
+      </ion-row>
+      <ion-row *ngIf="isEquip" class="b">
+          <ion-item style="background-color:#C8E6C9;padding:0px 0px 0px 0px;margin:0">
+            <ion-scroll scrollX="true" style="margin:0;width:100%">
+              <button icon-only color="ptitle" ion-button *ngFor="let e of equips" (click)="setPno(e)">
+                    <ion-thumbnail item-start>
+                      <img [src]="(urlx+e.pic+'.png')" (error)="errorHandler($event)" default="./assets/img/placeholder.png"  >
+                     </ion-thumbnail>
+                     <ion-thumbnail item-start>
+                       <br>
+                       <h2>{{e?.pno}}</h2>
+                       <h3>SN:{{e?.sno}}</h3>
+                       </ion-thumbnail>
+                    <!-- <p>SN:{{e.sno}}</p> -->
+              </button>
+            </ion-scroll>
+          </ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item>
+            ระบบงาน: {{work_type_desc}}
+          </ion-item>
+          <ion-item>
+            WORKSTATION: {{equip_set_desc}}
+          </ion-item>
+          <ion-item>
+            PNO: {{problem_sub_desc}}
+          </ion-item>
+          <ion-item>
+            SNO: {{sno}}
+          </ion-item>
+          <ion-item>
+            <ion-label>อาการ</ion-label>
+            <ion-select [(ngModel)]="problem_sub2_id" >
+              <ion-option *ngFor="let p of problemsub2s" [value]="p.problem_sub2_id">
+                {{p.problem_sub2_desc}}
+              </ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>รายละเอียด</ion-label>
+            <ion-textarea rows=5 cols=80 [(ngModel)]="detail">
+
+            </ion-textarea>
+          </ion-item>
+
+        </ion-row>
 </ion-content>
+<ion-footer>
+  <button ion-button full color="primary" (click)="updateSv()">ปรับปรุง</button>
+</ion-footer>

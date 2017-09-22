@@ -76,7 +76,7 @@
             <img src="./assets/icon/p.jpg"  *ngIf="p.problem_type=='P2'">
             <img  [src]="(urlx+p?.pic+'.png')" (error)="errorHandler($event)" default="./assets/img/placeholder.png" *ngIf="p.problem_type=='P1'">
           </ion-thumbnail>
-          <h3 *ngIf="p.problem_type=='P1'">{{p?.work_type_desc}}&nbsp;{{p?.equip_set_desc}}&nbsp;SN:{{p?.sno}}</h3>
+          <h3 *ngIf="p.problem_type=='P1'">{{p?.work_type_desc}}&nbsp;<ion-icon name="arrow-forward"></ion-icon>&nbsp;{{p?.equip_set_desc}}&nbsp;<ion-icon name="arrow-forward"></ion-icon>&nbsp;SN:{{p?.sno}}</h3>
           <h3 *ngIf="p.problem_type=='P2'">{{p?.prob_gdesc}}<br>{{p?.problem_sub_desc}}&nbsp;</h3>
           <p text-wrap>{{p?.detail}}</p>
         </ion-item>

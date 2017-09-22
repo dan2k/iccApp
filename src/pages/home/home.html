@@ -1,9 +1,9 @@
 <ion-header>
-    <ion-navbar color="primary">
+    <ion-navbar color="ptitle">
 
         <ion-title>
             ICCAPP
-
+            <br><ion-note>คุณ {{userData?.user_fname}} {{userData?.user_lname}}</ion-note>
         </ion-title>
         <ion-buttons end>
             <button ion-button icon-only (click)="logout()">

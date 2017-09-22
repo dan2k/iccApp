@@ -25,7 +25,8 @@ export class SwPage {
   problemsubs: any;
   problemsub2s: any;
   detail: any;
-
+  svData: any;
+  isUpdate: boolean = false;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -35,6 +36,15 @@ export class SwPage {
   ) {
     this.token = localStorage.getItem('token');
     this.userData = JSON.parse(localStorage.getItem('userData'));
+    this.svData = this.navParams.get('svData');
+    if (this.svData) {
+      //update
+      this.isUpdate = true;
+      this.prob_gid = this.svData.prob_gid;
+      this.problem_sub_id = this.svData.problem_sub_id;
+      this.problem_sub2_id = this.svData.problem_sub2_id;
+      this.detail = this.svData.sv_detail;
+    }
     this.genProblemgroup();
   }
   genProblemsub() {
@@ -101,9 +111,11 @@ export class SwPage {
       prob_gid: pg[0],
       prob_gdesc:pg[1],
       problem_sub_id: ps[0],
-      problem_sub_desc:ps[1],
+      problem_sub_desc: ps[1],
+      problem_sub2_id:this.problem_sub2_id,
       detail: this.detail,
       problem_type: 'P2',
+      contract_no:pg[2],
       work_type_id: '0',
     }
     this.view.dismiss(data);

@@ -28,10 +28,13 @@ export class Followup2Page {
       this.token = localStorage.getItem('token');
       this.xurl = url;
       this.userData = JSON.parse(localStorage.getItem('userData'));
+
+
       let svno = this.navParams.get('msv_no');
       this.commentProvider.getSvdata(this.token, this.userData.user_id, svno)
         .then((data: any) => {
           if (data.status) {
+            console.log('xyz====>',data.data[0]);
             this.svData = data.data[0];
           this.imageData = `${url}/uploads/msv-pic/${this.svData.msv_no}.jpg`;
           this.getComment();

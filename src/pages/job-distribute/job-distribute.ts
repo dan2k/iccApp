@@ -70,7 +70,6 @@ export class JobDistributePage {
     this.equip_set_id = equip_set_id;
     this.hw.listEquip(this.token, this.userData.user_id, this.svData.cust_ptype, this.svData.cust_pcode, work_type_id, equip_set_id)
       .then((data: any) => {
-
         this.equips = data.data;
         for (let i = 0; i<this.problems.length; i++){
           let sno = this.problems[i].sno;
@@ -88,15 +87,6 @@ export class JobDistributePage {
     let pop = this.pop.create('PopEquipPage',{equip: equip });
     pop.onDidDismiss((data: any) => {
        if (data) {
-        /*this.serviceProvider.close(this.token, this.userData.user_id, this.svData.msv_no,data.solve)
-          .then((data: any) => {
-            console.log(data);
-            this.close();
-          }, (err) => {
-            this.close();
-            console.log(err);
-          });
-         */
          console.log(data);
          let p = {
            probid:this.probid,
@@ -107,6 +97,7 @@ export class JobDistributePage {
            work_type_desc: data.data.equip.work_type_desc,
            sno: data.data.equip.sno,
            pic: data.data.equip.pic,
+           contract_no:data.data.equip.contract_no,
            problem_type: 'P1',
            prob_gid: data.data.prob_gid,
            problem_sub_id: data.data.problem_sub_id,
@@ -175,7 +166,7 @@ export class JobDistributePage {
     }
 
     let modal = this.modalCtrl.create(page, { svData: this.svData });
-    modal.onDidDismiss((data:any) => {
+    modal.onDidDismiss((data: any) => {
       if (data) {
         let p = {
           probid:this.probid,
@@ -186,6 +177,7 @@ export class JobDistributePage {
           work_type_desc: '',
           sno: '',
           pic: '',
+          contract_no: data.contract_no,
           problem_type: 'P2',
           prob_gid: data.prob_gid,
           problem_sub_id: data.problem_sub_id,
@@ -217,6 +209,7 @@ export class JobDistributePage {
       .then((data: any) => {
         if (data.status) {
           console.log(data.data);
+          this.close();
         }
       }, (err) => {
         console.log(err);

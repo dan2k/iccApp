@@ -1,44 +1,44 @@
 <ion-content>
-    <!-- <ion-item no-lines color="ptitle">
+  <!-- <ion-item no-lines color="ptitle">
         <ion-avatar item-start>
             <img src="./assets/icon/monitoring.jpg">
         </ion-avatar>
         <h1>ตรวจสอบติดตาม:</h1>
     </ion-item> -->
-    <ion-item *ngIf="uType!='P'">
-        <ion-label>จังหวัด:</ion-label>
-        <ion-select [(ngModel)]="fProvince" (ionChange)="changeProvince()">
-            <ion-option value='' selected>--ทั้งหมด--</ion-option>
-            <ion-option *ngFor="let p of provinces" [value]="p.province_id">
-                {{p.province_name}}
-            </ion-option>
-        </ion-select>
-    </ion-item>
-    <!-- <ion-item>
+  <ion-item *ngIf="uType!='P'">
+    <ion-label>จังหวัด:</ion-label>
+    <ion-select [(ngModel)]="fProvince" (ionChange)="changeProvince()">
+      <ion-option value='' selected>--ทั้งหมด--</ion-option>
+      <ion-option *ngFor="let p of provinces" [value]="p.province_id">
+        {{p.province_name}}
+      </ion-option>
+    </ion-select>
+  </ion-item>
+  <!-- <ion-item>
         <p>Selected Value: {{ fProvince }}</p>
     </ion-item> -->
-    <ion-item>
-        <ion-label>ประเภทหน่วยงาน:</ion-label>
-        <ion-select [(ngModel)]="fCustptype" (ionChange)="changePtype()">
-            <ion-option selected value=''>--ทั้งหมด--</ion-option>
-            <ion-option *ngFor="let c of custptypes" [value]="c.cust_ptype">
-                {{c.cust_desc}}
-            </ion-option>
-        </ion-select>
-    </ion-item>
-    <ion-item>
-        <ion-label>หน่วยงาน:</ion-label>
-        <ion-select [(ngModel)]="fCustpcode" (ionChange)="changePcode()">
-            <ion-option selected value=''>--ทั้งหมด--</ion-option>
-            <ion-option *ngFor="let c of custpcodes" [value]="c.cust_pcode">
-                {{c.cust_pdesc}}
-            </ion-option>
-        </ion-select>
-    </ion-item>
-    <ion-scroll scrollY="true" style="margin:0px;height: 90%;background-color:#ebebeb">
-        <ion-list inset no-lines style="margin:0">
-            <ion-card async *ngFor="let sv of svData">
-                <button ion-item (click)="openJob(sv)">
+  <ion-item>
+    <ion-label>ประเภทหน่วยงาน:</ion-label>
+    <ion-select [(ngModel)]="fCustptype" (ionChange)="changePtype()">
+      <ion-option selected value=''>--ทั้งหมด--</ion-option>
+      <ion-option *ngFor="let c of custptypes" [value]="c.cust_ptype">
+        {{c.cust_desc}}
+      </ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>หน่วยงาน:</ion-label>
+    <ion-select [(ngModel)]="fCustpcode" (ionChange)="changePcode()">
+      <ion-option selected value=''>--ทั้งหมด--</ion-option>
+      <ion-option *ngFor="let c of custpcodes" [value]="c.cust_pcode">
+        {{c.cust_pdesc}}
+      </ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-scroll scrollY="true" style="margin:0px;height: 90%;background-color:#ebebeb">
+    <ion-list inset no-lines style="margin:0">
+      <ion-card async *ngFor="let sv of svData">
+        <!-- <button ion-item (click)="openJob(sv)">
                         <ion-avatar item-start>
                             <img *ngIf="sv.msv_type==1" src="./assets/icon/workstation.png">
                             <img *ngIf="sv.msv_type==2" src="./assets/icon/p.jpg">
@@ -52,8 +52,47 @@
                         </p>
                         <p>วัน: {{sv.msv_adate}} เวลา: {{sv.msv_atime}}</p>
                     </button>
-                    <h2>สถานะ: {{sv.msv_status_desc}} <span *ngIf="sv.msv_status!=0">{{sv.kp_desc}}</span><span style="color:red;" *ngIf="(sv.msv_status==6 && sv.kp_idx!=sv.skp_idx)">(ตีกลับ)</span></h2>
-            </ion-card>
-        </ion-list>
-    </ion-scroll>
+                    <h2>สถานะ: {{sv.msv_status_desc}} <span *ngIf="sv.msv_status!=0">{{sv.kp_desc}}</span><span style="color:red;" *ngIf="(sv.msv_status==6 && sv.kp_idx!=sv.skp_idx)">(ตีกลับ)</span></h2> -->
+        <ion-item color="ptitle2">
+          <ion-avatar item-start>
+            <img *ngIf="sv.msv_type==1" src="./assets/icon/workstation.png">
+            <img *ngIf="sv.msv_type==2" src="./assets/icon/p.jpg">
+            <img *ngIf="sv.msv_type==3" src="./assets/icon/other.jpg">
+          </ion-avatar>
+          <h2>{{sv.msv_no}}</h2>
+          <h2>{{sv.cust_ptype_desc}} {{sv.cust_pdesc}}</h2>
+          <h2>{{sv.province_name}}</h2>
+          <!-- {{sv.isRG}} {{sv.msv_type}} {{sv.prob_gdesc}} {{sv.problem_sub_desc}} -->
+        </ion-item>
+        <ion-item color="ptitle2" class='h'>
+          <div *ngIf="sv.isRG==0 && sv.msv_type==1" >
+              <h2 >
+                ระบบงาน: {{sv.work_type_desc}}
+              </h2>
+              <h2>
+                workstation: {{sv.equip_set_desc}}
+              </h2>
+              <h2>
+                PN: {{sv.pno}} SN: {{sv.sv_sn}}
+              </h2>
+            </div>
+            <div *ngIf="sv.isRG==0 && sv.msv_type==2">
+              <h2 text-wrap>ระบบงาน: {{sv.prob_gdesc}}</h2>
+              <h2 text-wrap>ระบบงาน: {{sv.problem_sub_desc}}</h2>
+            </div>
+        </ion-item>
+        <ion-item>
+          <p text-wrap>ปัญหา: {{sv.msv_detail}}</p>
+        </ion-item>
+        <ion-item style="background-color:rgba(185, 202, 218, 0.66)">
+          <button ion-button item-right clear icon-only small (click)="openJob(sv)">
+                          <ion-icon name="open"></ion-icon>
+                        </button>
+          <h3>โดย: {{sv.thiname}}</h3>
+          <h3>วัน: {{sv.msv_adate}} เวลา: {{sv.msv_atime}}</h3>
+          <h3>สถานะ: {{sv.msv_status_desc}} <ion-note *ngIf="sv.msv_status!=0" style="color:blue;">{{sv.kp_desc}}</ion-note><ion-note style="color:red;" *ngIf="(sv.msv_status==6 && sv.kp_idx!=sv.skp_idx)">(ตีกลับ)</ion-note></h3>
+        </ion-item>
+      </ion-card>
+    </ion-list>
+  </ion-scroll>
 </ion-content>

@@ -77,6 +77,8 @@ export class FollowupProblemPage {
     }
     this.imageData = `${url}/uploads/msv-pic/${msvno}.jpg`;
     this.getComment();
+    console.log('problem_type==>' + this.svData.msv_type);
+    console.log('isRG==>' + this.isRG);
     // console.log('isOPen=' + this.isOpen)
     // console.log('svData.userData.cust_ptype=', this.userData.cust_ptype);
     // console.log('svData.userData.cust_pcode=', this.userData.cust_pcode);
@@ -105,6 +107,7 @@ export class FollowupProblemPage {
   showPhoto() {
     this.photoViewer.show(this.imageData);
   }
+
   showPhotox(img) {
     this.photoViewer.show(img);
   }
@@ -113,10 +116,23 @@ export class FollowupProblemPage {
   close() {
     this.navCtrl.pop();
   }
+
+  edit(sv: any) {
+    let page: any;
+    if (sv.msv_type == 1) {
+      page = 'HwPage';
+    } else if (sv.msv_type == 2) {
+      page = 'SwPage';
+    }
+    let model = this.modalController.create(page, { svData:sv });
+    model.onDidDismiss(() => {
+      this.close();
+    });
+    model.present();
+  }
   openComment() {
     let model = this.modalController.create('CommentPage', { msv_no: this.svData.msv_no });
     model.onDidDismiss(() => {
-
       this.getComment();
       //console.log('msg=>', 1);
     });
