@@ -24,7 +24,7 @@
             <p>{{svData?.msv_detail}}</p>
         </ion-card-content> -->
       <!-- ลองทำใหม่ลอบทำใหม่ -->
-      <img [src]="imageData" (click)="showPhoto()" (error)="errorHandler($event)" default="./assets/img/placeholder.png">
+      <img [src]="imageData" *ngIf="!!imgData" (click)="showPhoto()" (error)="errorHandler($event)" default="./assets/img/placeholder.png">
       <ion-item color="ptitle2">
           <!-- <ion-avatar item-start>
             <img *ngIf="svData.msv_type==1" src="./assets/icon/workstation.png">

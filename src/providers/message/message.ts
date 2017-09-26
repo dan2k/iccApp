@@ -44,6 +44,28 @@ export class MessageProvider {
     });
     alert.present();
   }
+  confirm(msg:string,handler:any,data?:any) {
+    let confirm = this.altCtrl.create({
+      title: 'Confirm',
+      message: msg,
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'ตกลง',
+          handler: () => {
+            handler(data);
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
   checkServer() {
     let load = this.load(`กำลังประมวลผลข้อมูล`);
     load.present();

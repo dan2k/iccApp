@@ -11,4 +11,19 @@ page-followup-problem {
       width:100%;
 
     }
+    .control{
+      ion-col{
+        button{
+          ion-icon{
+            height:10px;
+            width:10xp;
+            font-size:10px;
+          }
+          div{
+            font-size:14px;
+          }
+
+        }
+      }
+    }
 }

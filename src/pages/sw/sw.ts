@@ -24,9 +24,15 @@ export class SwPage {
   problem_sub2_id: any;
   problemsubs: any;
   problemsub2s: any;
+  contract_no: any;
+  prob_gdesc: any;
+  problem_sub_desc: any;
+  problem_sub2_desc: any;
   detail: any;
   svData: any;
   isUpdate: boolean = false;
+  isFirst = true;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -37,46 +43,63 @@ export class SwPage {
     this.token = localStorage.getItem('token');
     this.userData = JSON.parse(localStorage.getItem('userData'));
     this.svData = this.navParams.get('svData');
-    if (this.svData) {
-      //update
-      this.isUpdate = true;
-      this.prob_gid = this.svData.prob_gid;
-      this.problem_sub_id = this.svData.problem_sub_id;
-      this.problem_sub2_id = this.svData.problem_sub2_id;
-      this.detail = this.svData.sv_detail;
-    }
     this.genProblemgroup();
-  }
-  genProblemsub() {
-    let pg=this.prob_gid.split('||')
-    this.sw.genProblemsub(this.token, this.userData.user_id,pg[0])
-    .then((data: any) => {
-      if (data.status) {
-        this.problemsubs = data.data;
-      }
-    }, (err) => {
+    if (this.svData) {
+      this.isUpdate = true;
+      this.contract_no = this.svData.contract_no;
+      this.detail = this.svData.msv_detail;
+      console.log('svData====>', this.svData);
+    }
 
-    });
   }
   genProblemgroup() {
+    this.problemsubs = null;
     this.sw.genProblemgroup(this.token, this.userData.user_id)
       .then((data: any) => {
         if (data.status) {
           this.problemgroups = data.data;
+          if (this.isUpdate && this.isFirst) {
+            this.prob_gid = this.svData.prob_gid;
+            this.prob_gdesc = this.svData.prob_gdesc;
+            this.genProblemsub();
+          }
         }
       }, (err) => {
 
       });
   }
+  genProblemsub() {
+    this.sw.genProblemsub(this.token, this.userData.user_id,this.prob_gid)
+    .then((data: any) => {
+      if (data.status) {
+        this.problemsubs = data.data;
+        if (this.isUpdate && this.isFirst) {
+          this.problem_sub_id = this.svData.problem_sub_id;
+          this.problem_sub_desc = this.svData.problem_sub_desc;
+          this.genProblemsub2();
+        } else {
+          this.problem_sub_id = null;
+        }
+      }
+    }, (err) => {
+
+    });
+  }
+
   genProblemsub2() {
-    let ps = this.problem_sub_id.split('||');
-    this.sw.genProblemsub2(this.token, this.userData.user_id, ps[0])
+    this.sw.genProblemsub2(this.token, this.userData.user_id, this.problem_sub_id)
       .then((data: any) => {
         if (data.status) {
           this.problemsub2s = data.data;
+          if (this.isUpdate && this.isFirst) {
+            this.problem_sub2_id = this.svData.problem_sub2_id;
+            this.problem_sub2_desc = this.svData.problem_sub2_desc;
+            this.isFirst = false;
+          } else {
+            this.problem_sub2_id = null;
+          }
         }
       }, (err) => {
-
       });
   }
   change(data) {
@@ -86,6 +109,19 @@ export class SwPage {
   change2(data) {
 
     this.genProblemsub2();
+  }
+  // show(p) {
+  //   console.log('select====>', p);
+  // }
+  select1(p: any) {
+    this.prob_gdesc = p.prob_desc;
+    this.contract_no = p.contract_no;
+  }
+  select2(p:any) {
+    this.problem_sub_desc = p.problem_sub_desc;
+  }
+  select3(p:any) {
+    this.problem_sub2_desc = p.problem_sub2_desc;
   }
   save() {
     if (!this.prob_gid) {
@@ -105,20 +141,38 @@ export class SwPage {
       return false;
     }
 
-    let pg = this.prob_gid.split('||');
-    let ps = this.problem_sub_id.split('||');
     let data = {
-      prob_gid: pg[0],
-      prob_gdesc:pg[1],
-      problem_sub_id: ps[0],
-      problem_sub_desc: ps[1],
+      user_id: this.userData.user_id,
+      sv_no:this.svData.msv_no,
+      prob_gid: this.prob_gid,
+      problem_sub_id: this.problem_sub_id,
       problem_sub2_id:this.problem_sub2_id,
       detail: this.detail,
       problem_type: 'P2',
-      contract_no:pg[2],
-      work_type_id: '0',
+      contract_no:this.contract_no,
     }
-    this.view.dismiss(data);
+    if (this.isUpdate) {
+      this.msg.postApi(this.token, 'swEdit', data)
+        .then((data:any) => {
+          if (data.status) {
+            this.svData.prob_gid = this.prob_gid;
+            this.svData.prob_gdesc = this.prob_gdesc;
+            this.svData.problem_sub_id = this.problem_sub_id;
+            this.svData.problem_sub_desc = this.problem_sub_desc;
+            this.svData.problem_sub2_id = this.problem_sub2_id;
+            this.svData.problem_sub2_desc = this.problem_sub2_desc;
+            this.svData.msv_detail = this.detail;
+            this.svData.contract_no = this.contract_no;
+            this.view.dismiss(this.svData);
+          }
+        }, (err) => {
+          console.log(err);
+        });
+
+
+    } else {
+      this.view.dismiss(data);
+    }
   }
   close() {
     this.view.dismiss();

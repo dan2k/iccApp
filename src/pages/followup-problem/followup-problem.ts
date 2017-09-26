@@ -125,11 +125,32 @@ export class FollowupProblemPage {
       page = 'SwPage';
     }
     let model = this.modalController.create(page, { svData:sv });
-    model.onDidDismiss(() => {
-      this.close();
+    model.onDidDismiss((data: any) => {
+      console.log(data);
+      if (data) {
+        this.svData = data;
+      }
     });
     model.present();
   }
+  //delete job
+  trash(sv) {
+    console.log('xx');
+    this.msg.confirm('คุณต้องการลบข้อมูลหรือไม่', (sv) => {
+      let params = {
+        user_id: this.userData.user_id,
+        sv_no: sv.msv_no
+      }
+      this.msg.postApi(this.token, 'deleteSv', params)
+        .then((data: any) => {
+          if (data.status) this.close();
+          console.log(data);
+        }, (err) => {
+          console.log(err);
+        });
+    },sv);
+  }
+
   openComment() {
     let model = this.modalController.create('CommentPage', { msv_no: this.svData.msv_no });
     model.onDidDismiss(() => {

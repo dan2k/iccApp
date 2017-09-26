@@ -38,7 +38,7 @@
                 </button>
       </ion-col>
     </ion-row> -->
-    <img [src]="imageData" (click)="showPhoto()" (error)="errorHandler($event)" default="./assets/img/placeholder.png">
+    <img [src]="imageData" *ngIf="!!imgData" (click)="showPhoto()" (error)="errorHandler($event)" default="./assets/img/placeholder.png">
     <ion-item color="ptitle2">
       <!-- <ion-avatar item-start>
         <img *ngIf="svData.msv_type==1" src="./assets/icon/workstation.png">
@@ -68,7 +68,7 @@
     <ion-card-content>
       <p text-wrap>ปัญหา: {{svData.msv_detail}}</p>
     </ion-card-content>
-    <ion-row>
+    <ion-row class="control">
       <ion-col>
         <button ion-button item-right clear icon-only small (click)="openComment()" style="font-size:10px;">
                 <ion-icon name="text"></ion-icon>
@@ -85,6 +85,12 @@
           <button ion-button item-right clear icon-only small (click)="edit(svData)" *ngIf="isRG && userData.user_type==2">
                   <ion-icon name="create"></ion-icon>
                   <div>แก้ไข</div>
+              </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button item-right clear icon-only small (click)="trash(svData)" *ngIf="isRG && userData.user_type==2">
+                  <ion-icon name="trash"></ion-icon>
+                  <div>ลบ</div>
               </button>
         </ion-col>
     </ion-row>

@@ -30,6 +30,7 @@ export class HwPage {
   public problem_sub2_desc: any;
   public detail: any;
   public problemsub2s: any;
+  public contract_no: any;
 
   public equips: any;
   public problems: Array<any>=[];
@@ -54,6 +55,7 @@ export class HwPage {
     this.prob_gid = this.svData.prob_gid;
     this.prob_gdesc = this.svData.prob_gdesc;
     this.problem_sub_id = this.svData.problem_sub_id;
+    this.contract_no = this.svData.contract_no;
     this.problem_sub_desc = this.svData.problem_sub_desc;
     //this.problem_sub2_id = this.svData.problem_sub2_id;
     this.problem_sub2_desc = this.svData.problem_sub2_desc;
@@ -61,7 +63,7 @@ export class HwPage {
     this.detail = this.svData.msv_detail;
     this.listSymptom();
     this.problem_sub2_id = this.svData.problem_sub2_id;
-
+    console.log(this.svData);
   }
   errorHandler(event) {
     console.debug(event);
@@ -147,26 +149,14 @@ export class HwPage {
     this.problem_sub2_id = null;
     this.problem_sub2_desc = null;
     this.sno = equip.sno;
+    this.contract_no = equip.contract_no;
+    this.prob_gid = equip.prob_gid;
+    this.prob_gdesc = equip.prob_gdesc;
     this.detail = null;
     this.listSymptom();
   }
   updateSv() {
 
-    // this.work_type_id = this.svData.work_type_id;
-    // this.work_type_desc = this.svData.work_type_desc;
-    // this.equip_set_id = this.svData.equip_set_id;
-    // this.equip_set_desc = this.svData.equip_set_desc;
-    // this.prob_gid = this.svData.prob_gid;
-    // this.prob_gdesc = this.svData.prob_gdesc;
-    // this.problem_sub_id = this.svData.problem_sub_id;
-    // this.problem_sub_desc = this.svData.problem_sub_desc;
-    //this.problem_sub2_id = this.svData.problem_sub2_id;
-    // this.problem_sub2_desc = this.svData.problem_sub2_desc;
-    // this.sno = this.svData.sv_sn;
-    // this.detail = this.svData.msv_detail;
-    // this.listSymptom();
-    // this.problem_sub2_id = this.svData.problem_sub2_id;
-    // this.problem_sub2_id = this.svData.problem_sub2_id;
 
     if(!this.work_type_id) {
       this.msg.alert('กรุณาระบุระบบงาน');
@@ -196,6 +186,7 @@ export class HwPage {
       problem_sub_desc: this.problem_sub_desc,
       problem_sub2_id: this.problem_sub2_id,
       sno: this.sno,
+      contract_no:this.contract_no,
       detail:this.detail,
     };
 
@@ -203,7 +194,20 @@ export class HwPage {
     this.msg.postApi(this.token, 'hwEdit', params)
       .then((data:any) => {
         if (data.status) {
-          this.close();
+          this.svData.work_type_id = this.work_type_id;
+          this.svData.work_type_desc = this.work_type_desc;
+          this.svData.equip_set_id = this.equip_set_id;
+          this.svData.equip_set_desc = this.equip_set_desc;
+          this.svData.prob_gid = this.prob_gid;
+          this.svData.prob_gdesc = this.prob_gdesc;
+          this.svData.problem_sub_id = this.problem_sub_id;
+          this.svData.problem_sub_desc = this.problem_sub_desc;
+          this.svData.problem_sub2_id = this.problem_sub2_desc;
+          this.svData.contract_no = this.contract_no;
+          this.svData.sv_sn = this.sno;
+          this.svData.pno = this.problem_sub_desc;
+          this.svData.msv_detail = this.detail;
+          this.viewCtrl.dismiss(this.svData);
         }
       }, (err) => {
         console.log(err);

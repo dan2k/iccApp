@@ -166,7 +166,7 @@ export class JobDistributePage {
     }
 
     let modal = this.modalCtrl.create(page, { svData: this.svData });
-    modal.onDidDismiss((data: any) => {
+    modal.onDidDismiss((data?: any) => {
       if (data) {
         let p = {
           probid:this.probid,
