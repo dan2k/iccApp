@@ -29,6 +29,7 @@
         "@ionic-native/status-bar": "3.12.1",
         "@ionic/storage": "2.0.1",
         "angular2-jwt": "^0.2.3",
+        "angular2-signaturepad": "^2.6.1",
         "com-sarriaroman-photoviewer": "^1.1.10",
         "cordova-android": "^6.2.3",
         "cordova-plugin-camera": "^2.4.1",

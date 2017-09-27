@@ -124,3 +124,9 @@
         </div>
       </ion-scroll>
 </ion-content>
+<ion-footer>
+  <button ion-button full (click)="openSignatureModel()">
+    Open Signature
+    </button>
+    <div><img [src]="signatureImage" *ngIf="signatureImage" /></div>
+</ion-footer>

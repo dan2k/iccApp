@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ModalController } from 'ionic-angular';
 
 /**
  * Generated class for the Tab3Page page.
@@ -14,12 +14,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'tab3.html',
 })
 export class Tab3Page {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public signatureImage : any;
+  constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl:ModalController) {
+    this.signatureImage = navParams.get('signatureImage');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Tab3Page');
+  }
+  openSignatureModel(){
+    setTimeout(() => {
+       let modal = this.modalCtrl.create('SignaturePage');
+    modal.present();
+    }, 300);
   }
 
 }
