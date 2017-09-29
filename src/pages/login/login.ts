@@ -39,6 +39,10 @@ export class LoginPage {
         if (data.status) {
           let jwtHelper = new JwtHelper();
           let d = jwtHelper.decodeToken(data.data);
+          console.log('dddddddddddd', d);
+          console.log('isExpired=>', jwtHelper.isTokenExpired(data.data));
+          console.log('getExpired=>', jwtHelper.getTokenExpirationDate(data.data));
+
           localStorage.setItem('token', data.data);//token
           console.log("userData=>", d.data);
           localStorage.setItem('userData', JSON.stringify(d.data));
