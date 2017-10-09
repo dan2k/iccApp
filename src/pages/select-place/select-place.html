@@ -1,0 +1,22 @@
+<ion-header>
+
+    <ion-navbar color="ptitle">
+      <ion-title>เลือกหน่วยงาน</ion-title>
+      <ion-buttons start small>
+        <button ion-button icon-only color="ligth" small (click)="close()">
+                    <ion-icon name="close-circle"></ion-icon>
+                  </button>
+      </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list radio-group [(ngModel)]="place">
+      <ion-item *ngFor="let d of data">
+        <ion-label>{{d.cust_pdesc}}</ion-label>
+        <ion-radio [value]="d"></ion-radio>
+      </ion-item>
+    </ion-list>
+</ion-content>
+<ion-footer>
+  <button ion-button full color="primary" [disabled]="!place" (click)="confirm()">ยืนยัน</button>
+</ion-footer>
