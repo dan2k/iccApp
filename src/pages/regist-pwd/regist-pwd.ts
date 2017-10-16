@@ -14,13 +14,13 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
   selector: 'page-regist-pwd',
   templateUrl: 'regist-pwd.html',
   providers: [RegisterProvider]
-  
+
 })
 export class RegistPwdPage {
-  private phoneNumber: any;
-  private password: any;
-  private repassword: any;
-  private user: any;
+  public phoneNumber: any;
+  public password: any;
+  public repassword: any;
+  public user: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -47,7 +47,7 @@ export class RegistPwdPage {
       this.showMsg('ระบุรหัสผ่านให้ตรงกัน');
       return false;
     }
-    
+
     let user = {
       user_id: this.user.user_id,
       cust_ptype: this.user.cust_ptype,
@@ -59,13 +59,13 @@ export class RegistPwdPage {
       .then((data: any) => {
         if (data.status) {
           this.navCtrl.setRoot('LoginPage');
-        } 
-        console.log(data.msg);  
+        }
+        console.log(data.msg);
       }, (err) => {
         console.log(err);
       });
   }
- 
+
   showMsg(msg,obj?:any) {
     let alt = this.alertCtrl.create({
       title: `แจ้งเตือน`,

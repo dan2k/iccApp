@@ -3,7 +3,7 @@
     <name>iccApp</name>
     <description>inform system</description>
     <author email="seangtong.h@cdg.co.th" href="http://www.controldata.co.th">Controldata(Ltd) thailand</author>
-    <content original-src="index.html" src="http://192.168.1.136:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-intent href="http://*/*" />

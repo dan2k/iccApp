@@ -14,7 +14,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'regist-confirm.html',
 })
 export class RegistConfirmPage {
-  private user: any;
+  user: any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.user=this.navParams.get('user');
   }

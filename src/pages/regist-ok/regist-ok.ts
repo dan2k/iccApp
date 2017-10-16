@@ -14,7 +14,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'regist-ok.html',
 })
 export class RegistOkPage {
-  private users: any;
+  public users: any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     let data:any  = this.navParams.get('data');
     this.users = data.data;

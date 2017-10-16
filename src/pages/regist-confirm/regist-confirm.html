@@ -1,27 +1,16 @@
-<!--
-  Generated template for the RegistConfirmPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-    <ion-navbar color="primary">
-        <ion-title>ลงทะเบียน</ion-title>
+    <ion-navbar color="ptitle">
+        <ion-title>รายละเอียดผู้ใช้</ion-title>
     </ion-navbar>
-
 </ion-header>
-
-
 <ion-content padding>
-
     <ion-list>
-        <ion-list-header style="color:green;">รายละเอียดผู้ใช้</ion-list-header>
         <ion-item>
-            <h2>คุณ: {{user.user_fname}} {{user.user_lname}}</h2>
-            <h2>ประเภทหน่วยงาน: </h2>
-            <h2>จังหวัด: </h2>
-            <h2>หน่วยงาน: </h2>
+            <h2><b>คุณ:</b> {{user.user_fname}} {{user.user_lname}}</h2>
+            <h2><b>ตำแหน่ง:</b> {{user.user_position}}</h2>
+            <h2><b>ประเภทหน่วยงาน:</b> {{user.cust_desc}}</h2>
+            <h2><b>จังหวัด:</b> {{user.province_name}}</h2>
+            <h2><b>หน่วยงาน:</b> {{user.cust_pdesc}}</h2>
         </ion-item>
         <ion-item>
             <button ion-button color="primary" block (click)="confirm()">ยืนยัน</button>

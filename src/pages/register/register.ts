@@ -20,16 +20,18 @@ export class RegisterPage {
   // private custPtype: any;
   // private provinceid: any;
   // private provinces: any;
-  private fname: String;
-  private lname: String;
+  public fname: String;
+  public lname: String;
   // @ViewChild('_custPtype') _custPtype;
   // @ViewChild('_provinceid') _provinceid;
   @ViewChild('_fname') _fname;
   @ViewChild('_lname') _lname;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private registerProvider: RegisterProvider, private alertCtrl: AlertController) {
-
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private registerProvider: RegisterProvider,
+    private alertCtrl: AlertController) {
   }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterPage');
     // this.registerProvider.genPtype()
@@ -65,7 +67,7 @@ export class RegisterPage {
     }
     if (!this.lname) {
       this.showMsg('กรุณาระบุชื่อสกุล',this._lname);
-      
+
       return false;
     }
     let data:any = {
