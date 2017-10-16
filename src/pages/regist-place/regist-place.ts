@@ -14,8 +14,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'regist-place.html',
 })
 export class RegistPlacePage {
-
+  public user: any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.user = this.navParams.get('user');
+    console.log(this.user);
   }
 
   ionViewDidLoad() {
