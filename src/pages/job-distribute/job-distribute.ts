@@ -167,6 +167,7 @@ export class JobDistributePage {
 
     let modal = this.modalCtrl.create(page, { svData: this.svData });
     modal.onDidDismiss((data?: any) => {
+      console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx---->',data);
       if (data) {
         let p = {
           probid:this.probid,
@@ -184,7 +185,7 @@ export class JobDistributePage {
           problem_sub2_id: data.problem_sub2_id,
           prob_gdesc: data.prob_gdesc,
           problem_sub_desc:data.problem_sub_desc,
-          detail: data.detail,
+          detail: data.msv_detail,
           // cust_ptype: this.svData.cust_ptype,
           // cust_pcode: this.svData.cust_pcode,
           // user_id: this.svData.msv_uid,
@@ -192,6 +193,7 @@ export class JobDistributePage {
         this.problems.push(p);
         this.probid++;
       }
+      //console.log('problem------>',this.problems);
     });
     modal.present();
   }
@@ -203,7 +205,8 @@ export class JobDistributePage {
       cust_ptype: this.svData.cust_ptype,
       cust_pcode: this.svData.cust_pcode,
       msv_uid: this.svData.msv_uid,
-      msv_no:this.svData.msv_no,
+      msv_no: this.svData.msv_no,
+      userData:this.userData,
     };
     this.msg.postApi(this.token,'createSv',params)
       .then((data: any) => {

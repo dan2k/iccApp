@@ -43,7 +43,7 @@ export class ServiceProvider {
         });
     });
   }
-  confirmClose(token: string, uid: string,msv_no:any,rate?:any) {
+  confirmClose(token: string, uid: string,msv_no:any,rate?:any,userData?:any) {
     this.msg.checkServer();
     return new Promise((resolve, reject) => {
       let headers = new Headers({
@@ -55,7 +55,8 @@ export class ServiceProvider {
         data: {
           user_id: uid,
           msv_no: msv_no,
-          rate:rate
+          rate: rate,
+          userData:userData
         }
       };
       console.log(body);
@@ -71,7 +72,7 @@ export class ServiceProvider {
         });
     });
   }
-  close(token: string, uid: string,msv_no:any,solve?:any) {
+  close(token: string, uid: string,msv_no:any,solve?:any,userData?:any) {
     this.msg.checkServer();
     return new Promise((resolve, reject) => {
       let headers = new Headers({
@@ -83,7 +84,8 @@ export class ServiceProvider {
         data: {
           user_id: uid,
           msv_no: msv_no,
-          solve:solve
+          solve: solve,
+          userData:userData,
         }
       };
       this.http.post(`${url}/close`, body, options)
@@ -98,7 +100,7 @@ export class ServiceProvider {
         });
     });
   }
-  saveProblem(token: string, uid: string, cust_ptype: any, cust_pcode: any, msv_detail: string,msv_type:any) {
+  saveProblem(token: string, uid: string, cust_ptype: any, cust_pcode: any, msv_detail: string,msv_type:any,userData:any) {
     this.msg.checkServer();
     return new Promise((resolve, reject) => {
       let headers = new Headers({
@@ -112,7 +114,8 @@ export class ServiceProvider {
           cust_ptype: cust_ptype,
           cust_pcode: cust_pcode,
           msv_detail: msv_detail,
-          msv_type:msv_type
+          msv_type: msv_type,
+          userData:userData
         }
       };
       console.log(body);

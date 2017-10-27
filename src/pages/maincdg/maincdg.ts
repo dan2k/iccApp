@@ -39,7 +39,9 @@ export class MaincdgPage {
     public modalCtrol : ModalController
   ) {
     this.token = localStorage.getItem('token');
-    this.userData = JSON.parse(localStorage.getItem('userData'));
+    let tmp:any=JSON.parse(localStorage.getItem('userData'));
+    // this.userData = JSON.parse(localStorage.getItem('userData'));
+    this.userData = tmp;
     this.uType = this.userData.place_type;
     this.scope = '';
 
@@ -52,6 +54,7 @@ export class MaincdgPage {
       this.scope = '';
     }
     this.genType();
+
     this.genProvince();
     this.genPcode();
     this.getJob();
@@ -98,8 +101,10 @@ export class MaincdgPage {
   }
   getJob() {
     console.log('getJob......');
+    console.log('------------------>', this.userData);
     this.serviceProvider.getJob(this.token, this.userData.user_id,this.fCustptype,this.fCustpcode,this.uType,this.scope,this.fProvince)
     .then((data: any) => {
+
       if (data.status) {
         this.svData = data.data;
       } else {

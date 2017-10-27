@@ -162,7 +162,8 @@ export class FollowupProblemPage {
   returnJob() {//ส่งคืนกลับไปกรณีที่ยังไม่ได้รับการแก้ไขจริง ๆ
     let params = {
       user_id: this.userData.user_id,
-      svno: this.svData.msv_no
+      svno: this.svData.msv_no,
+      userData:this.userData
     }
     this.msg.postApi(this.token,'returnJob',params)
       .then((data: any) => {
@@ -187,10 +188,10 @@ export class FollowupProblemPage {
     model.present();
   }
   openPop(myEvent) {
-    let pop = this.popup.create('PopSolvePage', {}, { cssClass: 'custom-popover' }/*, {}, { showBackdrop: true, enableBackdropDismiss: false }*/);
+    let pop = this.popup.create('PopSolvePage', {svData:this.svData}, { cssClass: 'custom-popover' }/*, {}, { showBackdrop: true, enableBackdropDismiss: false }*/);
     pop.onDidDismiss((data: any) => {
       if (data) {
-        this.serviceProvider.close(this.token, this.userData.user_id, this.svData.msv_no,data.solve)
+        this.serviceProvider.close(this.token, this.userData.user_id, this.svData.msv_no,data.solve,this.userData)
           .then((data: any) => {
             console.log(data);
             this.close();
@@ -210,7 +211,7 @@ export class FollowupProblemPage {
       let pop = this.popup.create('PopSmilePage', {}/*{ showBackdrop: true, enableBackdropDismiss: true }*/);
       pop.onDidDismiss((data: any) => {
         if (data.type == 1) {
-          this.serviceProvider.confirmClose(this.token, this.userData.user_id, this.svData.msv_no, data.rate)
+          this.serviceProvider.confirmClose(this.token, this.userData.user_id, this.svData.msv_no, data.rate,this.userData)
             .then((data: any) => {
               console.log(data);
               this.close();

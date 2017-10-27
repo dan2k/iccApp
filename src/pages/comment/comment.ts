@@ -53,9 +53,11 @@ export class CommentPage {
       this.userData.user_id,
       this.msv_no,
       this.detail,
-      this.userData.user_type
+      this.userData.user_type,
+      this.userData
     ).then((data: any) => {
       load.dismiss();
+      console.log('--------------',this.userData);
       if (data.status) {
           this.msg.toast('บันทึกความคิดเห็นเรียบร้อยแล้ว')
           console.log(data, 'isImg:=>', isImg);

@@ -57,7 +57,8 @@ export class ModalProblemPage {
       this.userData.user_id,
       this.userData.cust_ptype,
       this.userData.cust_pcode,
-      this.detail, this.ptype
+      this.detail, this.ptype,
+      this.userData
     ).then((data: any) => {
       load.dismiss();
       if (data.status) {

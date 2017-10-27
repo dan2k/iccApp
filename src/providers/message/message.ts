@@ -72,7 +72,7 @@ export class MessageProvider {
     this.http.get(`${url}/isConnect`)
       .subscribe((data) => {
         load.dismiss();
-        console.log(data);
+        console.log('isconnect process-->',data);
       }, (err) => {
         load.dismiss();
         console.log('err----->',err);

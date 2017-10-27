@@ -17,7 +17,8 @@
         <ion-item>
           <ion-label>ระบบงาน</ion-label>
           <ion-select   [(ngModel)]="prob_gid" (ionChange)="change($event)" okText="ตกลง" cancelText="ยกเลิก">
-            <ion-option *ngFor="let p of problemgroups" [value]="p.prob_gid" (ionSelect)='setContract(p.contract_no)'>
+            <ion-option *ngFor="let p of problemgroups" [value]="p.prob_gid" (ionSelect)='select1(p)'>
+            <!-- <ion-option *ngFor="let p of problemgroups" [value]="p.prob_gid" > -->
               {{p.prob_gdesc}}
             </ion-option>
           </ion-select>
@@ -25,7 +26,7 @@
         <ion-item>
           <ion-label>โปรแกรม</ion-label>
           <ion-select [(ngModel)]="problem_sub_id" (ionChange)="change2($event)" okText="ตกลง" cancelText="ยกเลิก">
-            <ion-option *ngFor="let ps of problemsubs" [value]="ps.problem_sub_id">
+            <ion-option *ngFor="let ps of problemsubs" [value]="ps.problem_sub_id" (ionSelect)='select2(ps)'>
               {{ps.problem_sub_desc}}
             </ion-option>
           </ion-select>
@@ -33,7 +34,7 @@
         <ion-item>
             <ion-label>อาการ</ion-label>
             <ion-select [(ngModel)]="problem_sub2_id" okText="ตกลง" cancelText="ยกเลิก" >
-                <ion-option *ngFor="let ps2 of problemsub2s" [value]="ps2.problem_sub2_id">
+                <ion-option *ngFor="let ps2 of problemsub2s" [value]="ps2.problem_sub2_id" (ionSelect)='select3(ps2)'>
                   {{ps2.problem_sub2_desc}}
                 </ion-option>
               </ion-select>

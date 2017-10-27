@@ -5,13 +5,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
 //import * as CryptoJS from 'crypto-js/crypto-js';
 import { JwtHelper } from "angular2-jwt";
-/**
- * Generated class for the LoginPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -48,7 +41,7 @@ export class LoginPage {
           localStorage.setItem('token', data.data);//token
 
           //console.log("userData=>", d.data);
-          localStorage.setItem('userData', JSON.stringify(d.data));
+
           //console.log('user====>',JSON.stringify(d.data));
           console.log('length===>', d.data.length);
           if (d.data.length > 1) {
@@ -56,13 +49,15 @@ export class LoginPage {
             let modal = this.modal.create('SelectPlacePage', { data: d.data });
             modal.onDidDismiss((datax) => {
               if (datax) {
-                localStorage.setItem('token', data.data);//token
+                //localStorage.setItem('token', data.data);//token
                 localStorage.setItem('userData', JSON.stringify(datax));
                 this.navCtrl.setRoot(HomePage);
               }
             });
             modal.present();
           } else {
+            //console.log('yyyyyyyyyyyyy',d.data[0]);
+            localStorage.setItem('userData', JSON.stringify(d.data[0]));
             this.navCtrl.setRoot(HomePage);
           }
 
@@ -86,5 +81,4 @@ export class LoginPage {
     //goto  register page
     this.navCtrl.push('RegisterPage');
   }
-
 }

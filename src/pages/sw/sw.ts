@@ -117,12 +117,16 @@ export class SwPage {
     this.prob_gdesc = p.prob_desc;
     this.contract_no = p.contract_no;
   }
+
   select2(p:any) {
     this.problem_sub_desc = p.problem_sub_desc;
   }
   select3(p:any) {
     this.problem_sub2_desc = p.problem_sub2_desc;
   }
+  /*setContract(contract: any) {
+    this.contract_no = contract;
+  }*/
   save() {
     if (!this.prob_gid) {
       this.msg.alert('กรุณาระบุระบบงานด้วย');
@@ -151,6 +155,7 @@ export class SwPage {
       problem_type: 'P2',
       contract_no:this.contract_no,
     }
+    console.log(data);
     if (this.isUpdate) {
       this.msg.postApi(this.token, 'swEdit', data)
         .then((data:any) => {

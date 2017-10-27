@@ -6,14 +6,14 @@ import { NavController,App } from 'ionic-angular';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  private tab1: any;
-  private tab2: any;
-  private tab3: any;
-  private tab4: any;
-  private userData: any;
+  public tab1: any;
+  public tab2: any;
+  public tab3: any;
+  public tab4: any;
+  public userData: any;
   constructor(public navCtrl: NavController,private app:App) {
     this.userData= JSON.parse(localStorage.getItem('userData'));
-    //console.log(this.userData);
+    console.log('HOME------>',this.userData);
     let userType = this.userData.user_type;
     if (userType == 1) {//moi
       let jobid = this.userData.job_id;
