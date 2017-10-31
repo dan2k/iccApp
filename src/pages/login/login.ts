@@ -28,6 +28,7 @@ export class LoginPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
+
   login() {
     this.user.login(this.tel, this.password, this.loginType)
       .then((data: any) => {

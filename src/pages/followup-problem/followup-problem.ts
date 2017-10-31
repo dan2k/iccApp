@@ -31,6 +31,7 @@ export class FollowupProblemPage {
   public isRG: any;
   public isMoi: any;
   public isOpen: any;
+  public imgHide: any = false;
 
   constructor(
     public navCtrl: NavController,
@@ -76,6 +77,7 @@ export class FollowupProblemPage {
       this.isOpen = false;
     }
     this.imageData = `${url}/uploads/msv-pic/${msvno}.jpg`;
+    //console.log(this.imageData);
     this.getComment();
     console.log('problem_type==>' + this.svData.msv_type);
     console.log('isRG==>' + this.isRG);
@@ -177,6 +179,7 @@ export class FollowupProblemPage {
       });
   }
   errorHandler(event) {
+    this.imgHide = true;
     console.debug(event);
   }
   openFollow2(msvno: any) {

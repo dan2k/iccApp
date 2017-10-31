@@ -4,8 +4,8 @@
     <ion-title>ตรวจสอบติดตามปัญหา</ion-title>
     <ion-buttons start small>
       <button ion-button icon-only color="ligth" small (click)="close()">
-                  <ion-icon name="close-circle"></ion-icon>
-                </button>
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -38,19 +38,21 @@
                 </button>
       </ion-col>
     </ion-row> -->
-    <img [src]="imageData" *ngIf="!!imgData" (click)="showPhoto()" (error)="errorHandler($event)" default="./assets/img/placeholder.png">
+    <!-- <img style="width:100%;height:30%;" [src]="imageData" *ngIf="!imgHide"  (click)="showPhoto()" (error)="errorHandler($event)" default="./assets/img/placeholder.png" > -->
     <ion-item color="ptitle2">
       <!-- <ion-avatar item-start>
         <img *ngIf="svData.msv_type==1" src="./assets/icon/workstation.png">
         <img *ngIf="svData.msv_type==2" src="./assets/icon/p.jpg">
         <img *ngIf="svData.msv_type==3" src="./assets/icon/other.jpg">
       </ion-avatar> -->
-
+      <ion-thumbnail item-center *ngIf="!imgHide">
+        <img [src]="imageData" (click)="showPhoto()" (error)="errorHandler($event)" default="./assets/img/placeholder.png">
+      </ion-thumbnail>
       <h2>{{svData.msv_no}}</h2>
       <h2>{{svData.cust_ptype_desc}} {{svData.cust_pdesc}}</h2>
       <h2>{{svData.province_name}}</h2>
       <div *ngIf="isRG && svData.msv_type==1">
-        <h2 >
+        <h2>
           ระบบงาน: {{svData.work_type_desc}}
         </h2>
         <h2>
@@ -71,28 +73,28 @@
     <ion-row class="control">
       <ion-col>
         <button ion-button item-right clear icon-only small (click)="openComment()" style="font-size:10px;">
-                <ion-icon name="text"></ion-icon>
-                <div >แสดงความคิดเห็น</div>
-            </button>
+          <ion-icon name="text"></ion-icon>
+          <div>แสดงความคิดเห็น</div>
+        </button>
       </ion-col>
       <ion-col>
         <button ion-button item-right clear icon-only small (click)="openFollow2(svData.msv_no2)" *ngIf="isRG">
-                <ion-icon name="share-alt"></ion-icon>
-                <div>ต้นทาง</div>
-            </button>
+          <ion-icon name="share-alt"></ion-icon>
+          <div>ต้นทาง</div>
+        </button>
       </ion-col>
       <ion-col>
-          <button ion-button item-right clear icon-only small (click)="edit(svData)" *ngIf="isRG && userData.user_type==2">
-                  <ion-icon name="create"></ion-icon>
-                  <div>แก้ไข</div>
-              </button>
-        </ion-col>
-        <ion-col>
-          <button ion-button item-right clear icon-only small (click)="trash(svData)" *ngIf="isRG && userData.user_type==2">
-                  <ion-icon name="trash"></ion-icon>
-                  <div>ลบ</div>
-              </button>
-        </ion-col>
+        <button ion-button item-right clear icon-only small (click)="edit(svData)" *ngIf="isRG && userData.user_type==2">
+          <ion-icon name="create"></ion-icon>
+          <div>แก้ไข</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button item-right clear icon-only small (click)="trash(svData)" *ngIf="isRG && userData.user_type==2">
+          <ion-icon name="trash"></ion-icon>
+          <div>ลบ</div>
+        </button>
+      </ion-col>
     </ion-row>
     <ion-item style="background-color:rgba(185, 202, 218, 0.66);" padding>
 
@@ -124,6 +126,20 @@
           </ion-item>
         </ion-card-content>
       </ion-card>
+      <ion-card  *ngIf="(isOpen && (svData.msv_status==6))" color="warning">
+        <ion-card-content>
+          <h3>
+            <u>สรุปการแก้ไข</u>
+          </h3>
+          <p>{{svData.sv_solve_detail}}</p>
+          <ion-item>
+            <ion-buttons text-center>
+              <button ion-button color="success" blocked small (click)="openSmile($event)">ได้รับการแก้ไขแล้ว</button>
+              <button ion-button color="warning" blocked small (click)="returnJob()">ยังไม่ได้การแก้ไข</button>
+            </ion-buttons>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
     </div>
 
   </ion-scroll>
@@ -132,19 +148,21 @@
 <ion-footer *ngIf="((isMoi && svData.msv_status==0)||(isMoi && ((svData.msv_status==6)&&(svData.kp_idx!=svData.skp_idx) )))">
   <ion-buttons text-center>
     <button ion-button full color="danger" (click)="openPop($event)" item-end icon-left>
-    ปิด</button>
+      ปิด</button>
   </ion-buttons>
 
 </ion-footer>
 <ion-footer *ngIf="userData.user_type==2 ">
   <ion-buttons text-center>
-    <button ion-button small full icon-left color="primary" (click)="openJob(svData)" *ngIf="(svData.msv_status==0||svData.msv_status==6)&&(!this.isRG)"><ion-icon name="arrow-dropdown"></ion-icon>รับงาน</button>
-    <button ion-button small full icon-left color="danger" (click)="openPop(svData)" *ngIf="((svData.msv_status!=0 && svData.user_type==1)&&(this.isRG))"><ion-icon name="close-circel"></ion-icon>ปิดงาน</button>
+    <button ion-button small full icon-left color="primary" (click)="openJob(svData)" *ngIf="(svData.msv_status==0||svData.msv_status==6)&&(!this.isRG)">
+      <ion-icon name="arrow-dropdown"></ion-icon>รับงาน</button>
+    <button ion-button small full icon-left color="danger" (click)="openPop(svData)" *ngIf="((svData.msv_status!=0 && svData.user_type==1)&&(this.isRG))">
+      <ion-icon name="close-circel"></ion-icon>ปิดงาน</button>
   </ion-buttons>
 </ion-footer>
-<ion-footer *ngIf="(isOpen && (svData.msv_status==6))">
+<!-- <ion-footer *ngIf="(isOpen && (svData.msv_status==6))">
   <ion-buttons text-center>
     <button ion-button color="success" blocked small (click)="openSmile($event)">ได้รับการแก้ไขแล้ว</button>
     <button ion-button color="warning" blocked small (click)="returnJob()">ยังไม่ได้การแก้ไข</button>
   </ion-buttons>
-</ion-footer>
+</ion-footer> -->
