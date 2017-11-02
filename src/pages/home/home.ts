@@ -18,12 +18,12 @@ export class HomePage {
     if (userType == 1) {//moi
       let jobid = this.userData.job_id;
       console.log('jobid=>' + jobid);
-      if (jobid == 2 || jobid == 3 || jobid == 4) {
+      if (jobid == 2 || jobid == 3 || jobid == 4) {// สำหรับข้าราชการตั้งแต่ ศจ.เป็นต้นไป
         this.tab1 = 'MainmoiPage';
-      } else {
+      } else {// สำหรับข้าราชการ สน.ท ่job_id=1
         this.tab1 = 'MainPage';
       }
-    } else {// cdg
+    } else {//cdg สำหรับพนักงาน login เข้าใช้งาน
       this.tab1 = 'MaincdgPage';
     }
     this.tab2 = 'Tab3Page';

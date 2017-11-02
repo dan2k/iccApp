@@ -43,7 +43,7 @@ export class ServiceProvider {
         });
     });
   }
-  confirmClose(token: string, uid: string,msv_no:any,rate?:any,userData?:any) {
+  confirmClose(token: string, uid: string,msv_no:any,userData?:any,rate?:any) {
     this.msg.checkServer();
     return new Promise((resolve, reject) => {
       let headers = new Headers({

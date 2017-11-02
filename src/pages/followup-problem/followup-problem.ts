@@ -214,7 +214,7 @@ export class FollowupProblemPage {
       let pop = this.popup.create('PopSmilePage', {}/*{ showBackdrop: true, enableBackdropDismiss: true }*/);
       pop.onDidDismiss((data: any) => {
         if (data.type == 1) {
-          this.serviceProvider.confirmClose(this.token, this.userData.user_id, this.svData.msv_no, data.rate,this.userData)
+          this.serviceProvider.confirmClose(this.token, this.userData.user_id, this.svData.msv_no,this.userData, data.rate)
             .then((data: any) => {
               console.log(data);
               this.close();
@@ -229,7 +229,7 @@ export class FollowupProblemPage {
       });
     } else {
       //close job moi no show popup smile
-      this.serviceProvider.confirmClose(this.token, this.userData.user_id, this.svData.msv_no)
+      this.serviceProvider.confirmClose(this.token, this.userData.user_id, this.svData.msv_no,this.userData)
         .then((data: any) => {
           console.log(data);
           this.close();
