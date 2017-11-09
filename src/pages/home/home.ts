@@ -30,10 +30,14 @@ export class HomePage {
     this.tab3 = 'Tab3Page';
   }
   logout() {
-     localStorage.removeItem('token');
+    //  localStorage.removeItem('token');
+    //  localStorage.removeItem('userData');
+    //  let nav = this.app.getRootNav();
+    //  nav.setRoot('LoginPage');
+    // localStorage.removeItem('token');
      localStorage.removeItem('userData');
      let nav = this.app.getRootNav();
-     nav.setRoot('LoginPage');
+     nav.setRoot('LoginTypePage');
   }
 
 }

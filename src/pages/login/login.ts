@@ -3,6 +3,8 @@ import { HomePage } from './../home/home';
 import { UserProvider } from './../../providers/user/user';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
+//import { IonDigitKeyboardCmp, IonDigitKeyboardOptions } from '../../components/ion-digit-keyboard';
+
 //import * as CryptoJS from 'crypto-js/crypto-js';
 import { JwtHelper } from "angular2-jwt";
 @IonicPage()
@@ -16,13 +18,27 @@ export class LoginPage {
   password: string;
   //private SECERET_KEY: string = 'mpsicc';
   loginType: any = 1;
+  max: any;
+  min: any;
+
+
+
+
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private user: UserProvider,
     private alertCtrl: AlertController,
     private modal: ModalController) {
-
+    this.loginType = this.navParams.get('loginType');
+    if (this.loginType == 1) {
+      this.max = 10;
+      this.min = 10;
+    } else {
+      this.max = 7;
+      this.min = 1;
+    }
   }
 
   ionViewDidLoad() {
@@ -82,4 +98,8 @@ export class LoginPage {
     //goto  register page
     this.navCtrl.push('RegisterPage');
   }
+
+
+
+
 }

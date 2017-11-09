@@ -8,10 +8,12 @@ import {HttpModule} from  '@angular/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ServiceProvider } from '../providers/service/service';
-import { CommentProvider } from '../providers/comment/comment';
+//import { CommentProvider } from '../providers/comment/comment';
 import { MessageProvider } from '../providers/message/message';
 import { HwProvider } from '../providers/hw/hw';
 import { SwProvider } from '../providers/sw/sw';
+
+
 //import { UserProvider } from '../providers/user/user';
 //import { RegisterProvider } from '../providers/register/register';
 //import { DirectivesModule } from '../directives/directives.module';
@@ -41,7 +43,7 @@ import { SwProvider } from '../providers/sw/sw';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ServiceProvider,
-    CommentProvider,
+    //CommentProvider,
     MessageProvider,
     HwProvider,
     SwProvider,
