@@ -92,4 +92,8 @@ export class LoginPage {
     //goto  register page
     this.navCtrl.push('RegisterPage');
   }
+
+
+
+
 }
