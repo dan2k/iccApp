@@ -13,7 +13,6 @@ export class HomePage {
   public userData: any;
   constructor(public navCtrl: NavController,private app:App) {
     this.userData= JSON.parse(localStorage.getItem('userData'));
-    console.log('HOME------>',this.userData);
     let userType = this.userData.user_type;
     if (userType == 1) {//moi
       let jobid = this.userData.job_id;
@@ -30,10 +29,9 @@ export class HomePage {
     this.tab3 = 'Tab3Page';
   }
   logout() {
-     localStorage.removeItem('token');
      localStorage.removeItem('userData');
      let nav = this.app.getRootNav();
-     nav.setRoot('LoginPage');
+     nav.setRoot('LoginTypePage');
   }
 
 }

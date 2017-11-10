@@ -1,24 +1,25 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
-
-/**
- * Generated class for the SelectPlacePage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+import { Component } from "@angular/core";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  ViewController
+} from "ionic-angular";
 
 @IonicPage()
 @Component({
-  selector: 'page-select-place',
-  templateUrl: 'select-place.html',
+  selector: "page-select-place",
+  templateUrl: "select-place.html"
 })
 export class SelectPlacePage {
   data: any;
   place: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public view:ViewController) {
-    this.data = this.navParams.get('data');
-    console.log(this.data);
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public view: ViewController
+  ) {
+    this.data = this.navParams.get("data");
   }
   close() {
     this.navCtrl.pop();
@@ -27,7 +28,6 @@ export class SelectPlacePage {
     this.view.dismiss(this.place);
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SelectPlacePage');
+    console.log("ionViewDidLoad SelectPlacePage");
   }
-
 }

@@ -1,5 +1,5 @@
 import { MessageProvider } from './../../providers/message/message';
-import { SwProvider } from './../../providers/sw/sw';
+//import { SwProvider } from './../../providers/sw/sw';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
 
@@ -36,7 +36,7 @@ export class SwPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public sw: SwProvider,
+    //public sw: SwProvider,
     public view: ViewController,
     public msg: MessageProvider
   ) {
@@ -54,7 +54,10 @@ export class SwPage {
   }
   genProblemgroup() {
     this.problemsubs = null;
-    this.sw.genProblemgroup(this.token, this.userData.user_id)
+    let params = {
+      userData:this.userData
+    };
+    this.msg.postApi01('v1/genProblemgroup',params)
       .then((data: any) => {
         if (data.status) {
           this.problemgroups = data.data;
@@ -67,9 +70,26 @@ export class SwPage {
       }, (err) => {
 
       });
+    // this.sw.genProblemgroup(this.token, this.userData.user_id)
+    //   .then((data: any) => {
+    //     if (data.status) {
+    //       this.problemgroups = data.data;
+    //       if (this.isUpdate && this.isFirst) {
+    //         this.prob_gid = this.svData.prob_gid;
+    //         this.prob_gdesc = this.svData.prob_gdesc;
+    //         this.genProblemsub();
+    //       }
+    //     }
+    //   }, (err) => {
+
+    //   });
   }
   genProblemsub() {
-    this.sw.genProblemsub(this.token, this.userData.user_id,this.prob_gid)
+    let params = {
+      userData: this.userData,
+      prob_gid:this.prob_gid
+    };
+    this.msg.postApi01('v1/genProblemsub',params)
     .then((data: any) => {
       if (data.status) {
         this.problemsubs = data.data;
@@ -85,9 +105,30 @@ export class SwPage {
 
     });
   }
+  // genProblemsub() {
+  //   this.sw.genProblemsub(this.token, this.userData.user_id,this.prob_gid)
+  //   .then((data: any) => {
+  //     if (data.status) {
+  //       this.problemsubs = data.data;
+  //       if (this.isUpdate && this.isFirst) {
+  //         this.problem_sub_id = this.svData.problem_sub_id;
+  //         this.problem_sub_desc = this.svData.problem_sub_desc;
+  //         this.genProblemsub2();
+  //       } else {
+  //         this.problem_sub_id = null;
+  //       }
+  //     }
+  //   }, (err) => {
+
+  //   });
+  // }
 
   genProblemsub2() {
-    this.sw.genProblemsub2(this.token, this.userData.user_id, this.problem_sub_id)
+    let params = {
+      userData: this.userData,
+      problem_sub_id:this.problem_sub_id
+    };
+    this.msg.postApi01('v1/genProblemsub2',params)
       .then((data: any) => {
         if (data.status) {
           this.problemsub2s = data.data;
@@ -102,6 +143,22 @@ export class SwPage {
       }, (err) => {
       });
   }
+  // genProblemsub2() {
+  //   this.sw.genProblemsub2(this.token, this.userData.user_id, this.problem_sub_id)
+  //     .then((data: any) => {
+  //       if (data.status) {
+  //         this.problemsub2s = data.data;
+  //         if (this.isUpdate && this.isFirst) {
+  //           this.problem_sub2_id = this.svData.problem_sub2_id;
+  //           this.problem_sub2_desc = this.svData.problem_sub2_desc;
+  //           this.isFirst = false;
+  //         } else {
+  //           this.problem_sub2_id = null;
+  //         }
+  //       }
+  //     }, (err) => {
+  //     });
+  // }
   change(data) {
     this.genProblemsub();
   }
@@ -157,7 +214,8 @@ export class SwPage {
     }
     console.log(data);
     if (this.isUpdate) {
-      this.msg.postApi(this.token, 'swEdit', data)
+      let params = data;
+      this.msg.postApi01('v1/swEdit', params)
         .then((data:any) => {
           if (data.status) {
             this.svData.prob_gid = this.prob_gid;
@@ -173,6 +231,22 @@ export class SwPage {
         }, (err) => {
           console.log(err);
         });
+      // this.msg.postApi(this.token, 'swEdit', data)
+      //   .then((data:any) => {
+      //     if (data.status) {
+      //       this.svData.prob_gid = this.prob_gid;
+      //       this.svData.prob_gdesc = this.prob_gdesc;
+      //       this.svData.problem_sub_id = this.problem_sub_id;
+      //       this.svData.problem_sub_desc = this.problem_sub_desc;
+      //       this.svData.problem_sub2_id = this.problem_sub2_id;
+      //       this.svData.problem_sub2_desc = this.problem_sub2_desc;
+      //       this.svData.msv_detail = this.detail;
+      //       this.svData.contract_no = this.contract_no;
+      //       this.view.dismiss(this.svData);
+      //     }
+      //   }, (err) => {
+      //     console.log(err);
+      //   });
 
 
     } else {

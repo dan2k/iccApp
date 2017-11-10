@@ -1,8 +1,13 @@
-import { RegisterProvider } from './../../providers/register/register';
-import { MessageProvider } from './../../providers/message/message';
-import { ServiceProvider } from './../../providers/service/service';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+//import { RegisterProvider } from "./../../providers/register/register";
+import { MessageProvider } from "./../../providers/message/message";
+//import { ServiceProvider } from "./../../providers/service/service";
+import { Component } from "@angular/core";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  ModalController
+} from "ionic-angular";
 
 /**
  * Generated class for the MainmoiPage page.
@@ -13,9 +18,9 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 
 @IonicPage()
 @Component({
-  selector: 'page-mainmoi',
-  templateUrl: 'mainmoi.html',
-  providers: [ServiceProvider, MessageProvider, RegisterProvider]
+  selector: "page-mainmoi",
+  templateUrl: "mainmoi.html",
+ // providers: [ServiceProvider, MessageProvider, RegisterProvider]
 })
 export class MainmoiPage {
   custptypes: any;
@@ -26,35 +31,38 @@ export class MainmoiPage {
   uType: any;
   scope: any;
   provinces: any;
-  fProvince: any = '';
-  fCustptype: any = '';
-  fCustpcode: any = '';
+  fProvince: any = "";
+  fCustptype: any = "";
+  fCustpcode: any = "";
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
-    public serviceProvider: ServiceProvider,
+   // public serviceProvider: ServiceProvider,
     public msg: MessageProvider,
-    public registerProvider: RegisterProvider
+    //public registerProvider: RegisterProvider
   ) {
-    this.userData = JSON.parse(localStorage.getItem('userData'));
-    this.token = localStorage.getItem('token');
-    this.scope = '';
+    this.userData = JSON.parse(localStorage.getItem("userData"));
+    this.token = localStorage.getItem("token");
+    this.scope = "";
     let jobid = this.userData.job_id;
     if (jobid == 2) {
-      this.uType = 'P';
+      this.uType = "P";
     } else if (jobid == 3) {
-      this.uType = 'R';
+      this.uType = "R";
     } else if (jobid == 4) {
-      this.uType = 'M';
+      this.uType = "M";
     }
-    if (this.uType == 'P') {// PV
+    if (this.uType == "P") {
+      // PV
       this.scope = this.userData.cc;
-    } else if (this.uType == 'R') {// RG
+    } else if (this.uType == "R") {
+      // RG
       this.scope = this.userData.section_id;
-    } else {// Center
-      this.scope = '';
+    } else {
+      // Center
+      this.scope = "";
     }
 
     this.genType();
@@ -63,72 +71,169 @@ export class MainmoiPage {
     this.getJob();
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MainmoiPage');
+    console.log("ionViewDidLoad MainmoiPage");
   }
   genProvince() {
-    console.log("uType=" + this.uType, "scope=" + this.scope);
-    this.registerProvider.genProvince(this.uType, this.scope)
-      .then((data: any) => {
+    let params = {
+      uType: this.uType,
+      scope: this.scope
+    };
+    this.msg.postApi01("v1/genProvince", params).then(
+      (data: any) => {
         if (data.status) {
           this.provinces = data.data;
         } else {
-          console.log(data);
+          console.log(data.msg);
         }
-      }, (err) => {
+      },
+      err => {
         console.log(err);
-      });
+      }
+    );
   }
-  genType() {
-    this.registerProvider.genPtype(this.uType, this.scope, this.fProvince)
-      .then((data: any) => {
-        if (data.status) {
-          this.custptypes = data.data
-        } else {
-          console.log(data);
-        }
-      }, (err) => {
-        console.log(err);
+  // genProvince() {
+  //   console.log("uType=" + this.uType, "scope=" + this.scope);
+  //   this.registerProvider.genProvince(this.uType, this.scope)
+  //     .then((data: any) => {
+  //       if (data.status) {
+  //         this.provinces = data.data;
+  //       } else {
+  //         console.log(data);
+  //       }
+  //     }, (err) => {
+  //       console.log(err);
+  //     });
+  // }
 
-      });
+
+  genType() {
+    let params = {
+      uType: this.uType,
+      scope: this.scope,
+      pv:this.fProvince
+    }
+    this.msg.postApi01('v1/genPtype',params)
+    .then((data: any) => {
+      if (data.status) {
+        this.custptypes=data.data
+      } else {
+        console.log(data.msg);
+      }
+    }, (err) => {
+      console.log(err);
+    });
   }
+  // genType() {
+  //   this.registerProvider.genPtype(this.uType, this.scope, this.fProvince).then(
+  //     (data: any) => {
+  //       if (data.status) {
+  //         this.custptypes = data.data;
+  //       } else {
+  //         console.log(data);
+  //       }
+  //     },
+  //     err => {
+  //       console.log(err);
+  //     }
+  //   );
+  // }
+
   genPcode() {
     console.log('สร้างหน่วยงานของ' + this.scope + '..............');
-    this.registerProvider.genPcode(this.uType, this.scope, this.fProvince, this.fCustptype)
-      .then((data: any) => {
-        console.log('pv=', this.scope, data);
-        if (data.status) {
-          this.custpcodes = data.data;
-        } else {
-          console.log(data);
-        }
-      }, (err) => {
-        console.log(err);
-      });
+    let params = {
+      uType: this.uType,
+      scope: this.scope,
+      pv: this.fProvince,
+      custptype:this.fCustptype
+    };
+    this.msg.postApi01('v1/genPcode',params)
+    .then((data: any) => {
+      console.log('pv=',this.scope,data);
+      if (data.status) {
+        this.custpcodes = data.data;
+      } else {
+        console.log(data.msg);
+      }
+    }, (err) => {
+      console.log(err);
+    });
   }
+  // genPcode() {
+  //   console.log("สร้างหน่วยงานของ" + this.scope + "..............");
+  //   this.registerProvider
+  //     .genPcode(this.uType, this.scope, this.fProvince, this.fCustptype)
+  //     .then(
+  //       (data: any) => {
+  //         console.log("pv=", this.scope, data);
+  //         if (data.status) {
+  //           this.custpcodes = data.data;
+  //         } else {
+  //           console.log(data);
+  //         }
+  //       },
+  //       err => {
+  //         console.log(err);
+  //       }
+  //     );
+  // }
   async getJob() {
-    this.serviceProvider.getJob(this.token, this.userData.user_id, this.fCustptype, this.fCustpcode, this.uType, this.scope, this.fProvince)
-      .then((data: any) => {
+    let params = {
+      userData: this.userData,
+      cust_ptype: this.fCustptype,
+      cust_pcode: this.fCustpcode,
+      uType:this.uType,
+      scope: this.scope,
+      pv:this.fProvince,
+    };
+    this.msg.postApi01(`v1/getJob`,{params})
+      .then((data:any) => {
         if (data.status) {
+
           this.svData = data.data;
-        } else {
-          console.log(data);
-          // let isExpired = /Expired token/g.test(data.msg);
-          // let isVerification = /Signature verification/g.test(data.msg);
-          // console.log(`isExpired=${isExpired},isVerification=${isVerification}`);
+          console.log(this.svData);
+        }else {
+          alert(data.msg);
         }
       }, (err) => {
         console.log(err);
       });
   }
+  // async getJob() {
+  //   this.serviceProvider
+  //     .getJob(
+  //       this.token,
+  //       this.userData.user_id,
+  //       this.fCustptype,
+  //       this.fCustpcode,
+  //       this.uType,
+  //       this.scope,
+  //       this.fProvince
+  //     )
+  //     .then(
+  //       (data: any) => {
+  //         if (data.status) {
+  //           this.svData = data.data;
+  //         } else {
+  //           console.log(data);
+  //           // let isExpired = /Expired token/g.test(data.msg);
+  //           // let isVerification = /Signature verification/g.test(data.msg);
+  //           // console.log(`isExpired=${isExpired},isVerification=${isVerification}`);
+  //         }
+  //       },
+  //       err => {
+  //         console.log(err);
+  //       }
+  //     );
+  // }
   changeProvince() {
-    this.fCustptype = '';
-    this.fCustpcode = '';
+    this.fCustptype = "";
+    this.fCustpcode = "";
     this.genType();
     this.genPcode();
     this.getJob();
   }
   changePtype() {
-    this.fCustpcode = '';
+    this.fCustpcode = "";
     this.genPcode();
     this.getJob();
   }
@@ -136,17 +241,19 @@ export class MainmoiPage {
     this.getJob();
   }
   showProblem(type: any) {
-    let problem = this.modalCtrl.create('ModalProblemPage', { type: type });
+    let problem = this.modalCtrl.create("ModalProblemPage", { type: type });
     problem.onDidDismiss(() => {
       this.getJob();
     });
     problem.present();
   }
   openFollow(svData: any) {
-    let follow = this.modalCtrl.create('FollowupProblemPage', { svData: svData });
+    let follow = this.modalCtrl.create("FollowupProblemPage", {
+      svData: svData
+    });
     follow.onDidDismiss(() => {
       this.getJob();
-      console.log('msg=>', 1);
+      console.log("msg=>", 1);
     });
     follow.present();
   }

@@ -1,6 +1,6 @@
 import { MessageProvider } from './../../providers/message/message';
 import { url } from './../../config';
-import { CommentProvider } from './../../providers/comment/comment';
+//import { CommentProvider } from './../../providers/comment/comment';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 //import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -19,7 +19,12 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
 @Component({
   selector: 'page-comment',
   templateUrl: 'comment.html',
-  providers: [FileTransfer,Camera,PhotoViewer,CommentProvider,MessageProvider]
+  providers: [
+    FileTransfer,
+    Camera,
+    PhotoViewer,
+    MessageProvider
+  ]
 })
 export class CommentPage {
   private token: string;
@@ -33,7 +38,7 @@ export class CommentPage {
     private transfer: FileTransfer,
     private camera: Camera,
     private photoViewer: PhotoViewer,
-    private commentProvider: CommentProvider,
+    //private commentProvider: CommentProvider,
     private msg:MessageProvider
 
   ) {
@@ -48,16 +53,14 @@ export class CommentPage {
   saveComment() {
     let load=this.msg.load('กำลังประมวลผล');
     let isImg = this.imageData ? true : false;
-    this.commentProvider.saveComment(
-      this.token,
-      this.userData.user_id,
-      this.msv_no,
-      this.detail,
-      this.userData.user_type,
-      this.userData
-    ).then((data: any) => {
+    let params = {
+      msv_no:this.msv_no,
+      detail:this.detail,
+      user_type:this.userData.user_type,
+      userData:this.userData
+    }
+    this.msg.postApi01('v1/saveComment',params).then((data: any) => {
       load.dismiss();
-      console.log('--------------',this.userData);
       if (data.status) {
           this.msg.toast('บันทึกความคิดเห็นเรียบร้อยแล้ว')
           console.log(data, 'isImg:=>', isImg);
@@ -77,6 +80,40 @@ export class CommentPage {
       console.log(err);
     });
   }
+  // saveComment() {
+  //   let load=this.msg.load('กำลังประมวลผล');
+  //   let isImg = this.imageData ? true : false;
+  //   this.commentProvider.saveComment(
+  //     this.token,
+  //     this.userData.user_id,
+  //     this.msv_no,
+  //     this.detail,
+  //     this.userData.user_type,
+  //     this.userData
+  //   ).then((data: any) => {
+  //     load.dismiss();
+  //     console.log('--------------',this.userData);
+  //     if (data.status) {
+  //         this.msg.toast('บันทึกความคิดเห็นเรียบร้อยแล้ว')
+  //         console.log(data, 'isImg:=>', isImg);
+  //         if (isImg) {//have upload photo
+  //           this.upload(data.sv_no,data.comment_no,data.pno);
+  //         } else {
+  //           this.close();
+  //         }
+  //     } else {
+  //       this.msg.toast(data);
+  //         console.log(data);
+  //       }
+  //     }, (err) => {
+  //       load.dismiss();
+  //       this.msg.toast(err);
+
+  //     console.log(err);
+  //   });
+  // }
+
+
   close() {
     this.navCtrl.pop();
   }
@@ -108,7 +145,6 @@ export class CommentPage {
         this.msg.toast('upload photo to server complete!');
         load.dismiss();
         // success
-
         console.log(data);
         this.close();
       }, (err) => {

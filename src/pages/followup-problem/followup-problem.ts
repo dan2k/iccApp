@@ -1,5 +1,6 @@
-import { ServiceProvider } from './../../providers/service/service';
-import { CommentProvider } from './../../providers/comment/comment';
+//import { ServiceProvider } from './../../providers/service/service';
+//import { CommentProvider } from './../../providers/comment/comment';
+
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, PopoverController } from 'ionic-angular';
 import { url } from "../../config";
@@ -18,7 +19,10 @@ import { MessageProvider } from '../../providers/message/message';
 @Component({
   selector: 'page-followup-problem',
   templateUrl: 'followup-problem.html',
-  providers: [PhotoViewer, CommentProvider, ServiceProvider],
+  providers: [PhotoViewer,
+    //CommentProvider,
+   // ServiceProvider
+  ],
 
 })
 export class FollowupProblemPage {
@@ -38,14 +42,15 @@ export class FollowupProblemPage {
     public navParams: NavParams,
     public photoViewer: PhotoViewer,
     public modalController: ModalController,
-    public commentProvider: CommentProvider,
+    //public commentProvider: CommentProvider,
     public popup: PopoverController,
-    public serviceProvider: ServiceProvider,
+   // public serviceProvider: ServiceProvider,
     public msg:MessageProvider,
   ) {
-    this.token = localStorage.getItem('token');
+    //this.token = localStorage.getItem('token');
     this.xurl = url;
     this.userData = JSON.parse(localStorage.getItem('userData'));
+    console.log(this.userData);
     let jobid = this.userData.job_id;
     if (jobid == 2 || jobid == 3 || jobid == 4) {//เอาไว้ตรวจสอบว่าเป็น สน.ท login หรือเปล่า ถ้าใช่ก็ ปิดตรงส่งจ๊อบไปก่อน
       this.isMoi = true;
@@ -93,7 +98,11 @@ export class FollowupProblemPage {
     console.log('ionViewDidLoad FollowupProblemPage');
   }
   async getComment() {
-    this.commentProvider.getComment(this.token, this.userData.user_id, this.svData.msv_no)
+    let params = {
+      userData:this.userData,
+      msv_no:this.svData.msv_no
+    }
+    this.msg.postApi01('v1/getComment',params)
       .then((data: any) => {
         if (data.status) {
 
@@ -106,6 +115,20 @@ export class FollowupProblemPage {
         console.log(err);
       });
   }
+  // async getComment() {
+  //   this.commentProvider.getComment(this.token, this.userData.user_id, this.svData.msv_no)
+  //     .then((data: any) => {
+  //       if (data.status) {
+
+  //         this.comments = data.data;
+  //         console.log('commentdata=>', this.comments);
+  //       } else {
+  //         console.log(data);
+  //       }
+  //     }, (err) => {
+  //       console.log(err);
+  //     });
+  // }
   showPhoto() {
     this.photoViewer.show(this.imageData);
   }
@@ -137,13 +160,12 @@ export class FollowupProblemPage {
   }
   //delete job
   trash(sv) {
-    console.log('xx');
     this.msg.confirm('คุณต้องการลบข้อมูลหรือไม่', (sv) => {
       let params = {
-        user_id: this.userData.user_id,
+        userData: this.userData,
         sv_no: sv.msv_no
       }
-      this.msg.postApi(this.token, 'deleteSv', params)
+      this.msg.postApi01('v1/deleteSv', params)
         .then((data: any) => {
           if (data.status) this.close();
           console.log(data);
@@ -152,6 +174,23 @@ export class FollowupProblemPage {
         });
     },sv);
   }
+  // //delete job
+  // trash(sv) {
+  //   console.log('xx');
+  //   this.msg.confirm('คุณต้องการลบข้อมูลหรือไม่', (sv) => {
+  //     let params = {
+  //       user_id: this.userData.user_id,
+  //       sv_no: sv.msv_no
+  //     }
+  //     this.msg.postApi(this.token, 'deleteSv', params)
+  //       .then((data: any) => {
+  //         if (data.status) this.close();
+  //         console.log(data);
+  //       }, (err) => {
+  //         console.log(err);
+  //       });
+  //   },sv);
+  // }
 
   openComment() {
     let model = this.modalController.create('CommentPage', { msv_no: this.svData.msv_no });
@@ -167,7 +206,7 @@ export class FollowupProblemPage {
       svno: this.svData.msv_no,
       userData:this.userData
     }
-    this.msg.postApi(this.token,'returnJob',params)
+    this.msg.postApi01('v1/returnJob',params)
       .then((data: any) => {
         if (data.status) {
           //return ok
@@ -178,6 +217,23 @@ export class FollowupProblemPage {
         console.log(err);
       });
   }
+  // returnJob() {//ส่งคืนกลับไปกรณีที่ยังไม่ได้รับการแก้ไขจริง ๆ
+  //   let params = {
+  //     user_id: this.userData.user_id,
+  //     svno: this.svData.msv_no,
+  //     userData:this.userData
+  //   }
+  //   this.msg.postApi(this.token,'returnJob',params)
+  //     .then((data: any) => {
+  //       if (data.status) {
+  //         //return ok
+  //         console.log(data);
+  //         this.close();
+  //       }
+  //     }, (err) => {
+  //       console.log(err);
+  //     });
+  // }
   errorHandler(event) {
     this.imgHide = true;
     console.debug(event);
@@ -194,14 +250,28 @@ export class FollowupProblemPage {
     let pop = this.popup.create('PopSolvePage', {svData:this.svData}, { cssClass: 'custom-popover' }/*, {}, { showBackdrop: true, enableBackdropDismiss: false }*/);
     pop.onDidDismiss((data: any) => {
       if (data) {
-        this.serviceProvider.close(this.token, this.userData.user_id, this.svData.msv_no,data.solve,this.userData)
-          .then((data: any) => {
-            console.log(data);
-            this.close();
-          }, (err) => {
-            this.close();
-            console.log(err);
-          });
+        // this.serviceProvider.close(this.token, this.userData.user_id, this.svData.msv_no,data.solve,this.userData)
+        //   .then((data: any) => {
+        //     console.log(data);
+        //     this.close();
+        //   }, (err) => {
+        //     this.close();
+        //     console.log(err);
+        //   });
+        let params = {
+          user_id: this.userData.user_id,
+          msv_no: this.svData.msv_no,
+          solve: data.solve,
+          userData:this.userData
+        };
+        this.msg.postApi01('v1/close',params)
+        .then((data: any) => {
+          console.log(data);
+          this.close();
+        }, (err) => {
+          this.close();
+          console.log(err);
+        });
       }
     });
     pop.present({
@@ -214,7 +284,13 @@ export class FollowupProblemPage {
       let pop = this.popup.create('PopSmilePage', {}/*{ showBackdrop: true, enableBackdropDismiss: true }*/);
       pop.onDidDismiss((data: any) => {
         if (data.type == 1) {
-          this.serviceProvider.confirmClose(this.token, this.userData.user_id, this.svData.msv_no,this.userData, data.rate)
+          let params = {
+            user_id: this.userData.user_id,
+            msv_no: this.svData.msv_no,
+            userData: this.userData,
+            rate:data.rate
+          };
+          this.msg.postApi01('v1/confirmClose',params)
             .then((data: any) => {
               console.log(data);
               this.close();
@@ -222,6 +298,14 @@ export class FollowupProblemPage {
               this.close();
               console.log(err);
             });
+          // this.serviceProvider.confirmClose(this.token, this.userData.user_id, this.svData.msv_no,this.userData, data.rate)
+          //   .then((data: any) => {
+          //     console.log(data);
+          //     this.close();
+          //   }, (err) => {
+          //     this.close();
+          //     console.log(err);
+          //   });
         }
       });
       pop.present({
@@ -229,7 +313,12 @@ export class FollowupProblemPage {
       });
     } else {
       //close job moi no show popup smile
-      this.serviceProvider.confirmClose(this.token, this.userData.user_id, this.svData.msv_no,this.userData)
+      let params = {
+        user_id:this.userData.user_id,
+        msv_no: this.svData.msv_no,
+        userData:this.userData
+      }
+      this.msg.postApi01('v1/confirmClose',params)
         .then((data: any) => {
           console.log(data);
           this.close();
@@ -237,6 +326,14 @@ export class FollowupProblemPage {
           this.close();
           console.log(err);
         });
+      // this.serviceProvider.confirmClose(this.token, this.userData.user_id, this.svData.msv_no,this.userData)
+      //   .then((data: any) => {
+      //     console.log(data);
+      //     this.close();
+      //   }, (err) => {
+      //     this.close();
+      //     console.log(err);
+      //   });
 
     }
   }

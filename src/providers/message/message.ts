@@ -121,4 +121,25 @@ export class MessageProvider {
         });
     });
   }
+  postApi01(endPoint:any,params?:any) {
+    this.checkServer();
+    return new Promise((resolve, reject) => {
+      let headers = new Headers({
+        'Content-Type': 'application/json'
+      });
+      let options = new RequestOptions({ headers: headers });
+      let body = {
+           data: params
+       };
+      this.http.post(`${url}/${endPoint}`, body, options)
+        .map(res => {
+          return res.json();
+        })
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
 }

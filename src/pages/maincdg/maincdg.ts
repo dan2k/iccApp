@@ -1,7 +1,9 @@
-import { ServiceProvider } from './../../providers/service/service';
-import { RegisterProvider } from './../../providers/register/register';
+//import { ServiceProvider } from './../../providers/service/service';
+//mport { RegisterProvider } from './../../providers/register/register';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { MessageProvider } from '../../providers/message/message';
+
 /**
  * Generated class for the MaincdgPage page.
  *
@@ -13,7 +15,7 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 @Component({
   selector: 'page-maincdg',
   templateUrl: 'maincdg.html',
-  providers:[RegisterProvider,ServiceProvider]
+  //providers:[RegisterProvider,ServiceProvider,MessageProvider]
 })
 export class MaincdgPage {
   custptypes: any;
@@ -34,9 +36,10 @@ export class MaincdgPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public serviceProvider: ServiceProvider,
-    public registerProvider: RegisterProvider,
-    public modalCtrol : ModalController
+    //public serviceProvider: ServiceProvider,
+    //public registerProvider: RegisterProvider,
+    public modalCtrol: ModalController,
+    public msg:MessageProvider
   ) {
     this.token = localStorage.getItem('token');
     let tmp:any=JSON.parse(localStorage.getItem('userData'));
@@ -53,15 +56,23 @@ export class MaincdgPage {
     } else {// Center
       this.scope = '';
     }
-    this.genType();
 
+    this.genType();
     this.genProvince();
+    //กำหนดค่า ของ listbox ให้ตรงกับจังหวัดของตัวเอง
+    this.fProvince = this.userData.place_code.substr(0, 2);
     this.genPcode();
     this.getJob();
+
   }
   genProvince() {
     console.log("uType=" + this.uType, "scope=" + this.scope);
-    this.registerProvider.genProvince(this.uType, this.scope)
+    let params = {
+      uType: this.uType,
+      scope: this.scope
+    };
+    //this.registerProvider.genProvince(this.uType, this.scope)
+    this.msg.postApi01('v1/genProvince',params)
       .then((data: any) => {
         if (data.status) {
           this.provinces = data.data;
@@ -73,47 +84,106 @@ export class MaincdgPage {
       });
   }
   genType() {
-    this.registerProvider.genPtype(this.uType,this.scope,this.fProvince)
+    let params = {
+      uType: this.uType,
+      scope: this.scope,
+      pv:this.fProvince
+    }
+    this.msg.postApi01('v1/genPtype',params)
     .then((data: any) => {
       if (data.status) {
         this.custptypes=data.data
       } else {
-        console.log(data);
+        console.log(data.msg);
       }
     }, (err) => {
       console.log(err);
-
     });
   }
+  // genType() {
+  //   this.registerProvider.genPtype(this.uType,this.scope,this.fProvince)
+  //   .then((data: any) => {
+  //     if (data.status) {
+  //       this.custptypes=data.data
+  //     } else {
+  //       console.log(data);
+  //     }
+  //   }, (err) => {
+  //     console.log(err);
+
+  //   });
+  // }
   genPcode() {
-    console.log('สร้างหน่วยงานของ'+this.scope+'..............');
-    this.registerProvider.genPcode(this.uType,this.scope,this.fProvince,this.fCustptype)
+    console.log('สร้างหน่วยงานของ' + this.scope + '..............');
+    let params = {
+      uType: this.uType,
+      scope: this.scope,
+      pv: this.fProvince,
+      custptype:this.fCustptype
+    };
+    this.msg.postApi01('v1/genPcode',params)
     .then((data: any) => {
       console.log('pv=',this.scope,data);
       if (data.status) {
         this.custpcodes = data.data;
       } else {
-        console.log(data);
+        console.log(data.msg);
       }
     }, (err) => {
       console.log(err);
     });
   }
-  getJob() {
-    console.log('getJob......');
-    console.log('------------------>', this.userData);
-    this.serviceProvider.getJob(this.token, this.userData.user_id,this.fCustptype,this.fCustpcode,this.uType,this.scope,this.fProvince)
-    .then((data: any) => {
+  // genPcode() {
+  //   console.log('สร้างหน่วยงานของ'+this.scope+'..............');
+  //   this.registerProvider.genPcode(this.uType,this.scope,this.fProvince,this.fCustptype)
+  //   .then((data: any) => {
+  //     console.log('pv=',this.scope,data);
+  //     if (data.status) {
+  //       this.custpcodes = data.data;
+  //     } else {
+  //       console.log(data);
+  //     }
+  //   }, (err) => {
+  //     console.log(err);
+  //   });
+  // }
+  async getJob() {
+    let params = {
+      userData: this.userData,
+      cust_ptype: this.fCustptype,
+      cust_pcode: this.fCustpcode,
+      uType:this.uType,
+      scope: this.scope,
+      pv:this.fProvince,
+    };
+    this.msg.postApi01(`v1/getJob`,{params})
+      .then((data:any) => {
+        if (data.status) {
 
-      if (data.status) {
-        this.svData = data.data;
-      } else {
-        console.log(data);
-      }
-    }, (err) => {
-      console.log(err);
-    });
+          this.svData = data.data;
+          console.log(this.svData);
+        }else {
+          alert(data.msg);
+        }
+      }, (err) => {
+        console.log(err);
+      });
   }
+  // getJob() {
+  //   console.log('getJob......');
+  //   console.log('------------------>', this.userData);
+  //   this.serviceProvider.getJob(this.token, this.userData.user_id,this.fCustptype,this.fCustpcode,this.uType,this.scope,this.fProvince)
+  //   .then((data: any) => {
+
+  //     if (data.status) {
+  //       this.svData = data.data;
+  //     } else {
+  //       console.log(data);
+  //     }
+  //   }, (err) => {
+  //     console.log(err);
+  //   });
+  // }
   changeProvince() {
     this.fCustptype = '';
     this.fCustpcode = '';

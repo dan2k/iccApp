@@ -112,7 +112,7 @@
         <ion-item>
           <ion-avatar item-start>
             <img src="./assets/img/favicon.ico" alt="" *ngIf="comment.comment_utype==1">
-            <img src="./assets/img/logo.jpg" alt="" *ngIf="comment.comment_utype==2">
+            <img src="./assets/img/logo.gif" alt="" *ngIf="comment.comment_utype==2">
           </ion-avatar>
           <h2>โดย: {{comment.thiname}}</h2>
           <p>วันที่: {{comment.comment_adate}} เวลา: {{comment.comment_atime}}</p>
@@ -145,7 +145,7 @@
   </ion-scroll>
 
 </ion-content>
-<ion-footer *ngIf="((isMoi && svData.msv_status==0)||(isMoi && ((svData.msv_status==6)&&(svData.kp_idx!=svData.skp_idx) )))">
+<ion-footer *ngIf="((isMoi && svData.msv_status==0 && svData.kp_idx!=svData.skp_idx)||(isMoi && ((svData.msv_status==6)&&(svData.kp_idx!=svData.skp_idx) )))">
   <ion-buttons text-center>
     <button ion-button full color="danger" (click)="openPop($event)" item-end icon-left>
       ปิด</button>

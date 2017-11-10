@@ -1,1 +1,12 @@
-page-login {}
+page-login {
+  ion-item{
+    .small{
+      font-size:8px;
+    }
+  }
+  .small{
+    ion-icon{
+      font-size:12px;
+    }
+  }
+}
