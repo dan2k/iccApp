@@ -18,8 +18,6 @@ import { MessageProvider } from '../providers/message/message';
 //import { UserProvider } from '../providers/user/user';
 //import { RegisterProvider } from '../providers/register/register';
 //import { DirectivesModule } from '../directives/directives.module';
-
-
 @NgModule({
   declarations: [
     MyApp,
