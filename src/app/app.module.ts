@@ -44,6 +44,7 @@ import { MessageProvider } from '../providers/message/message';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     //ServiceProvider,
+
     //CommentProvider,
     MessageProvider,
     //HwProvider,
