@@ -27,11 +27,11 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
   ]
 })
 export class CommentPage {
-  private token: string;
-  private userData: any;
-  private imageData: any;
-  private msv_no: any;
-  private detail: any='';
+  public token: string;
+  public userData: any;
+  public imageData: any;
+  public msv_no: any;
+  public detail: any='';
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
