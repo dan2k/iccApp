@@ -1,0 +1,16 @@
+<ion-header>
+
+  <ion-navbar color="ptitle">
+    <ion-title>ตั้งค่าโปรแกรม</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <button ion-item color="warning" (click)="selectplace()" *ngIf="userDataArr.length>1" icon-right>
+      <ion-icon name="ios-repeat" item-end></ion-icon>
+      เปลี่ยนสถานที่ปฏิบัติงาน
+    </button>
+  </ion-list>
+</ion-content>

@@ -42,7 +42,7 @@ export class MainPage {
       scope: '',
       pv:'',
     };
-    this.msg.postApi01(`v1/getJob`,{params})
+    this.msg.postApi01(`v1/getJob`,params)
       .then((data:any) => {
         if (data.status) {
           this.svData = data.data;

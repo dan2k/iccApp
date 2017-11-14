@@ -46,7 +46,7 @@ export class MessageProvider {
   }
   confirm(msg:string,handler:any,data?:any) {
     let confirm = this.altCtrl.create({
-      title: 'Confirm',
+      title: 'ยืนยันการทำรายการ',
       message: msg,
       buttons: [
         {

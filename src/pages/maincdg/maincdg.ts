@@ -26,6 +26,7 @@ export class MaincdgPage {
   uType: any;
   scope: any;
   provinces: any;
+  userType: any;
   // cust_ptype: any = '';
   // cust_pcode: any = '';
   // pv: any = '';
@@ -46,6 +47,7 @@ export class MaincdgPage {
     // this.userData = JSON.parse(localStorage.getItem('userData'));
     this.userData = tmp;
     this.uType = this.userData.place_type;
+    this.userType = this.userData.user_type;
     this.scope = '';
 
     if (this.uType == 'P') {// PV
@@ -87,7 +89,8 @@ export class MaincdgPage {
     let params = {
       uType: this.uType,
       scope: this.scope,
-      pv:this.fProvince
+      pv: this.fProvince,
+      userData:this.userData
     }
     this.msg.postApi01('v1/genPtype',params)
     .then((data: any) => {
@@ -119,9 +122,10 @@ export class MaincdgPage {
       uType: this.uType,
       scope: this.scope,
       pv: this.fProvince,
-      custptype:this.fCustptype
+      custptype: this.fCustptype,
+      userData:this.userData
     };
-    this.msg.postApi01('v1/genPcode',params)
+    this.msg.postApi01('v1/genPcodeByCDG',params)
     .then((data: any) => {
       console.log('pv=',this.scope,data);
       if (data.status) {
@@ -156,7 +160,7 @@ export class MaincdgPage {
       scope: this.scope,
       pv:this.fProvince,
     };
-    this.msg.postApi01(`v1/getJob`,{params})
+    this.msg.postApi01(`v1/getJobbyCDG`,params)
       .then((data:any) => {
         if (data.status) {
 

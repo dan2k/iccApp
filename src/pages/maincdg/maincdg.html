@@ -5,7 +5,7 @@
         </ion-avatar>
         <h1>ตรวจสอบติดตาม:</h1>
     </ion-item> -->
-  <ion-item *ngIf="uType!='P'">
+  <ion-item >
     <ion-label>จังหวัด:</ion-label>
     <ion-select [(ngModel)]="fProvince" (ionChange)="changeProvince()">
       <ion-option value='' selected>--ทั้งหมด--</ion-option>

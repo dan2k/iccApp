@@ -5,9 +5,12 @@
             <br><ion-note>คุณ {{userData?.user_fname}} {{userData?.user_lname}}</ion-note>
         </ion-title>
         <ion-buttons end>
-            <button ion-button icon-only (click)="logout()">
-        <ion-icon name="log-out"></ion-icon>
-      </button>
+            <button ion-button icon-only small (click)="setting()">
+              <ion-icon name="ios-settings-outline"></ion-icon>
+            </button>
+            <button ion-button icon-only (click)="logout()" small>
+              <ion-icon name="log-out"></ion-icon>
+            </button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>

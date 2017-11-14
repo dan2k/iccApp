@@ -9,12 +9,6 @@ import {
   ModalController
 } from "ionic-angular";
 
-/**
- * Generated class for the MainmoiPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -110,7 +104,8 @@ export class MainmoiPage {
     let params = {
       uType: this.uType,
       scope: this.scope,
-      pv:this.fProvince
+      pv: this.fProvince,
+      userData:this.userData
     }
     this.msg.postApi01('v1/genPtype',params)
     .then((data: any) => {
@@ -144,7 +139,8 @@ export class MainmoiPage {
       uType: this.uType,
       scope: this.scope,
       pv: this.fProvince,
-      custptype:this.fCustptype
+      custptype: this.fCustptype,
+      userData:this.userData
     };
     this.msg.postApi01('v1/genPcode',params)
     .then((data: any) => {
@@ -185,7 +181,7 @@ export class MainmoiPage {
       scope: this.scope,
       pv:this.fProvince,
     };
-    this.msg.postApi01(`v1/getJob`,{params})
+    this.msg.postApi01(`v1/getJob`,params)
       .then((data:any) => {
         if (data.status) {
 

@@ -57,6 +57,7 @@ export class LoginPage {
       .then((data: any) => {
         if (data.status) {
           let d = data.data;
+          localStorage.setItem('userDataArr', JSON.stringify(d));
           if (d.length > 1) {
             //มากกว่าหนึ่งหน่วยงาน
             let modal = this.modal.create('SelectPlacePage', { data: d });

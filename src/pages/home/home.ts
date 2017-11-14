@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController,App } from 'ionic-angular';
+import { MessageProvider } from '../../providers/message/message';
 
 @Component({
   selector: 'page-home',
@@ -11,7 +12,8 @@ export class HomePage {
   public tab3: any;
   public tab4: any;
   public userData: any;
-  constructor(public navCtrl: NavController,private app:App) {
+    constructor(public navCtrl: NavController, private app: App, public msg: MessageProvider, ) {
+
     this.userData= JSON.parse(localStorage.getItem('userData'));
     let userType = this.userData.user_type;
     if (userType == 1) {//moi
@@ -29,9 +31,13 @@ export class HomePage {
     this.tab3 = 'Tab3Page';
   }
   logout() {
-     localStorage.removeItem('userData');
-     let nav = this.app.getRootNav();
-     nav.setRoot('LoginTypePage');
+    let confirm = this.msg.confirm('คุณต้องการออกจากระบบหรือไม่', (data) => {
+      localStorage.removeItem('userData');
+      let nav = this.app.getRootNav();
+      nav.setRoot('LoginTypePage');
+    });
   }
-
+  setting() {
+    this.navCtrl.push('SettingPage');
+  }
 }
