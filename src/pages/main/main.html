@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content [style.background-color]="colorHeader" class="colorHeader">
 
   <!-- <ion-item no-lines color="ptitle">
         <ion-avatar item-start>
@@ -7,7 +7,7 @@
         <h1>แจ้งปัญหา</h1>
 
     </ion-item> -->
-  <div class="issue">
+  <div class="issue" >
     <ion-segment>
       <ion-segment-button (click)="showProblem(1)">
         <img src="./assets/icon/workstation.png"> เครื่อง
@@ -55,7 +55,7 @@
         </ion-avatar>
         <h1>ตรวจสอบติดตาม</h1>
     </ion-item> -->
-  <ion-scroll scrollY="true" style="margin:0px;height: 90%;background-color:#ebebeb">
+  <!-- <ion-scroll scrollY="true" style="margin:0px;height: 90%;background-color:#ebebeb">
     <ion-list inset no-lines style="margin:0">
       <ion-card async *ngFor="let sv of this.svData">
         <ion-item color="ptitle2">
@@ -67,7 +67,6 @@
           <h2>{{sv.msv_no}}</h2>
           <h2>{{sv.cust_ptype_desc}} {{sv.cust_pdesc}}</h2>
           <h2>{{sv.province_name}}</h2>
-          <!-- {{sv.isRG}} {{sv.msv_type}} {{sv.prob_gdesc}} {{sv.problem_sub_desc}} -->
         </ion-item>
         <ion-item color="ptitle2" class='h'>
           <div *ngIf="sv.isRG==0 && sv.msv_type==1" >
@@ -99,5 +98,5 @@
         </ion-item>
       </ion-card>
     </ion-list>
-  </ion-scroll>
+  </ion-scroll> -->
 </ion-content>

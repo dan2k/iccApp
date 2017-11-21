@@ -1,0 +1,11 @@
+page-follow-cdg-self {
+  ion-scroll[scrollx] {
+    //white-space: nowrap;
+    height: 40px;
+    overflow: auto;
+  }
+  /* Hide ion-content scrollbar */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}

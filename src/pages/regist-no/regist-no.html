@@ -6,15 +6,15 @@
 -->
 <ion-header>
 
-    <ion-navbar color="primary">
-        <ion-title text-center>ลงทะเบียน</ion-title>
-    </ion-navbar>
+  <ion-navbar color="primary">
+    <ion-title text-center>ลงทะเบียน</ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-    <ion-card>
+<ion-content>
+  <!-- <ion-card>
         <ion-item style="color:red;">
             <ion-icon name="warning" item-start>
             </ion-icon>
@@ -26,5 +26,35 @@
                 <br> พนักงานที่ดูแลระบบของท่าน
             </p>
         </ion-card-content>
-    </ion-card>
+    </ion-card> -->
+  <ion-list>
+    <ion-item style="color:red;" text-wrap>
+      <ion-icon name="warning" item-start>
+      </ion-icon>
+      <p style="color:orange;font-size:16px">ตรวจสอบไม่พบผู้ใช้งานในระบบ กรุณาระบุข้อมูลเบื้องต้นของท่านเพื่อเพิ่มข้อมูลเข้าระบบและรอการติดต่อกลับจากพนักงานอีกครั้ง</p>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>ชื่อ:</ion-label>
+      <ion-input type="text" [(ngModel)]="fname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>นามสกุล:</ion-label>
+      <ion-input type="text" [(ngModel)]="lname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>เบอร์โทร:</ion-label>
+      <ion-input type="number" [(ngModel)]="tel"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>ชื่อหน่วยงาน:</ion-label>
+      <ion-input type="text" [(ngModel)]="codename"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>จังหวัด:</ion-label>
+      <ion-input type="text" [(ngModel)]="province"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-item>
+      <button ion-button color="primary" full (click)="save()" [disabled]="!fname&&!lname&&!tel&&!codename&&!province">บันทึกข้อมูล</button>
+    </ion-item>
 </ion-content>

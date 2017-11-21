@@ -21,6 +21,7 @@ export class MainPage {
   public userData: any;
   public svData: any;
   public token: string;
+  public colorHeader = 'warning';
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -30,44 +31,44 @@ export class MainPage {
     public msg:MessageProvider
   ) {
     this.userData = JSON.parse(localStorage.getItem('userData'));
-    this.getJob();
+    //this.getJob();
   }
 
-  async getJob() {
-    let params = {
-      userData: this.userData,
-      cust_ptype: this.userData.cust_ptype,
-      cust_pcode: this.userData.cust_pcode,
-      uType: '',
-      scope: '',
-      pv:'',
-    };
-    this.msg.postApi01(`v1/getJob`,params)
-      .then((data:any) => {
-        if (data.status) {
-          this.svData = data.data;
-        }else {
-          alert(data.msg);
-        }
-      }, (err) => {
-        console.log(err);
-      });
-  }
+  // async getJob() {
+  //   let params = {
+  //     userData: this.userData,
+  //     cust_ptype: this.userData.cust_ptype,
+  //     cust_pcode: this.userData.cust_pcode,
+  //     uType: '',
+  //     scope: '',
+  //     pv:'',
+  //   };
+  //   this.msg.postApi01(`v1/getJob`,params)
+  //     .then((data:any) => {
+  //       if (data.status) {
+  //         this.svData = data.data;
+  //       }else {
+  //         alert(data.msg);
+  //       }
+  //     }, (err) => {
+  //       console.log(err);
+  //     });
+  // }
 
   showProblem(type: any) {
     let problem = this.modalCtrl.create('ModalProblemPage', { type: type });
     problem.onDidDismiss(() => {
-      this.getJob();
+      //this.getJob();
     });
     problem.present();
   }
-  openFollow(sv: any) {
-    console.log('sv====>', sv);
-     let follow = this.modalCtrl.create('FollowupProblemPage', { svData: sv });
-       follow.onDidDismiss(() => {
-         this.getJob();
-         console.log('msg=>', 1);
-       });
-      follow.present();
-  }
+  // openFollow(sv: any) {
+  //   console.log('sv====>', sv);
+  //    let follow = this.modalCtrl.create('FollowupProblemPage', { svData: sv });
+  //      follow.onDidDismiss(() => {
+  //        this.getJob();
+  //        console.log('msg=>', 1);
+  //      });
+  //     follow.present();
+  // }
 }

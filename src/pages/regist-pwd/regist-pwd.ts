@@ -58,7 +58,7 @@ export class RegistPwdPage {
     this.registerProvider.updaePwd(user)
       .then((data: any) => {
         if (data.status) {
-          this.navCtrl.setRoot('LoginPage');
+          this.navCtrl.setRoot('LoginTypePage');
         }
         console.log(data.msg);
       }, (err) => {

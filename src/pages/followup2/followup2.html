@@ -31,17 +31,17 @@
             <img *ngIf="svData.msv_type==2" src="./assets/icon/p.jpg">
             <img *ngIf="svData.msv_type==3" src="./assets/icon/other.jpg">
           </ion-avatar> -->
-          <h2>{{svData?.msv_no}}</h2>
+          <h2>{{svData?.sv_no}}</h2>
            <h2>{{svData?.cust_ptype_desc}} {{svData?.cust_pdesc}}</h2>
            <h2>{{svData?.province_name}}</h2>
         </ion-item>
         <ion-card-content>
-          <p text-wrap>ปัญหา: {{svData?.msv_detail}}</p>
+          <p text-wrap>ปัญหา: {{svData?.sv_detail}}</p>
         </ion-card-content>
         <ion-item style="background-color:rgba(185, 202, 218, 0.66);" padding>
 
           <h3>โดย: {{svData?.thiname}}</h3>
-          <h3>วัน: {{svData?.msv_adate}} เวลา: {{svData?.msv_atime}}</h3>
+          <h3>วัน: {{svData?.sv_date}} เวลา: {{svData?.sv_time}}</h3>
         </ion-item>
 
     </ion-card>

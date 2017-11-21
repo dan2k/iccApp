@@ -1,0 +1,64 @@
+<ion-content>
+  <ion-fab right edge>
+    <button ion-fab color="vibrant" mini (click)="setShow()" *ngIf="!isShow">
+      <ion-icon name="ios-arrow-dropdown-outline"></ion-icon>
+    </button>
+    <button ion-fab (click)="setNotShow()" *ngIf="isShow" mini>
+      <ion-icon name="ios-arrow-dropup-outline"></ion-icon>
+    </button>
+
+  </ion-fab>
+  <ion-list>
+    <ion-item *ngIf="isShow">
+      <ion-label>จังหวัด:</ion-label>
+      <ion-select [(ngModel)]="fProvince" (ionChange)="changeProvince()">
+        <ion-option value='' selected>--ทั้งหมด--</ion-option>
+        <ion-option *ngFor="let p of provinces" [value]="p.province_id">
+          {{p.province_name}}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="isShow">
+      <ion-label>ประเภทหน่วยงาน:</ion-label>
+      <ion-select [(ngModel)]="fCustptype" (ionChange)="changePtype()">
+        <ion-option selected value=''>--ทั้งหมด--</ion-option>
+        <ion-option *ngFor="let c of custptypes" [value]="c.cust_ptype">
+          {{c.cust_desc}}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="isShow">
+      <ion-label>หน่วยงาน:</ion-label>
+      <ion-select [(ngModel)]="fCustpcode" (ionChange)="changePcode()">
+        <ion-option selected value=''>--ทั้งหมด--</ion-option>
+        <ion-option *ngFor="let c of custpcodes" [value]="c.cust_pcode">
+          {{c.cust_pdesc}}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngFor="let i of items" (click)="openFollow(i)">
+      <ion-avatar item-start>
+          <img src="./assets/icon/workstation.png" *ngIf="i.msv_type==1">
+          <img src="./assets/icon/p.jpg" *ngIf="i.msv_type==2">
+          <img src="./assets/icon/other.jpg" *ngIf="i.msv_type==3">
+
+      </ion-avatar>
+      <ion-scroll scrollX="true">
+        <div>
+          <ion-icon name="md-radio-button-on" style="color:red" *ngIf="i.msv_status==0"></ion-icon>
+          <ion-icon name="md-radio-button-on" style="color:green" *ngIf="i.msv_status==4"></ion-icon>
+          <ion-icon name="md-radio-button-on" style="color:gray" *ngIf="i.msv_status==6"></ion-icon>
+          <b>{{i?.msv_no}}</b> {{i?.msv_adate}}-{{i?.msv_atime}}
+          <b>ปัญหา:</b>{{i?.msv_detail}}
+          <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
+        </div>
+      </ion-scroll>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="dots" loadingText="กำลังโหลดข้อมูล........">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

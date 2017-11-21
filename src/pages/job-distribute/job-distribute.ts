@@ -42,6 +42,7 @@ export class JobDistributePage {
     public msg: MessageProvider
   ) {
     this.svData = this.navParams.get("svData");
+    console.log(this.svData);
     this.token = localStorage.getItem("token");
     this.userData = JSON.parse(localStorage.getItem("userData"));
     console.log(this.svData);

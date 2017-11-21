@@ -38,53 +38,53 @@ export class MainmoiPage {
     //public registerProvider: RegisterProvider
   ) {
     this.userData = JSON.parse(localStorage.getItem("userData"));
-    this.token = localStorage.getItem("token");
-    this.scope = "";
-    let jobid = this.userData.job_id;
-    if (jobid == 2) {
-      this.uType = "P";
-    } else if (jobid == 3) {
-      this.uType = "R";
-    } else if (jobid == 4) {
-      this.uType = "M";
-    }
-    if (this.uType == "P") {
-      // PV
-      this.scope = this.userData.cc;
-    } else if (this.uType == "R") {
-      // RG
-      this.scope = this.userData.section_id;
-    } else {
-      // Center
-      this.scope = "";
-    }
+    // this.token = localStorage.getItem("token");
+    // this.scope = "";
+    // let jobid = this.userData.job_id;
+    // if (jobid == 2) {
+    //   this.uType = "P";
+    // } else if (jobid == 3) {
+    //   this.uType = "R";
+    // } else if (jobid == 4) {
+    //   this.uType = "M";
+    // }
+    // if (this.uType == "P") {
+    //   // PV
+    //   this.scope = this.userData.cc;
+    // } else if (this.uType == "R") {
+    //   // RG
+    //   this.scope = this.userData.section_id;
+    // } else {
+    //   // Center
+    //   this.scope = "";
+    // }
 
-    this.genType();
-    this.genProvince();
-    this.genPcode();
-    this.getJob();
+    // this.genType();
+    // this.genProvince();
+    // this.genPcode();
+    // this.getJob();
   }
   ionViewDidLoad() {
     console.log("ionViewDidLoad MainmoiPage");
   }
-  genProvince() {
-    let params = {
-      uType: this.uType,
-      scope: this.scope
-    };
-    this.msg.postApi01("v1/genProvince", params).then(
-      (data: any) => {
-        if (data.status) {
-          this.provinces = data.data;
-        } else {
-          console.log(data.msg);
-        }
-      },
-      err => {
-        console.log(err);
-      }
-    );
-  }
+  // genProvince() {
+  //   let params = {
+  //     uType: this.uType,
+  //     scope: this.scope
+  //   };
+  //   this.msg.postApi01("v1/genProvince", params).then(
+  //     (data: any) => {
+  //       if (data.status) {
+  //         this.provinces = data.data;
+  //       } else {
+  //         console.log(data.msg);
+  //       }
+  //     },
+  //     err => {
+  //       console.log(err);
+  //     }
+  //   );
+  // }
   // genProvince() {
   //   console.log("uType=" + this.uType, "scope=" + this.scope);
   //   this.registerProvider.genProvince(this.uType, this.scope)
@@ -100,24 +100,24 @@ export class MainmoiPage {
   // }
 
 
-  genType() {
-    let params = {
-      uType: this.uType,
-      scope: this.scope,
-      pv: this.fProvince,
-      userData:this.userData
-    }
-    this.msg.postApi01('v1/genPtype',params)
-    .then((data: any) => {
-      if (data.status) {
-        this.custptypes=data.data
-      } else {
-        console.log(data.msg);
-      }
-    }, (err) => {
-      console.log(err);
-    });
-  }
+  // genType() {
+  //   let params = {
+  //     uType: this.uType,
+  //     scope: this.scope,
+  //     pv: this.fProvince,
+  //     userData:this.userData
+  //   }
+  //   this.msg.postApi01('v1/genPtype',params)
+  //   .then((data: any) => {
+  //     if (data.status) {
+  //       this.custptypes=data.data
+  //     } else {
+  //       console.log(data.msg);
+  //     }
+  //   }, (err) => {
+  //     console.log(err);
+  //   });
+  // }
   // genType() {
   //   this.registerProvider.genPtype(this.uType, this.scope, this.fProvince).then(
   //     (data: any) => {
@@ -133,27 +133,27 @@ export class MainmoiPage {
   //   );
   // }
 
-  genPcode() {
-    console.log('สร้างหน่วยงานของ' + this.scope + '..............');
-    let params = {
-      uType: this.uType,
-      scope: this.scope,
-      pv: this.fProvince,
-      custptype: this.fCustptype,
-      userData:this.userData
-    };
-    this.msg.postApi01('v1/genPcode',params)
-    .then((data: any) => {
-      console.log('pv=',this.scope,data);
-      if (data.status) {
-        this.custpcodes = data.data;
-      } else {
-        console.log(data.msg);
-      }
-    }, (err) => {
-      console.log(err);
-    });
-  }
+  // genPcode() {
+  //   console.log('สร้างหน่วยงานของ' + this.scope + '..............');
+  //   let params = {
+  //     uType: this.uType,
+  //     scope: this.scope,
+  //     pv: this.fProvince,
+  //     custptype: this.fCustptype,
+  //     userData:this.userData
+  //   };
+  //   this.msg.postApi01('v1/genPcode',params)
+  //   .then((data: any) => {
+  //     console.log('pv=',this.scope,data);
+  //     if (data.status) {
+  //       this.custpcodes = data.data;
+  //     } else {
+  //       console.log(data.msg);
+  //     }
+  //   }, (err) => {
+  //     console.log(err);
+  //   });
+  // }
   // genPcode() {
   //   console.log("สร้างหน่วยงานของ" + this.scope + "..............");
   //   this.registerProvider
@@ -172,28 +172,28 @@ export class MainmoiPage {
   //       }
   //     );
   // }
-  async getJob() {
-    let params = {
-      userData: this.userData,
-      cust_ptype: this.fCustptype,
-      cust_pcode: this.fCustpcode,
-      uType:this.uType,
-      scope: this.scope,
-      pv:this.fProvince,
-    };
-    this.msg.postApi01(`v1/getJob`,params)
-      .then((data:any) => {
-        if (data.status) {
+  // async getJob() {
+  //   let params = {
+  //     userData: this.userData,
+  //     cust_ptype: this.fCustptype,
+  //     cust_pcode: this.fCustpcode,
+  //     uType:this.uType,
+  //     scope: this.scope,
+  //     pv:this.fProvince,
+  //   };
+  //   this.msg.postApi01(`v1/getJob`,params)
+  //     .then((data:any) => {
+  //       if (data.status) {
 
-          this.svData = data.data;
-          console.log(this.svData);
-        }else {
-          alert(data.msg);
-        }
-      }, (err) => {
-        console.log(err);
-      });
-  }
+  //         this.svData = data.data;
+  //         console.log(this.svData);
+  //       }else {
+  //         alert(data.msg);
+  //       }
+  //     }, (err) => {
+  //       console.log(err);
+  //     });
+  // }
   // async getJob() {
   //   this.serviceProvider
   //     .getJob(
@@ -221,36 +221,36 @@ export class MainmoiPage {
   //       }
   //     );
   // }
-  changeProvince() {
-    this.fCustptype = "";
-    this.fCustpcode = "";
-    this.genType();
-    this.genPcode();
-    this.getJob();
-  }
-  changePtype() {
-    this.fCustpcode = "";
-    this.genPcode();
-    this.getJob();
-  }
-  changePcode() {
-    this.getJob();
-  }
+  // changeProvince() {
+  //   this.fCustptype = "";
+  //   this.fCustpcode = "";
+  //   this.genType();
+  //   this.genPcode();
+  //   this.getJob();
+  // }
+  // changePtype() {
+  //   this.fCustpcode = "";
+  //   this.genPcode();
+  //   this.getJob();
+  // }
+  // changePcode() {
+  //   this.getJob();
+  // }
   showProblem(type: any) {
     let problem = this.modalCtrl.create("ModalProblemPage", { type: type });
     problem.onDidDismiss(() => {
-      this.getJob();
+      //this.getJob();
     });
     problem.present();
   }
-  openFollow(svData: any) {
-    let follow = this.modalCtrl.create("FollowupProblemPage", {
-      svData: svData
-    });
-    follow.onDidDismiss(() => {
-      this.getJob();
-      console.log("msg=>", 1);
-    });
-    follow.present();
-  }
+  // openFollow(svData: any) {
+  //   let follow = this.modalCtrl.create("FollowupProblemPage", {
+  //     svData: svData
+  //   });
+  //   follow.onDidDismiss(() => {
+  //     this.getJob();
+  //     console.log("msg=>", 1);
+  //   });
+  //   follow.present();
+  // }
 }

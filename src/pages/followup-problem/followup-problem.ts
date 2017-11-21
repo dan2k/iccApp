@@ -36,6 +36,7 @@ export class FollowupProblemPage {
   public isMoi: any;
   public isOpen: any;
   public imgHide: any = false;
+  public kpid: any;
 
   constructor(
     public navCtrl: NavController,
@@ -50,16 +51,26 @@ export class FollowupProblemPage {
     //this.token = localStorage.getItem('token');
     this.xurl = url;
     this.userData = JSON.parse(localStorage.getItem('userData'));
+    this.svData = this.navParams.get('svData');
     console.log(this.userData);
     let jobid = this.userData.job_id;
+
     if (jobid == 2 || jobid == 3 || jobid == 4) {//เอาไว้ตรวจสอบว่าเป็น สน.ท login หรือเปล่า ถ้าใช่ก็ ปิดตรงส่งจ๊อบไปก่อน
       this.isMoi = true;
+      if (jobid == 2) {
+        this.kpid = 2;
+      }
+      if (jobid == 3) {
+        this.kpid = 3;
+      }
     } else {
       this.isMoi = false;
     }
-    //console.log('isMoi=>' + this.isMoi,this.userData);
+    console.log('isMoi=>' + this.isMoi);
+    console.log('kpid=>', this.kpid);
+    console.log('skpidx=>', this.svData.skp_idx);
+    console.log('svData.msv_status=>', this.svData.msv_status);
 
-    this.svData = this.navParams.get('svData');
     console.log('svDatax2=>', this.svData);
 
     let str = this.svData.msv_no.substr(0, 2);
@@ -132,16 +143,12 @@ export class FollowupProblemPage {
   showPhoto() {
     this.photoViewer.show(this.imageData);
   }
-
   showPhotox(img) {
     this.photoViewer.show(img);
   }
-
-
   close() {
     this.navCtrl.pop();
   }
-
   edit(sv: any) {
     let page: any;
     if (sv.msv_type == 1) {

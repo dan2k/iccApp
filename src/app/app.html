@@ -1,1 +1,26 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="content" *ngIf="isMenu">
+  <ion-header>
+    <ion-toolbar color="ptitle">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <button menuClose ion-item color="warning" (click)="selectpage()" *ngIf="userData.user_type==1">
+        เปลี่ยนสถานที่ปฏิบัติงาน
+        <ion-icon name="ios-repeat-outline" item-end></ion-icon>
+      </button>
+      <button menuClose ion-item color="warning" (click)="logout()">
+        ออกจากระบบ
+        <ion-icon name="ios-log-out" item-end></ion-icon>
+      </button>
+
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+<!-- <ion-nav [root]="rootPage"></ion-nav> -->

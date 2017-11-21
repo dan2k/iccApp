@@ -1,0 +1,44 @@
+<!--
+  Generated template for the FollowupCustomerSelfPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>followupCustomerSelf</ion-title>
+  </ion-navbar>
+
+</ion-header> -->
+
+
+<ion-content>
+
+  <ion-list>
+    <ion-item *ngFor="let i of items" (click)="openFollow(i)">
+      <ion-avatar item-start>
+          <img src="./assets/icon/workstation.png" *ngIf="i.msv_type==1">
+          <img src="./assets/icon/p.jpg" *ngIf="i.msv_type==2">
+          <img src="./assets/icon/other.jpg" *ngIf="i.msv_type==3">
+
+      </ion-avatar>
+      <ion-scroll scrollX="true" >
+        <div >
+          <ion-icon name="md-radio-button-on" style="color:red" *ngIf="i.msv_status==0"></ion-icon>
+          <ion-icon name="md-radio-button-on" style="color:green" *ngIf="i.msv_status==4"></ion-icon>
+          <ion-icon name="md-radio-button-on" style="color:gray" *ngIf="i.msv_status==6"></ion-icon>
+          <b>{{i?.msv_no}}</b> {{i?.msv_adate}}-{{i?.msv_atime}}
+          <b>ปัญหา:</b>{{i?.msv_detail}}
+          <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
+        </div>
+      </ion-scroll>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="dots" loadingText="กำลังโหลดข้อมูล........">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>
