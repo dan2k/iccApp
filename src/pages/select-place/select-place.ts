@@ -24,8 +24,9 @@ export class SelectPlacePage {
   close() {
     this.navCtrl.pop();
   }
-  confirm() {
-    this.view.dismiss(this.place);
+  confirm(d) {
+    //this.view.dismiss(this.place);
+    this.view.dismiss(d);
   }
   ionViewDidLoad() {
     console.log("ionViewDidLoad SelectPlacePage");

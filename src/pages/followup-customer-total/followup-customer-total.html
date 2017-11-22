@@ -11,8 +11,9 @@
   <ion-list>
     <ion-item *ngIf="isShow">
       <ion-label>จังหวัด:</ion-label>
-      <ion-select [(ngModel)]="fProvince" (ionChange)="changeProvince()">
-        <ion-option value='' selected>--ทั้งหมด--</ion-option>
+      <ion-select [(ngModel)]="fProvince" (ionChange)="changeProvince()" interface="popover">
+
+        <ion-option value='' >--ทั้งหมด--</ion-option>
         <ion-option *ngFor="let p of provinces" [value]="p.province_id">
           {{p.province_name}}
         </ion-option>
@@ -20,8 +21,9 @@
     </ion-item>
     <ion-item *ngIf="isShow">
       <ion-label>ประเภทหน่วยงาน:</ion-label>
-      <ion-select [(ngModel)]="fCustptype" (ionChange)="changePtype()">
-        <ion-option selected value=''>--ทั้งหมด--</ion-option>
+      <ion-select [(ngModel)]="fCustptype" (ionChange)="changePtype()" interface="popover">
+
+        <ion-option  value=''>--ทั้งหมด--</ion-option>
         <ion-option *ngFor="let c of custptypes" [value]="c.cust_ptype">
           {{c.cust_desc}}
         </ion-option>
@@ -29,8 +31,9 @@
     </ion-item>
     <ion-item *ngIf="isShow">
       <ion-label>หน่วยงาน:</ion-label>
-      <ion-select [(ngModel)]="fCustpcode" (ionChange)="changePcode()">
-        <ion-option selected value=''>--ทั้งหมด--</ion-option>
+      <ion-select [(ngModel)]="fCustpcode" (ionChange)="changePcode()" interface="popover">
+
+        <ion-option  value=''>--ทั้งหมด--</ion-option>
         <ion-option *ngFor="let c of custpcodes" [value]="c.cust_pcode">
           {{c.cust_pdesc}}
         </ion-option>
@@ -45,14 +48,33 @@
 
       </ion-avatar>
       <ion-scroll scrollX="true">
-        <div>
-          <ion-icon name="md-radio-button-on" style="color:red" *ngIf="i.msv_status==0"></ion-icon>
-          <ion-icon name="md-radio-button-on" style="color:green" *ngIf="i.msv_status==4"></ion-icon>
-          <ion-icon name="md-radio-button-on" style="color:gray" *ngIf="i.msv_status==6"></ion-icon>
-          <b>{{i?.msv_no}}</b> {{i?.msv_adate}}-{{i?.msv_atime}}
-          <b>ปัญหา:</b>{{i?.msv_detail}}
-          <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
-        </div>
+          <div style="color:red" *ngIf="i.msv_status==0">
+              <!-- <ion-icon name="md-radio-button-on" style="color:red" *ngIf="i.msv_status==0"></ion-icon>
+              <ion-icon name="md-radio-button-on" style="color:green" *ngIf="i.msv_status==4"></ion-icon>
+              <ion-icon name="md-radio-button-on" style="color:gray" *ngIf="i.msv_status==6"></ion-icon> -->
+
+              <!--<b>{{i?.msv_no}}</b>--> {{i?.msv_adate}}-{{i?.msv_atime}}
+              <b>ปัญหา:</b>{{i?.msv_detail}}
+              <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
+            </div>
+            <div style="color:green" *ngIf="i.msv_status==4">
+              <!-- <ion-icon name="md-radio-button-on" style="color:red" *ngIf="i.msv_status==0"></ion-icon>
+              <ion-icon name="md-radio-button-on" style="color:green" *ngIf="i.msv_status==4"></ion-icon>
+              <ion-icon name="md-radio-button-on" style="color:gray" *ngIf="i.msv_status==6"></ion-icon> -->
+
+              <!--<b>{{i?.msv_no}}</b>--> {{i?.msv_adate}}-{{i?.msv_atime}}
+              <b>ปัญหา:</b>{{i?.msv_detail}}
+              <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
+            </div>
+            <div style="color:gray" *ngIf="i.msv_status==6">
+              <!-- <ion-icon name="md-radio-button-on" style="color:red" *ngIf="i.msv_status==0"></ion-icon>
+              <ion-icon name="md-radio-button-on" style="color:green" *ngIf="i.msv_status==4"></ion-icon>
+              <ion-icon name="md-radio-button-on" style="color:gray" *ngIf="i.msv_status==6"></ion-icon> -->
+
+              <!--<b>{{i?.msv_no}}</b>--> {{i?.msv_adate}}-{{i?.msv_atime}}
+              <b>ปัญหา:</b>{{i?.msv_detail}}
+              <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
+            </div>
       </ion-scroll>
     </ion-item>
   </ion-list>

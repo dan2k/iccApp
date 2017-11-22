@@ -92,7 +92,7 @@
 </ion-content>
 <ion-footer style="background-color:#e8e8e8">
   <ion-buttons text-center>
-    <button ion-button  color="primary" full icon-left (click)="create()">
+    <button ion-button  color="primary" full icon-left (click)="create()" [disabled]="problems.length<1">
       <ion-icon name="add-circle"></ion-icon>สร้างรายการ service
     </button>
     <!-- <button ion-button clear color="primary">ส่งต่อ</button> -->

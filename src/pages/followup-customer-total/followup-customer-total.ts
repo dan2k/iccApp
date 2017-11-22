@@ -25,11 +25,11 @@ export class FollowupCustomerTotalPage {
   total: any;
   isShow: any = false;
 
-  provinces: any;
+  provinces: any=[];
   fProvince: any = "";
   svData: any;
-  custptypes: any;
-  custpcodes: any;
+  custptypes: any=[];
+  custpcodes: any=[];
   uType: any;
   scope: any;
   fCustptype: any = "";
@@ -42,9 +42,9 @@ export class FollowupCustomerTotalPage {
     public modalCtrl: ModalController
   ) {
     this.userData = JSON.parse(localStorage.getItem("userData"));
-    this.genProvince();
-    this.genType();
-    this.genPcode();
+    //this.genProvince();
+    //this.genType();
+    //this.genPcode();
   }
   genProvince() {
     let params = {};
@@ -52,6 +52,7 @@ export class FollowupCustomerTotalPage {
       (data: any) => {
         if (data.status) {
           this.provinces = data.data;
+          //this.fProvince = 'xx';
         } else {
           console.log(data.msg);
         }
@@ -123,6 +124,15 @@ export class FollowupCustomerTotalPage {
   }
   setShow() {
     this.isShow = true;
+    if (this.provinces.length<1) {
+      this.genProvince();
+      this.genType();
+      this.genPcode();
+
+    }
+    console.log('provinces==>',this.provinces)
+    //this.genType();
+    //this.genPcode();
   }
   setNotShow() {
     this.isShow = false;
@@ -206,9 +216,9 @@ export class FollowupCustomerTotalPage {
     follow.present();
   }
   ionViewDidEnter() {
-    this.genProvince();
-    this.genType();
-    this.genPcode();
+    // this.genProvince();
+    // this.genType();
+    // this.genPcode();
     this.getJob();
   }
   ionViewDidLoad() {

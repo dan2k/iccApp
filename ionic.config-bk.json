@@ -1,8 +1,0 @@
-{
-  "name": "iccApp",
-  "app_id": "a338abcc",
-  "type": "ionic-angular",
-  "integrations": {
-    "cordova": {}
-  }
-}

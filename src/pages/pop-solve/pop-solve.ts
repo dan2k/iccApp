@@ -40,4 +40,7 @@ export class PopSolvePage {
     let data = { solve: this.solve };
     this.viewCtrl.dismiss(data);
   }
+  clear() {
+    this.solve = '';
+  }
 }

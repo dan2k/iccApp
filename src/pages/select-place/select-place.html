@@ -1,22 +1,27 @@
 <ion-header>
 
-    <ion-navbar color="ptitle">
-      <ion-title>เลือกหน่วยงาน</ion-title>
-      <ion-buttons start small>
-        <button ion-button icon-only color="ligth" small (click)="close()">
-                    <ion-icon name="close-circle"></ion-icon>
-                  </button>
-      </ion-buttons>
-    </ion-navbar>
+  <ion-navbar color="ptitle">
+    <ion-title>เลือกหน่วยงาน</ion-title>
+    <ion-buttons start small>
+      <button ion-button icon-only color="ligth" small (click)="close()">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-list radio-group [(ngModel)]="place">
-      <ion-item *ngFor="let d of data">
-        <ion-label>{{d.cust_pdesc}}</ion-label>
-        <ion-radio [value]="d"></ion-radio>
-      </ion-item>
-    </ion-list>
+  <!-- <ion-list radio-group [(ngModel)]="place">
+    <ion-item *ngFor="let d of data">
+      <ion-label>{{d.cust_pdesc}}</ion-label>
+      <ion-radio [value]="d"></ion-radio>
+    </ion-item>
+  </ion-list> -->
+  <ion-list>
+    <button ion-item *ngFor="let d of data" (click)="confirm(d)">
+      <ion-icon name="md-radio-button-on" item-start></ion-icon>{{d.cust_pdesc}}
+    </button>
+  </ion-list>
 </ion-content>
-<ion-footer>
+<!-- <ion-footer>
   <button ion-button full color="primary" [disabled]="!place" (click)="confirm()">ยืนยัน</button>
-</ion-footer>
+</ion-footer> -->

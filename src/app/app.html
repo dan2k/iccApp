@@ -7,7 +7,7 @@
 
   <ion-content>
     <ion-list>
-      <button menuClose ion-item color="warning" (click)="selectpage()" *ngIf="userData.user_type==1">
+      <button menuClose ion-item color="warning" (click)="selectpage()" *ngIf="userData.user_type==1 && userDataArr.length>1">
         เปลี่ยนสถานที่ปฏิบัติงาน
         <ion-icon name="ios-repeat-outline" item-end></ion-icon>
       </button>

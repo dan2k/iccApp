@@ -15,14 +15,14 @@ import { MessageProvider } from '../../providers/message/message';
   templateUrl: 'follow-cdg-self.html',
 })
 export class FollowCdgSelfPage {
-  custptypes: any;
+  custptypes: any=[];
   token: any;
   userData: any;
   svData: any;
-  custpcodes: any;
+  custpcodes: any=[];
   uType: any;
   scope: any;
-  provinces: any;
+  provinces: any=[];
   userType: any;
   fProvince: any='';
   fCustptype: any='';
@@ -50,15 +50,21 @@ export class FollowCdgSelfPage {
       this.scope = '';
     }
 
-    this.genType();
-    this.genProvince();
+    //this.genType();
+    //this.genProvince();
     //กำหนดค่า ของ listbox ให้ตรงกับจังหวัดของตัวเอง
     this.fProvince = this.userData.place_code.substr(0, 2);
-    this.genPcode();
+    //this.genPcode();
     //this.getJob();
   }
   setShow() {
     this.isShow = true;
+    console.log('provinces==>', this.provinces);
+    if (this.provinces.length < 1) {
+      this.genProvince();
+      this.genType();
+      this.genPcode();
+    }
   }
   setNotShow() {
     this.isShow = false;

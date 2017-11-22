@@ -13,120 +13,133 @@
   <ion-card>
 
     <!-- <ion-item>
-      <ion-thumbnail item-start  >
-        <img [src]="imageData" (click)="showPhoto()" (error)="errorHandler($event)" default="./assets/img/placeholder.png">
-      </ion-thumbnail>
-      <h2>{{svData.msv_no}}</h2>
-      <h2>โดย: {{svData.thiname}}</h2>
-      <p>วันที่: {{svData.msv_adate}} เวลา: {{svData.msv_atime}}</p>
-    </ion-item>
-    <ion-card-content class="card-content">
-      <p>{{svData.msv_detail}}</p>
-    </ion-card-content>
-    <ion-row>
-      <ion-col class="byDate" text-left>
-        <button *ngIf="svData.msv_status!=1" ion-button clear small style="font-size:12px;" (click)="openComment()">
-                    <ion-icon name="chatboxes"></ion-icon>
-                    &nbsp;แสดงความคิดเห็น
-                </button>
-                <h2>สถานะ: {{svData.msv_status_desc}} <span *ngIf="svData.msv_status!=0" >{{svData.kp_desc}}</span><span style="color:red;" *ngIf="(this.svData.msv_status==6 && this.svData.kp_idx!=this.svData.skp_idx)">(ตีกลับ)</span></h2>
+          <ion-thumbnail item-start  >
+            <img [src]="imageData" (click)="showPhoto()" (error)="errorHandler($event)" default="./assets/img/placeholder.png">
+          </ion-thumbnail>
+          <h2>{{svData.msv_no}}</h2>
+          <h2>โดย: {{svData.thiname}}</h2>
+          <p>วันที่: {{svData.msv_adate}} เวลา: {{svData.msv_atime}}</p>
+        </ion-item>
+        <ion-card-content class="card-content">
+          <p>{{svData.msv_detail}}</p>
+        </ion-card-content>
+        <ion-row>
+          <ion-col class="byDate" text-left>
+            <button *ngIf="svData.msv_status!=1" ion-button clear small style="font-size:12px;" (click)="openComment()">
+                        <ion-icon name="chatboxes"></ion-icon>
+                        &nbsp;แสดงความคิดเห็น
+                    </button>
+                    <h2>สถานะ: {{svData.msv_status_desc}} <span *ngIf="svData.msv_status!=0" >{{svData.kp_desc}}</span><span style="color:red;" *ngIf="(this.svData.msv_status==6 && this.svData.kp_idx!=this.svData.skp_idx)">(ตีกลับ)</span></h2>
 
-      </ion-col>
-      <ion-col text-right *ngIf="isRG">
-        <button ion-button icon-only clear small color="warning" (click)="openFollow2(svData.msv_no2)">
-                    <ion-icon name="share-alt"></ion-icon>
-                </button>
-      </ion-col>
-    </ion-row> -->
+          </ion-col>
+          <ion-col text-right *ngIf="isRG">
+            <button ion-button icon-only clear small color="warning" (click)="openFollow2(svData.msv_no2)">
+                        <ion-icon name="share-alt"></ion-icon>
+                    </button>
+          </ion-col>
+        </ion-row> -->
     <!-- <img style="width:100%;height:30%;" [src]="imageData" *ngIf="!imgHide"  (click)="showPhoto()" (error)="errorHandler($event)" default="./assets/img/placeholder.png" > -->
-    <ion-item color="ptitle2">
-      <!-- <ion-avatar item-start>
-        <img *ngIf="svData.msv_type==1" src="./assets/icon/workstation.png">
-        <img *ngIf="svData.msv_type==2" src="./assets/icon/p.jpg">
-        <img *ngIf="svData.msv_type==3" src="./assets/icon/other.jpg">
-      </ion-avatar> -->
-      <ion-thumbnail item-center *ngIf="!imgHide">
+    <ion-item style="background-color:rgb(222, 248, 242)">
+      <ion-avatar item-start *ngIf="!imgHide">
         <img [src]="imageData" (click)="showPhoto()" (error)="errorHandler($event)" default="./assets/img/placeholder.png">
-      </ion-thumbnail>
+      </ion-avatar>
       <h2>{{svData.msv_no}}</h2>
-      <h2>{{svData.cust_ptype_desc}} {{svData.cust_pdesc}}</h2>
-      <h2>{{svData.province_name}}</h2>
+      <p>{{svData.cust_ptype_desc}} {{svData.cust_pdesc}}</p>
+      <p>{{svData.province_name}}</p>
+    </ion-item>
+    <ion-card-content style="background-color:rgb(222, 248, 242);">
       <div *ngIf="isRG && svData.msv_type==1">
-        <h2>
-          ระบบงาน: {{svData.work_type_desc}}
-        </h2>
-        <h2>
-          workstation: {{svData.equip_set_desc}}
-        </h2>
-        <h2>
-          PN: {{svData.pno}} SN: {{svData.sv_sn}}
-        </h2>
+        <p style="font-size:14px;">
+          ระบบงาน: {{svData.work_type_desc}} workstation: {{svData.equip_set_desc}} PN: {{svData.pno}} SN: {{svData.sv_sn}}
+        </p>
       </div>
       <div *ngIf="isRG && svData.msv_type==2">
-        <h2 text-wrap>ระบบงาน: {{svData.prob_gdesc}}</h2>
-        <h2 text-wrap>ระบบงาน: {{svData.problem_sub_desc}}</h2>
+        <p style="font-size:14px;">
+          <span text-wrap>ระบบงาน: {{svData.prob_gdesc}}</span>
+          <span text-wrap>ระบบงาน: {{svData.problem_sub_desc}}</span>
+        </p>
+        <!-- <span text-wrap>ระบบงาน: {{svData.prob_gdesc}}</span>
+                <span text-wrap>ระบบงาน: {{svData.problem_sub_desc}}</span> -->
       </div>
-    </ion-item>
+    </ion-card-content>
     <ion-card-content>
       <p text-wrap>ปัญหา: {{svData.msv_detail}}</p>
     </ion-card-content>
-    <ion-row class="control">
-      <ion-col>
-        <button ion-button item-right clear icon-only small (click)="openComment()" style="font-size:10px;">
-          <ion-icon name="text"></ion-icon>
-          <div>แสดงความคิดเห็น</div>
-        </button>
+    <!-- <ion-row class="control">
+          <ion-col>
+            <button ion-button item-right clear icon-only small (click)="openComment()" style="font-size:10px;">
+              <ion-icon name="text"></ion-icon>
+              <div>แสดงความคิดเห็น</div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button item-right clear icon-only small (click)="openFollow2(svData.msv_no2)" *ngIf="isRG">
+              <ion-icon name="share-alt"></ion-icon>
+              <div>ต้นทาง</div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button item-right clear icon-only small (click)="edit(svData)" *ngIf="isRG && userData.user_type==2">
+              <ion-icon name="create"></ion-icon>
+              <div>แก้ไข</div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button item-right clear icon-only small (click)="trash(svData)" *ngIf="isRG && userData.user_type==2">
+              <ion-icon name="trash"></ion-icon>
+              <div>ลบ</div>
+            </button>
+          </ion-col>
+        </ion-row> -->
+    <hr>
+    <ion-row>
+      <ion-col text-nowrap>
+        <span style="font-size:12px;">โดย: {{svData.thiname}}</span>
       </ion-col>
-      <ion-col>
-        <button ion-button item-right clear icon-only small (click)="openFollow2(svData.msv_no2)" *ngIf="isRG">
-          <ion-icon name="share-alt"></ion-icon>
-          <div>ต้นทาง</div>
-        </button>
+      <ion-col text-nowrap>
+        <span style="font-size:12px;">วัน: {{svData.msv_adate}} เวลา: {{svData.msv_atime}}</span>
       </ion-col>
-      <ion-col>
-        <button ion-button item-right clear icon-only small (click)="edit(svData)" *ngIf="isRG && userData.user_type==2">
-          <ion-icon name="create"></ion-icon>
-          <div>แก้ไข</div>
-        </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button item-right clear icon-only small (click)="trash(svData)" *ngIf="isRG && userData.user_type==2">
-          <ion-icon name="trash"></ion-icon>
-          <div>ลบ</div>
-        </button>
+      <ion-col text-wrap>
+        <span style="font-size:12px;">สถานะ: {{svData.msv_status_desc}}
+          <span *ngIf="svData.msv_status!=0" style="font-size:12px;color:blue;">{{svData.kp_desc}}</span>
+          <span style="font-size:12px;color:red;" *ngIf="(svData.msv_status==6 && svData.kp_idx!=svData.skp_idx)">(ตีกลับ)</span>
+        </span>
       </ion-col>
     </ion-row>
-    <ion-item style="background-color:rgba(185, 202, 218, 0.66);" padding>
-
-      <h3>โดย: {{svData.thiname}}</h3>
-      <h3>วัน: {{svData.msv_adate}} เวลา: {{svData.msv_atime}}</h3>
-      <h3>สถานะ: {{svData.msv_status_desc}}
-        <ion-note *ngIf="svData.msv_status!=0" style="color:blue;">{{svData.kp_desc}}</ion-note>
-        <ion-note style="color:red;" *ngIf="(svData.msv_status==6 && svData.kp_idx!=svData.skp_idx)">(ตีกลับ)</ion-note>
-      </h3>
-    </ion-item>
+    <!-- <ion-item style="background-color:rgba(185, 202, 218, 0.66);" padding> -->
+    <!-- <ion-item >
+          <hr>
+          <span style="font-size:12px;">โดย: {{svData.thiname}}</span>
+          <span style="font-size:12px;">วัน: {{svData.msv_adate}} เวลา: {{svData.msv_atime}}</span>
+          <span style="font-size:12px;">สถานะ: {{svData.msv_status_desc}}
+            <span  *ngIf="svData.msv_status!=0" style="font-size:12px;color:blue;">{{svData.kp_desc}}</span>
+            <span style="font-size:12px;color:red;" *ngIf="(svData.msv_status==6 && svData.kp_idx!=svData.skp_idx)">(ตีกลับ)</span>
+          </span>
+        </ion-item> -->
   </ion-card>
   <ion-scroll scrollY="true" style="height: 60%;background-color:#f9fafc;padding:0;">
     <div>
       <ion-card *ngFor="let comment of comments">
-        <ion-item>
-          <ion-avatar item-start>
-            <img src="./assets/img/favicon.ico" alt="" *ngIf="comment.comment_utype==1">
-            <img src="./assets/img/logo.gif" alt="" *ngIf="comment.comment_utype==2">
-          </ion-avatar>
-          <h2>โดย: {{comment.thiname}}</h2>
-          <p>วันที่: {{comment.comment_adate}} เวลา: {{comment.comment_atime}}</p>
-        </ion-item>
         <ion-card-content class="card-content">
           <p>{{comment.comment_detail}}</p>
           <!-- <img [src]="xurl+'/'+comment.comment_photo" (click)="showPhoto()"> -->
+          <ion-item *ngIf="comment.comment_photo">
+            <img [src]="xurl+'/'+comment.comment_photo" (click)="showPhotox(xurl+'/'+comment.comment_photo)" style="width:50%;height:50%;">
+          </ion-item>
           <ion-item>
-            <img [src]="xurl+'/'+comment.comment_photo" (click)="showPhotox(xurl+'/'+comment.comment_photo)" style="width:50%;height:50%;"
-              *ngIf="comment.comment_photo">
+            <hr>
+            <ion-avatar item-start>
+              <!-- <img src="./assets/img/favicon.ico" alt="" *ngIf="comment.comment_utype==1">
+                    <img src="./assets/img/logo.gif" alt="" *ngIf="comment.comment_utype==2"> -->
+              <ion-icon name="person"></ion-icon>
+            </ion-avatar>
+            <p style="font-size:14px;" text-wrap>
+              โดย: {{comment.thiname}} วันที่: {{comment.comment_adate}} เวลา: {{comment.comment_atime}}
+            </p>
           </ion-item>
         </ion-card-content>
       </ion-card>
-      <ion-card  *ngIf="((isOpen && svData.msv_status==6))" color="warning">
+      <ion-card *ngIf="((isOpen && svData.msv_status==6))" color="warning">
         <ion-card-content>
           <h3>
             <u>สรุปการแก้ไข</u>
@@ -145,14 +158,94 @@
   </ion-scroll>
 
 </ion-content>
-<ion-footer *ngIf="((isMoi && svData.msv_status==0 && kpid!=svData.skp_idx)||(isMoi && ((svData.msv_status==6)&&(kpid!=svData.skp_idx)&&(kpid!=svData.rkp_idx) )))">
+<ion-footer *ngIf="(preno=='M' && ((isMoi && svData.msv_status==0 && kpid!=svData.skp_idx)||(isMoi && ((svData.msv_status==6)&&(kpid!=svData.skp_idx)&&(kpid!=svData.rkp_idx) ))))">
+  <ion-row class="control">
+    <ion-col>
+      <button ion-button item-right clear icon-only small (click)="openComment()" style="font-size:10px;">
+        <ion-icon name="text"></ion-icon>
+        <div>แสดงความคิดเห็น</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button item-right clear icon-only small (click)="openFollow2(svData.msv_no2)" *ngIf="isRG">
+        <ion-icon name="share-alt"></ion-icon>
+        <div>ต้นทาง</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button item-right clear icon-only small (click)="edit(svData)" *ngIf="isRG && userData.user_type==2">
+        <ion-icon name="create"></ion-icon>
+        <div>แก้ไข</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button item-right clear icon-only small (click)="trash(svData)" *ngIf="isRG && userData.user_type==2">
+        <ion-icon name="trash"></ion-icon>
+        <div>ลบ</div>
+      </button>
+    </ion-col>
+  </ion-row>
   <ion-buttons text-center>
     <button ion-button full color="danger" (click)="openPop($event)" item-end icon-left>
       ปิด</button>
   </ion-buttons>
 
 </ion-footer>
+<ion-footer *ngIf="((isMoi&&preno=='R'))">
+  <ion-row class="control">
+    <ion-col>
+      <button ion-button item-right clear icon-only small (click)="openComment()" style="font-size:10px;">
+        <ion-icon name="text"></ion-icon>
+        <div>แสดงความคิดเห็น</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button item-right clear icon-only small (click)="openFollow2(svData.msv_no2)" *ngIf="isRG">
+        <ion-icon name="share-alt"></ion-icon>
+        <div>ต้นทาง</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button item-right clear icon-only small (click)="edit(svData)" *ngIf="isRG && userData.user_type==2">
+        <ion-icon name="create"></ion-icon>
+        <div>แก้ไข</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button item-right clear icon-only small (click)="trash(svData)" *ngIf="isRG && userData.user_type==2">
+        <ion-icon name="trash"></ion-icon>
+        <div>ลบ</div>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
 <ion-footer *ngIf="userData.user_type==2 ">
+  <ion-row class="control">
+    <ion-col>
+      <button ion-button item-right clear icon-only small (click)="openComment()" style="font-size:10px;">
+        <ion-icon name="text"></ion-icon>
+        <div>แสดงความคิดเห็น</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button item-right clear icon-only small (click)="openFollow2(svData.msv_no2)" *ngIf="isRG">
+        <ion-icon name="share-alt"></ion-icon>
+        <div>ต้นทาง</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button item-right clear icon-only small (click)="edit(svData)" *ngIf="isRG && userData.user_type==2">
+        <ion-icon name="create"></ion-icon>
+        <div>แก้ไข</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button item-right clear icon-only small (click)="trash(svData)" *ngIf="isRG && userData.user_type==2">
+        <ion-icon name="trash"></ion-icon>
+        <div>ลบ</div>
+      </button>
+    </ion-col>
+  </ion-row>
   <ion-buttons text-center>
     <button ion-button small full icon-left color="primary" (click)="openJob(svData)" *ngIf="(svData.msv_status==0||svData.msv_status==6)&&(!this.isRG)">
       <ion-icon name="arrow-dropdown"></ion-icon>รับงาน</button>
@@ -160,9 +253,37 @@
       <ion-icon name="close-circel"></ion-icon>ปิดงาน</button>
   </ion-buttons>
 </ion-footer>
+<ion-footer *ngIf="userData.user_type==1 && svData.skp_id==kpid">
+  <ion-row class="control">
+    <ion-col>
+      <button ion-button item-right clear icon-only small (click)="openComment()" style="font-size:10px;">
+        <ion-icon name="text"></ion-icon>
+        <div>แสดงความคิดเห็น</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button item-right clear icon-only small (click)="openFollow2(svData.msv_no2)" *ngIf="isRG">
+        <ion-icon name="share-alt"></ion-icon>
+        <div>ต้นทาง</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button item-right clear icon-only small (click)="edit(svData)" *ngIf="isRG && userData.user_type==2">
+        <ion-icon name="create"></ion-icon>
+        <div>แก้ไข</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button item-right clear icon-only small (click)="trash(svData)" *ngIf="isRG && userData.user_type==2">
+        <ion-icon name="trash"></ion-icon>
+        <div>ลบ</div>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
 <!-- <ion-footer *ngIf="(isOpen && (svData.msv_status==6))">
-  <ion-buttons text-center>
-    <button ion-button color="success" blocked small (click)="openSmile($event)">ได้รับการแก้ไขแล้ว</button>
-    <button ion-button color="warning" blocked small (click)="returnJob()">ยังไม่ได้การแก้ไข</button>
-  </ion-buttons>
-</ion-footer> -->
+      <ion-buttons text-center>
+        <button ion-button color="success" blocked small (click)="openSmile($event)">ได้รับการแก้ไขแล้ว</button>
+        <button ion-button color="warning" blocked small (click)="returnJob()">ยังไม่ได้การแก้ไข</button>
+      </ion-buttons>
+    </ion-footer> -->

@@ -5,9 +5,12 @@ import { Platform, ModalController, App } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { HomePage } from "../pages/home/home";
+import { AppVersion } from '@ionic-native/app-version';
+import { AppUpdate } from '@ionic-native/app-update';
+import { url } from '../config';
 @Component({
   templateUrl: "app.html",
-  providers: [Network, MessageProvider]
+  providers: [Network, MessageProvider,AppVersion,AppUpdate]
 })
 export class MyApp {
   rootPage: any;
@@ -21,13 +24,27 @@ export class MyApp {
     public network: Network,
     public modalCtrl: ModalController,
     public app: App,
-    public msg: MessageProvider
+    public msg: MessageProvider,
+    private appVersion: AppVersion,
+    private appUpdate:AppUpdate,
   ) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+      const updateUrl = `${url}/update/update.xml`;
+      this.appUpdate.checkAppUpdate(updateUrl)
+        .then((s) => {
+          console.log(s);
+        })
+        .catch(e => {
+        console.log(e);
+      });
+
+      console.log('appname=', this.appVersion.getAppName());
+      console.log('appversioncode=', this.appVersion.getVersionCode());
+      console.log('appversionnumber=', this.appVersion.getVersionNumber());
 
       if (this.network.type == "none") {
         // if disconnect
@@ -51,11 +68,13 @@ export class MyApp {
   logout() {
     this.msg.confirm("คุณต้องการออกจากระบบหรือไม่", data => {
       localStorage.removeItem("userData");
+      localStorage.removeItem("userDataArr");
       let nav = this.app.getRootNav();
       nav.setRoot("LoginTypePage");
     });
   }
   selectpage() {
+    console.log('userDataArr==>',this.userDataArr)
     let modal = this.modalCtrl.create("SelectPlacePage", {
       data: this.userDataArr
     });

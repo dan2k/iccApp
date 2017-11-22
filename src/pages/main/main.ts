@@ -21,7 +21,7 @@ export class MainPage {
   public userData: any;
   public svData: any;
   public token: string;
-  public colorHeader = 'warning';
+  public colorHeader = '#fcf17e';
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,

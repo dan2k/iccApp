@@ -7,7 +7,9 @@
   </ion-row>
   <ion-item>
     <ion-label stacked style="font-size:16px;">การแก้ไข</ion-label>
-    <ion-textarea rows=5 cols="30" [(ngModel)]="solve" style="font-size:12px;"></ion-textarea>
+    <ion-textarea rows=10 cols="30" [(ngModel)]="solve" style="font-size:12px;"></ion-textarea>
   </ion-item>
   <button ion-button="" blocked small color="primary" (click)="save()">บันทึก</button>
+  <button ion-button="" blocked small color="primary" (click)="clear()">ยกเลิก</button>
+  <button ion-button="" blocked small color="primary" (click)="close()">ปิด</button>
 </ion-content>

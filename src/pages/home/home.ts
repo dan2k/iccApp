@@ -1,9 +1,11 @@
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
+import { AppVersion } from '@ionic-native/app-version';
 
 @Component({
   selector: "page-home",
-  templateUrl: "home.html"
+  templateUrl: "home.html",
+  providers:[AppVersion]
 })
 export class HomePage {
   public tab1: any;
@@ -14,7 +16,13 @@ export class HomePage {
   public rootPage: any;
   public userType: any;
   public colorHeader: any;
-  constructor(public navCtrl: NavController) {
+  public version: any;
+  constructor(public navCtrl: NavController, public appVersion: AppVersion) {
+    this.appVersion.getVersionNumber().then((v) => {
+       this.version = v;
+    }).catch(e => {
+      console.log(e);
+    });
 
     this.userData = JSON.parse(localStorage.getItem("userData"));
     this.userType = this.userData.user_type;
