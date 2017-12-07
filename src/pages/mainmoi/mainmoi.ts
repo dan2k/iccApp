@@ -6,8 +6,9 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  ModalController
+  ModalController,
 } from "ionic-angular";
+
 
 
 @IonicPage()
@@ -28,6 +29,7 @@ export class MainmoiPage {
   fProvince: any = "";
   fCustptype: any = "";
   fCustpcode: any = "";
+  colorHeader = '#fcf6b0';
 
   constructor(
     public navCtrl: NavController,

@@ -30,12 +30,19 @@
     </ion-list>
 </ion-content>
 <ion-footer>
-  <button ion-button  small color="success" (click)="first()" icon-only outline>
-    <ion-icon name="arrow-dropleft"></ion-icon>
-  </button>
-  <button ion-button color="success" class="small"  (click)="register()" small outline icon-start *ngIf="loginType==1">
-      <ion-icon name="person" ></ion-icon>ลงทะเบียน
-    </button>
+  <ion-row>
+    <ion-col>
+      <button ion-button  small color="success" (click)="first()" icon-only outline>
+        <ion-icon name="arrow-dropleft"></ion-icon>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button color="success" class="small"  (click)="register()" small outline icon-start *ngIf="loginType==1">
+          <ion-icon name="person" ></ion-icon>ลงทะเบียน
+        </button>
+
+    </ion-col>
+  </ion-row>
 </ion-footer>
 
 

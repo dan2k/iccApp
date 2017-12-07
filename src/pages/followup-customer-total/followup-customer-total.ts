@@ -34,6 +34,7 @@ export class FollowupCustomerTotalPage {
   scope: any;
   fCustptype: any = "";
   fCustpcode: any = "";
+  isData: any = false;
 
   constructor(
     public navCtrl: NavController,
@@ -159,6 +160,9 @@ export class FollowupCustomerTotalPage {
             this.items.push(datax[j]);
             j++;
           }
+          if (this.items.length < 1) {
+            this.isData = false;
+          }
           console.log("x1", this.items);
         } else {
           alert(data.msg);
@@ -209,7 +213,7 @@ export class FollowupCustomerTotalPage {
     console.log("sv====>", sv);
     let follow = this.modalCtrl.create("FollowupProblemPage", { svData: sv });
     follow.onDidDismiss(() => {
-      this.items = [];
+      //this.items = [];
       this.getJob();
       //console.log("msg=>", 1);
     });

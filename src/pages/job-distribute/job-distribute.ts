@@ -316,8 +316,9 @@ export class JobDistributePage {
     };
     this.msg.postApi01("v1/createSv", params).then(
       (data: any) => {
+        console.log('ssssssssssssssssssss=>',data);
         if (data.status) {
-          console.log(data.data);
+          //console.log(data.data);
           this.close();
         } else {
           console.log(data.msg);

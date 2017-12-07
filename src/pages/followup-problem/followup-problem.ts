@@ -230,6 +230,13 @@ export class FollowupProblemPage {
     });
     model.present();
   }
+  openBranch(msvno) {
+    let modal = this.modalController.create("ProblemBranchPage", { msvno: msvno });
+    modal.onDidDismiss(() => {
+
+    });
+    modal.present();
+  }
   returnJob() {
     //ส่งคืนกลับไปกรณีที่ยังไม่ได้รับการแก้ไขจริง ๆ
     let params = {

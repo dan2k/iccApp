@@ -8,7 +8,7 @@ import {
 import { MessageProvider } from "../../providers/message/message";
 
 /**
- * Generated class for the FollowupCustomerSelfPage page.
+ * Generated class for the FollowupCustomerMapListPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
@@ -16,12 +16,13 @@ import { MessageProvider } from "../../providers/message/message";
 
 @IonicPage()
 @Component({
-  selector: "page-followup-customer-self",
-  templateUrl: "followup-customer-self.html"
+  selector: "page-followup-customer-map-list",
+  templateUrl: "followup-customer-map-list.html"
 })
-export class FollowupCustomerSelfPage {
-  items = [];
+export class FollowupCustomerMapListPage {
   userData: any;
+  data: any;
+  items = [];
   total: any;
   isData: any = false;
   constructor(
@@ -31,16 +32,20 @@ export class FollowupCustomerSelfPage {
     public modalCtrl: ModalController
   ) {
     this.userData = JSON.parse(localStorage.getItem("userData"));
+    this.data = this.navParams.get("data");
   }
   getJob() {
-    this.items = [];
+    while (this.items.length > 0) {
+      this.items.pop();
+    }
     let lastRow = 0;
     console.log("length------------>", lastRow);
     let params = {
       userData: this.userData,
-      lastRow: 0
+      lastRow: 0,
+      rcode: this.data.rcode
     };
-    this.msg.postApi01(`v1/getJobCustomerSelf`, params).then(
+    this.msg.postApi01(`v1/getJobCustomerMapList`, params).then(
       (data: any) => {
         if (data.status) {
           let datax = data.data;
@@ -72,9 +77,10 @@ export class FollowupCustomerSelfPage {
     }
     let params = {
       userData: this.userData,
-      lastRow: lastRow
+      lastRow: lastRow,
+      rcode: this.data.rcode
     };
-    this.msg.postApi01(`v1/getJobCustomerSelf`, params).then(
+    this.msg.postApi01(`v1/getJobCustomerMapList`, params).then(
       (data: any) => {
         if (data.status) {
           let datax = data.data;
@@ -101,25 +107,17 @@ export class FollowupCustomerSelfPage {
     console.log("sv====>", sv);
     let follow = this.modalCtrl.create("FollowupProblemPage", { svData: sv });
     follow.onDidDismiss(() => {
-      //this.items = [];
-      this.getJob();
+      // this.items = [];
+      //this.getJob();
       //console.log("msg=>", 1);
     });
     follow.present();
   }
   ionViewDidEnter() {
-    console.log('ViewDidEnter FollowupCustomerSelfPage');
-    //this.items = [];
+    // this.items = [];
     this.getJob();
   }
-  // ionViewCanEnter(){
-  //   console.log('ViewCanEnter FollowupCustomerSelfPage');
-  // }
-  // ionViewWillEnter(){
-  //   console.log('ViewWillEnter FollowupCustomerSelfPage');
-  // }
-
-  // ionViewDidLoad() {
-  //   console.log("ionViewDidLoad FollowupCustomerSelfPage");
-  // }
+  ionViewDidLoad() {
+    console.log("ionViewDidLoad FollowupCustomerMapListPage");
+  }
 }

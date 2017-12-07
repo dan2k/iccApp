@@ -40,14 +40,15 @@ export class HomePage {
       console.log("jobid=>" + jobid);
       if (jobid == 2 || jobid == 3 || jobid == 4) {
         // สำหรับข้าราชการตั้งแต่ ศจ.เป็นต้นไป
-        this.tab1 = "MainmoiPage";
-        this.tab2 = "FollowupCustomerSelfPage"
-        this.tab3 = "FollowupCustomerTotalPage"
+        this.tab2 = "MainmoiPage";
+        //this.tab1 = "FollowupCustomerSelfPage"
+        this.tab1 = "FollowupCustomerMapPage";
+        this.tab3 = "FollowupCustomerTotalPage";
 
       } else {
         // สำหรับข้าราชการ สน.ท ่job_id=1
-        this.tab1 = "MainPage";
-        this.tab2 = "FollowupCustomerSelfPage"
+        this.tab1 = "FollowupCustomerSelfPage"
+        this.tab2 = "MainPage";
 
       }
     } else {

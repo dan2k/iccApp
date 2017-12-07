@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import {HttpModule} from  '@angular/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+//import { CacheModule } from "ionic-cache";
 //import { ServiceProvider } from '../providers/service/service';
 //import { CommentProvider } from '../providers/comment/comment';
 import { MessageProvider } from '../providers/message/message';
@@ -25,8 +26,9 @@ import { MessageProvider } from '../providers/message/message';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp,{ tabsPlacement: 'top' }),
+    IonicModule.forRoot(MyApp, { tabsPlacement: 'top' }),
     HttpModule,
+    //CacheModule.forRoot(),
     //DirectivesModule,
   ],
 

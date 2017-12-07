@@ -33,11 +33,11 @@ import { MessageProvider } from "./../../providers/message/message";
   ]
 })
 export class ModalProblemPage {
-  private ptype: any;
-  private detail: string = "";
-  private token: string;
-  private userData: any;
-  private imageData: any;
+  public ptype: any;
+  public detail: string = "";
+  public token: string;
+  public userData: any;
+  public imageData: any;
 
   constructor(
     public navCtrl: NavController,

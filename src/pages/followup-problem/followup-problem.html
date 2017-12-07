@@ -61,6 +61,10 @@
         <!-- <span text-wrap>ระบบงาน: {{svData.prob_gdesc}}</span>
                 <span text-wrap>ระบบงาน: {{svData.problem_sub_desc}}</span> -->
       </div>
+      <button ion-button item-right clear icon-only small (click)="openBranch(svData.msv_no)" *ngIf="svData.msv_status==9">
+          <ion-icon name="ios-git-branch"></ion-icon>
+          <div style="font-size:12px;">ปัญหาที่เกี่ยวข้อง</div>
+        </button>
     </ion-card-content>
     <ion-card-content>
       <p text-wrap>ปัญหา: {{svData.msv_detail}}</p>
@@ -102,7 +106,7 @@
       <ion-col text-wrap>
         <span style="font-size:12px;">สถานะ: {{svData.msv_status_desc}}
           <span *ngIf="svData.msv_status!=0" style="font-size:12px;color:blue;">{{svData.kp_desc}}</span>
-          <span style="font-size:12px;color:red;" *ngIf="(svData.msv_status==6 && svData.kp_idx!=svData.skp_idx)">(ตีกลับ)</span>
+          <!-- <span style="font-size:12px;color:red;" *ngIf="(svData.msv_status==6 && svData.kp_idx!=svData.skp_idx)">(ตีกลับ)</span> -->
         </span>
       </ion-col>
     </ion-row>
@@ -158,7 +162,7 @@
   </ion-scroll>
 
 </ion-content>
-<ion-footer *ngIf="(preno=='M' && ((isMoi && svData.msv_status==0 && kpid!=svData.skp_idx)||(isMoi && ((svData.msv_status==6)&&(kpid!=svData.skp_idx)&&(kpid!=svData.rkp_idx) ))))">
+<ion-footer *ngIf="(preno=='M' && ((isMoi && svData.msv_status==0 && kpid!=svData.skp_idx)||(isMoi && ((svData.msv_status==10)&&(kpid!=svData.skp_idx)&&(kpid!=svData.rkp_idx) ))))">
   <ion-row class="control">
     <ion-col>
       <button ion-button item-right clear icon-only small (click)="openComment()" style="font-size:10px;">
@@ -167,7 +171,7 @@
       </button>
     </ion-col>
     <ion-col>
-      <button ion-button item-right clear icon-only small (click)="openFollow2(svData.msv_no2)" *ngIf="isRG">
+      <button ion-button item-right clear icon-only small (click)="openFollow2(svData.msv_no2)" *ngIf="isRG&&userData.user_type==2">
         <ion-icon name="share-alt"></ion-icon>
         <div>ต้นทาง</div>
       </button>
@@ -189,7 +193,6 @@
     <button ion-button full color="danger" (click)="openPop($event)" item-end icon-left>
       ปิด</button>
   </ion-buttons>
-
 </ion-footer>
 <ion-footer *ngIf="((isMoi&&preno=='R'))">
   <ion-row class="control">
@@ -200,7 +203,7 @@
       </button>
     </ion-col>
     <ion-col>
-      <button ion-button item-right clear icon-only small (click)="openFollow2(svData.msv_no2)" *ngIf="isRG">
+      <button ion-button item-right clear icon-only small (click)="openFollow2(svData.msv_no2)" *ngIf="isRG&&userData.user_type==2">
         <ion-icon name="share-alt"></ion-icon>
         <div>ต้นทาง</div>
       </button>
@@ -228,7 +231,7 @@
       </button>
     </ion-col>
     <ion-col>
-      <button ion-button item-right clear icon-only small (click)="openFollow2(svData.msv_no2)" *ngIf="isRG">
+      <button ion-button item-right clear icon-only small (click)="openFollow2(svData.msv_no2)" *ngIf="isRG&&userData.user_type==2">
         <ion-icon name="share-alt"></ion-icon>
         <div>ต้นทาง</div>
       </button>
@@ -247,22 +250,22 @@
     </ion-col>
   </ion-row>
   <ion-buttons text-center>
-    <button ion-button small full icon-left color="primary" (click)="openJob(svData)" *ngIf="(svData.msv_status==0||svData.msv_status==6)&&(!this.isRG)">
+    <button ion-button small full icon-left color="primary" (click)="openJob(svData)" *ngIf="(svData.msv_status==0||svData.msv_status==10)&&(!this.isRG)">
       <ion-icon name="arrow-dropdown"></ion-icon>รับงาน</button>
-    <button ion-button small full icon-left color="danger" (click)="openPop(svData)" *ngIf="((svData.msv_status==4 && this.isRG) || (this.isRG && (svData.msv_status==6 && svData.user_type!=2)) ) ">
+    <button ion-button small full icon-left color="danger" (click)="openPop(svData)" *ngIf="((svData.msv_status==4 && this.isRG) || (this.isRG && (svData.msv_status==10 && svData.user_type!=2)) ) ">
       <ion-icon name="close-circel"></ion-icon>ปิดงาน</button>
   </ion-buttons>
 </ion-footer>
-<ion-footer *ngIf="userData.user_type==1 && svData.skp_id==kpid">
+<!-- <ion-footer *ngIf="userData.user_type==1 && svData.skp_id==kpid">
   <ion-row class="control">
     <ion-col>
       <button ion-button item-right clear icon-only small (click)="openComment()" style="font-size:10px;">
         <ion-icon name="text"></ion-icon>
-        <div>แสดงความคิดเห็น</div>
+        <div>แสดงความคิดเห็น4</div>
       </button>
     </ion-col>
     <ion-col>
-      <button ion-button item-right clear icon-only small (click)="openFollow2(svData.msv_no2)" *ngIf="isRG">
+      <button ion-button item-right clear icon-only small (click)="openFollow2(svData.msv_no2)" *ngIf="isRG&&userData.user_type==2">
         <ion-icon name="share-alt"></ion-icon>
         <div>ต้นทาง</div>
       </button>
@@ -280,7 +283,7 @@
       </button>
     </ion-col>
   </ion-row>
-</ion-footer>
+</ion-footer> -->
 <!-- <ion-footer *ngIf="(isOpen && (svData.msv_status==6))">
       <ion-buttons text-center>
         <button ion-button color="success" blocked small (click)="openSmile($event)">ได้รับการแก้ไขแล้ว</button>

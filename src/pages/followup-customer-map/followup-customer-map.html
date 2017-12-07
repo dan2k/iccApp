@@ -1,0 +1,9 @@
+<ion-content overflow-scroll="true" class="main">
+
+      <ion-scroll scrollX="true" scrollY="true" zoom="true" maxZoom="3" style="width: 100%; height: 100%;">
+        <div style="width: 100%;height: 500px;">
+            <iframe [src]="mapUrl" width="100%" height="100%" (click)="show($event)" id="myFrame"></iframe>
+        </div>
+      </ion-scroll>
+  <!-- <iframe [src]="mapUrl" width="100%" height="100%" (click)="show($event)" id="myFrame"></iframe> -->
+</ion-content>

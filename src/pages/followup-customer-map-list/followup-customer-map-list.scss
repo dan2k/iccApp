@@ -1,0 +1,24 @@
+page-followup-customer-map-list {
+  /*ion-scroll[scrollx] {
+    //white-space: nowrap;
+    height: 40px;
+    overflow: auto;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }*/
+  .d_date{
+    font-weight:bold;
+  }
+  .d_detail{
+  }
+  ion-list {
+
+    ion-item:nth-child(2n + 1) {
+      background-color:#f7ffe0;
+    }
+    ion-item:nth-child(2n) {
+      background-color:#e5f7ff;
+    }
+  }
+}

@@ -13,7 +13,7 @@
       <ion-label>จังหวัด:</ion-label>
       <ion-select [(ngModel)]="fProvince" (ionChange)="changeProvince()" interface="popover">
 
-        <ion-option value='' >--ทั้งหมด--</ion-option>
+        <ion-option value=''>--ทั้งหมด--</ion-option>
         <ion-option *ngFor="let p of provinces" [value]="p.province_id">
           {{p.province_name}}
         </ion-option>
@@ -23,7 +23,7 @@
       <ion-label>ประเภทหน่วยงาน:</ion-label>
       <ion-select [(ngModel)]="fCustptype" (ionChange)="changePtype()" interface="popover">
 
-        <ion-option  value=''>--ทั้งหมด--</ion-option>
+        <ion-option value=''>--ทั้งหมด--</ion-option>
         <ion-option *ngFor="let c of custptypes" [value]="c.cust_ptype">
           {{c.cust_desc}}
         </ion-option>
@@ -33,48 +33,78 @@
       <ion-label>หน่วยงาน:</ion-label>
       <ion-select [(ngModel)]="fCustpcode" (ionChange)="changePcode()" interface="popover">
 
-        <ion-option  value=''>--ทั้งหมด--</ion-option>
+        <ion-option value=''>--ทั้งหมด--</ion-option>
         <ion-option *ngFor="let c of custpcodes" [value]="c.cust_pcode">
           {{c.cust_pdesc}}
         </ion-option>
       </ion-select>
     </ion-item>
-
+    <ion-card *ngIf="isData">
+      <ion-item style="color:red;">
+        <ion-icon name="warning" item-start>
+        </ion-icon>
+        <h2 style="color:orange;">ยังไม่มีรายการแจ้งปัญหา</h2>
+      </ion-item>
+      <ion-card-content>
+        <p style="color:blue;font-size:16px;">
+          <br>
+          <br>
+          <br>
+        </p>
+      </ion-card-content>
+    </ion-card>
     <ion-item *ngFor="let i of items" (click)="openFollow(i)">
       <ion-avatar item-start>
-          <img src="./assets/icon/workstation.png" *ngIf="i.msv_type==1">
-          <img src="./assets/icon/p.jpg" *ngIf="i.msv_type==2">
-          <img src="./assets/icon/other.jpg" *ngIf="i.msv_type==3">
-
+        <img src="./assets/icon/workstation.png" *ngIf="i.msv_type==1">
+        <img src="./assets/icon/p.jpg" *ngIf="i.msv_type==2">
+        <img src="./assets/icon/other.jpg" *ngIf="i.msv_type==3">
       </ion-avatar>
       <ion-scroll scrollX="true">
-          <div style="color:red" *ngIf="i.msv_status==0">
-              <!-- <ion-icon name="md-radio-button-on" style="color:red" *ngIf="i.msv_status==0"></ion-icon>
+        <div style="color:red" *ngIf="i.msv_status==0">
+          <!-- <ion-icon name="md-radio-button-on" style="color:red" *ngIf="i.msv_status==0"></ion-icon>
               <ion-icon name="md-radio-button-on" style="color:green" *ngIf="i.msv_status==4"></ion-icon>
               <ion-icon name="md-radio-button-on" style="color:gray" *ngIf="i.msv_status==6"></ion-icon> -->
 
-              <!--<b>{{i?.msv_no}}</b>--> {{i?.msv_adate}}-{{i?.msv_atime}}
-              <b>ปัญหา:</b>{{i?.msv_detail}}
-              <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
-            </div>
-            <div style="color:green" *ngIf="i.msv_status==4">
-              <!-- <ion-icon name="md-radio-button-on" style="color:red" *ngIf="i.msv_status==0"></ion-icon>
+          <!--<b>{{i?.msv_no}}</b>-->{{i?.msv_adate}}-{{i?.msv_atime}}
+          <b>ปัญหา:</b>{{i?.msv_detail}}
+          <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
+        </div>
+        <div style="color:green" *ngIf="i.msv_status==4">
+          <!-- <ion-icon name="md-radio-button-on" style="color:red" *ngIf="i.msv_status==0"></ion-icon>
               <ion-icon name="md-radio-button-on" style="color:green" *ngIf="i.msv_status==4"></ion-icon>
               <ion-icon name="md-radio-button-on" style="color:gray" *ngIf="i.msv_status==6"></ion-icon> -->
 
-              <!--<b>{{i?.msv_no}}</b>--> {{i?.msv_adate}}-{{i?.msv_atime}}
-              <b>ปัญหา:</b>{{i?.msv_detail}}
-              <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
-            </div>
-            <div style="color:gray" *ngIf="i.msv_status==6">
-              <!-- <ion-icon name="md-radio-button-on" style="color:red" *ngIf="i.msv_status==0"></ion-icon>
+          <!--<b>{{i?.msv_no}}</b>-->{{i?.msv_adate}}-{{i?.msv_atime}}
+          <b>ปัญหา:</b>{{i?.msv_detail}}
+          <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
+        </div>
+        <div style="color:gray" *ngIf="i.msv_status==6">
+          <!-- <ion-icon name="md-radio-button-on" style="color:red" *ngIf="i.msv_status==0"></ion-icon>
               <ion-icon name="md-radio-button-on" style="color:green" *ngIf="i.msv_status==4"></ion-icon>
               <ion-icon name="md-radio-button-on" style="color:gray" *ngIf="i.msv_status==6"></ion-icon> -->
 
-              <!--<b>{{i?.msv_no}}</b>--> {{i?.msv_adate}}-{{i?.msv_atime}}
-              <b>ปัญหา:</b>{{i?.msv_detail}}
-              <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
-            </div>
+          <!--<b>{{i?.msv_no}}</b>-->{{i?.msv_adate}}-{{i?.msv_atime}}
+          <b>ปัญหา:</b>{{i?.msv_detail}}
+          <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
+        </div>
+        <div style="color:rgb(82, 226, 202)" *ngIf="i.msv_status==9">
+          <!-- <ion-icon name="md-radio-button-on" style="color:red" *ngIf="i.msv_status==0"></ion-icon>
+                <ion-icon name="md-radio-button-on" style="color:green" *ngIf="i.msv_status==4"></ion-icon>
+                <ion-icon name="md-radio-button-on" style="color:gray" *ngIf="i.msv_status==6"></ion-icon> -->
+
+          <!--<b>{{i?.msv_no}}</b>-->{{i?.msv_adate}}-{{i?.msv_atime}}
+          <b>ปัญหา:</b>{{i?.msv_detail}}
+          <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
+        </div>
+        <div style="color:rgb(241, 164, 76)" *ngIf="i.msv_status==10">
+          <!-- <ion-icon name="md-radio-button-on" style="color:red" *ngIf="i.msv_status==0"></ion-icon>
+                  <ion-icon name="md-radio-button-on" style="color:green" *ngIf="i.msv_status==4"></ion-icon>
+                  <ion-icon name="md-radio-button-on" style="color:gray" *ngIf="i.msv_status==6"></ion-icon> -->
+
+          <!--<b>{{i?.msv_no}}</b>-->{{i?.msv_adate}}-{{i?.msv_atime}}
+          <b>ปัญหา:</b>{{i?.msv_detail}}
+          <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
+        </div>
       </ion-scroll>
     </ion-item>
   </ion-list>

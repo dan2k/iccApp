@@ -27,9 +27,11 @@ export class FollowCdgSelfPage {
   fProvince: any='';
   fCustptype: any='';
   fCustpcode: any = '';
-  items: any;
+  items: any=[];
   total: any;
   isShow: any = false;
+  isData: any = false;
+  tmp: any=[];
 
   constructor(
     public navCtrl: NavController,
@@ -68,6 +70,21 @@ export class FollowCdgSelfPage {
   }
   setNotShow() {
     this.isShow = false;
+  }
+  getItems(ev) {
+    // Reset items back to all of the items
+    //this.getJob();
+    // set val to the value of the ev target
+
+    var val = ev.target.value;
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.items = this.tmp.filter((item) => {
+        return (item.msv_detail.toLowerCase().indexOf(val.toLowerCase()) > -1)||(item.thiname.toLowerCase().indexOf(val.toLowerCase()) > -1)||(item.cust_pdesc.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      });
+    } else {
+      this.items = this.tmp;
+    }
   }
   genProvince() {
     console.log("uType=" + this.uType, "scope=" + this.scope);
@@ -154,6 +171,7 @@ export class FollowCdgSelfPage {
   //   });
   // }
   async getJob() {
+    this.items = [];
     let lastRow = 0;
     let params = {
       userData: this.userData,
@@ -163,6 +181,7 @@ export class FollowCdgSelfPage {
       scope: this.scope,
       pv: this.fProvince,
       lastRow:lastRow,
+
     };
     this.msg.postApi01(`v1/getJobCdgSelf`,params)
       .then((data:any) => {
@@ -179,6 +198,10 @@ export class FollowCdgSelfPage {
           for (let i = 0; i < total; i++) {
             this.items.push(datax[j]);
             j++;
+          }
+          this.tmp = this.items;
+          if (this.items.length < 1) {
+            this.isData = false;
           }
           console.log('items===>', datax);
 
@@ -227,7 +250,7 @@ export class FollowCdgSelfPage {
     let page = 'FollowupProblemPage';
     let modal = this.modalCtrol.create(page, { svData: svData });
     modal.onDidDismiss(() => {
-      this.items = [];
+     // this.items = [];
       this.getJob();
     });
     modal.present();
@@ -268,6 +291,7 @@ export class FollowCdgSelfPage {
           for (let i = 0; i < total; i++) {
             this.items.push(datax[i]);
           }
+          this.tmp = this.items;
           console.log("item-before", this.items);
           infiniteScroll.complete();
         } else {

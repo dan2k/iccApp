@@ -1,13 +1,13 @@
 <ion-content>
-    <ion-fab right edge>
-        <button ion-fab color="vibrant" mini (click)="setShow()" *ngIf="!isShow">
-          <ion-icon name="ios-arrow-dropdown-outline"></ion-icon>
-        </button>
-        <button ion-fab (click)="setNotShow()" *ngIf="isShow" mini>
-          <ion-icon name="ios-arrow-dropup-outline"></ion-icon>
-        </button>
+  <ion-fab right edge>
+    <button ion-fab color="vibrant" mini (click)="setShow()" *ngIf="!isShow">
+      <ion-icon name="ios-arrow-dropdown-outline"></ion-icon>
+    </button>
+    <button ion-fab (click)="setNotShow()" *ngIf="isShow" mini>
+      <ion-icon name="ios-arrow-dropup-outline"></ion-icon>
+    </button>
 
-      </ion-fab>
+  </ion-fab>
   <ion-list>
     <ion-item *ngIf="uType!='P' && isShow">
       <ion-label>จังหวัด:</ion-label>
@@ -37,6 +37,21 @@
       </ion-select>
     </ion-item>
 
+    <ion-card *ngIf="isData">
+      <ion-item style="color:red;">
+        <ion-icon name="warning" item-start>
+        </ion-icon>
+        <h2 style="color:orange;">ยังไม่มีรายการแจ้งปัญหา</h2>
+      </ion-item>
+      <ion-card-content>
+        <p style="color:blue;font-size:16px;">
+          <br>
+          <br>
+          <br>
+        </p>
+      </ion-card-content>
+    </ion-card>
+    <ion-searchbar (ionInput)="getItems($event)" *ngIf="!isData"></ion-searchbar>
     <ion-item *ngFor="let i of items" (click)="openJob(i)">
       <ion-avatar item-start>
         <img src="./assets/icon/workstation.png" *ngIf="i.msv_type==1">
@@ -49,7 +64,7 @@
           <ion-icon name="md-radio-button-on" style="color:green" *ngIf="i.msv_status==4"></ion-icon>
           <ion-icon name="md-radio-button-on" style="color:gray" *ngIf="i.msv_status==6"></ion-icon> -->
 
-          <!--<b>{{i?.msv_no}}</b>--> {{i?.msv_adate}}-{{i?.msv_atime}}
+          <!--<b>{{i?.msv_no}}</b>-->{{i?.msv_adate}}-{{i?.msv_atime}}
           <b>ปัญหา:</b>{{i?.msv_detail}}
           <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
         </div>
@@ -58,7 +73,7 @@
           <ion-icon name="md-radio-button-on" style="color:green" *ngIf="i.msv_status==4"></ion-icon>
           <ion-icon name="md-radio-button-on" style="color:gray" *ngIf="i.msv_status==6"></ion-icon> -->
 
-          <!--<b>{{i?.msv_no}}</b>--> {{i?.msv_adate}}-{{i?.msv_atime}}
+          <!--<b>{{i?.msv_no}}</b>-->{{i?.msv_adate}}-{{i?.msv_atime}}
           <b>ปัญหา:</b>{{i?.msv_detail}}
           <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
         </div>
@@ -67,15 +82,25 @@
           <ion-icon name="md-radio-button-on" style="color:green" *ngIf="i.msv_status==4"></ion-icon>
           <ion-icon name="md-radio-button-on" style="color:gray" *ngIf="i.msv_status==6"></ion-icon> -->
 
-          <!--<b>{{i?.msv_no}}</b>--> {{i?.msv_adate}}-{{i?.msv_atime}}
+          <!--<b>{{i?.msv_no}}</b>-->{{i?.msv_adate}}-{{i?.msv_atime}}
+          <b>ปัญหา:</b>{{i?.msv_detail}}
+          <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
+        </div>
+        <div style="color:rgb(241, 164, 76)" *ngIf="i.msv_status==10">
+          <!-- <ion-icon name="md-radio-button-on" style="color:red" *ngIf="i.msv_status==0"></ion-icon>
+          <ion-icon name="md-radio-button-on" style="color:green" *ngIf="i.msv_status==4"></ion-icon>
+          <ion-icon name="md-radio-button-on" style="color:gray" *ngIf="i.msv_status==6"></ion-icon> -->
+
+          <!--<b>{{i?.msv_no}}</b>-->{{i?.msv_adate}}-{{i?.msv_atime}}
           <b>ปัญหา:</b>{{i?.msv_detail}}
           <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
         </div>
       </ion-scroll>
     </ion-item>
+
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event) ">
-      <ion-infinite-scroll-content loadingSpinner="dots" loadingText="กำลังโหลดข้อมูล........">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+    <ion-infinite-scroll-content loadingSpinner="dots" loadingText="กำลังโหลดข้อมูล........">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

@@ -5,31 +5,31 @@
       ICC V{{version}} -- คุณ {{userData?.user_fname}} {{userData?.user_lname}}
     </ion-title>
     <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
+      <ion-icon name="menu"></ion-icon>
+    </button>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content>
 
-    <ion-tabs *ngIf="userData.user_type==1&&(userData.job_id!=2 || userData.job_id!=3||userData.job_id!=4)" color="{{colorHeader}}" >
-        <ion-tab tabTitle="รับแจ้ง" [root]="tab1" ></ion-tab>
-        <ion-tab tabTitle="ติดตามผล" [root]="tab2"></ion-tab>
-        <!-- <ion-tab tabTitle="ภาพรวม" [root]="tab3"></ion-tab> -->
-        <!-- <ion-tab tabTitle="demo" [root]="tab4"></ion-tab> -->
-      </ion-tabs>
-      <ion-tabs *ngIf="userData.user_type==1&&(userData.job_id==2 || userData.job_id==3||userData.job_id==4)" color="{{colorHeader}}" >
-          <ion-tab tabTitle="รับแจ้ง" [root]="tab1" ></ion-tab>
-          <ion-tab tabTitle="ติดตามผล" [root]="tab2"></ion-tab>
-          <ion-tab tabTitle="ภาพรวม" [root]="tab3"></ion-tab>
-          <!-- <ion-tab tabTitle="demo" [root]="tab4"></ion-tab> -->
-        </ion-tabs>
-      <ion-tabs *ngIf="userData.user_type==2" color="{{colorHeader}}">
-        <ion-tab tabTitle="ติดตามผล" [root]="tab2"></ion-tab>
-        <ion-tab tabTitle="ภาพรวม" [root]="tab3"></ion-tab>
-        <!-- <ion-tab tabTitle="demo" [root]="tab4"></ion-tab> -->
-      </ion-tabs>
+  <ion-tabs *ngIf="userData.user_type==1&&(userData.job_id!=2 && userData.job_id!=3 && userData.job_id!=4)" color="{{colorHeader}}">
+    <ion-tab tabTitle="ติดตามผล" [root]="tab1"></ion-tab>
+    <ion-tab tabTitle="รับแจ้ง" [root]="tab2"></ion-tab>
+    <!-- <ion-tab tabTitle="ภาพรวม" [root]="tab3"></ion-tab> -->
+    <!-- <ion-tab tabTitle="demo" [root]="tab4"></ion-tab> -->
+  </ion-tabs>
+  <ion-tabs *ngIf="userData.user_type==1&&(userData.job_id==2 || userData.job_id==3||userData.job_id==4)" color="{{colorHeader}}">
+      <ion-tab tabTitle="ติดตามผล" [root]="tab1"></ion-tab>
+    <ion-tab tabTitle="รับแจ้ง" [root]="tab2"></ion-tab>
+    <!-- <ion-tab tabTitle="ภาพรวม" [root]="tab3"></ion-tab> -->
+    <!-- <ion-tab tabTitle="demo" [root]="tab4"></ion-tab> -->
+  </ion-tabs>
+  <ion-tabs *ngIf="userData.user_type==2" color="{{colorHeader}}">
+    <ion-tab tabTitle="ติดตามผล" [root]="tab2"></ion-tab>
+    <ion-tab tabTitle="ภาพรวม" [root]="tab3"></ion-tab>
+    <!-- <ion-tab tabTitle="demo" [root]="tab4"></ion-tab> -->
+  </ion-tabs>
   <!-- <ion-tabs>
         <ion-tab tabIcon="contact" tabTitle="รับแจ้ง" [root]="tab1" *ngIf="userData.user_type==1"></ion-tab>
         <ion-tab tabIcon="chatbubbles" tabTitle="demo" [root]="tab2"></ion-tab>

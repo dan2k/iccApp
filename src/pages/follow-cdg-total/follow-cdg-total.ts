@@ -20,9 +20,10 @@ export class FollowCdgTotalPage {
   fProvince: any='';
   fCustptype: any='';
   fCustpcode: any = '';
-  items: any;
+  items: any=[];
   total: any;
   isShow: any = false;
+  isData: any = false;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -126,6 +127,9 @@ export class FollowCdgTotalPage {
             this.items.push(datax[j]);
             j++;
           }
+          if (this.items.length < 1) {
+            this.isData = false;
+          }
           console.log('items===>', datax);
 
         }else {
@@ -159,7 +163,7 @@ export class FollowCdgTotalPage {
     let page = 'FollowupProblemPage';
     let modal = this.modalCtrol.create(page, { svData: svData });
     modal.onDidDismiss(() => {
-      this.items = [];
+      //this.items = [];
       this.getJob();
     });
     modal.present();

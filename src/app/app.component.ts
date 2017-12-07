@@ -8,6 +8,8 @@ import { HomePage } from "../pages/home/home";
 import { AppVersion } from '@ionic-native/app-version';
 import { AppUpdate } from '@ionic-native/app-update';
 import { url } from '../config';
+//import { CacheService } from "ionic-cache";
+
 @Component({
   templateUrl: "app.html",
   providers: [Network, MessageProvider,AppVersion,AppUpdate]
@@ -21,6 +23,7 @@ export class MyApp {
     platform: Platform,
     statusBar: StatusBar,
     splashScreen: SplashScreen,
+    //cache:CacheService,
     public network: Network,
     public modalCtrl: ModalController,
     public app: App,
@@ -31,6 +34,14 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      // Set TTL to 12h
+     // cache.setDefaultTTL(1);
+
+     // cache.setDefaultTTL(60 * 60 * 12);
+
+     // Keep our cached results when device is offline!
+      // cache.setOfflineInvalidate(false);
+
       statusBar.styleDefault();
       splashScreen.hide();
       const updateUrl = `${url}/update/update.xml`;
@@ -72,6 +83,10 @@ export class MyApp {
       let nav = this.app.getRootNav();
       nav.setRoot("LoginTypePage");
     });
+  }
+  map() {
+    let modal = this.modalCtrl.create('MapPage');
+    modal.present();
   }
   selectpage() {
     console.log('userDataArr==>',this.userDataArr)
