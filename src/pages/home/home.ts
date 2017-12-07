@@ -71,4 +71,8 @@ export class HomePage {
   // setting() {
   //   this.navCtrl.push('SettingPage');
   // }
+  tel(tel: any) {
+    window.open('tel://' + tel);
+  }
 }
+

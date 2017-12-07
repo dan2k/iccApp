@@ -46,6 +46,11 @@
       <h2>{{svData.msv_no}}</h2>
       <p>{{svData.cust_ptype_desc}} {{svData.cust_pdesc}}</p>
       <p>{{svData.province_name}}</p>
+      <p>
+        <span style="font-size:10px;" (click)="tel(svData?.user_tel)">
+          <ion-icon name="call"></ion-icon>&nbsp;{{svData?.user_tel}}
+        </span>
+      </p>
     </ion-item>
     <ion-card-content style="background-color:rgb(222, 248, 242);">
       <div *ngIf="isRG && svData.msv_type==1">
@@ -57,6 +62,7 @@
         <p style="font-size:14px;">
           <span text-wrap>ระบบงาน: {{svData.prob_gdesc}}</span>
           <span text-wrap>ระบบงาน: {{svData.problem_sub_desc}}</span>
+          <span text-wrap (click)="tel('0862046083')">tel: (0862046083)</span>
         </p>
         <!-- <span text-wrap>ระบบงาน: {{svData.prob_gdesc}}</span>
                 <span text-wrap>ระบบงาน: {{svData.problem_sub_desc}}</span> -->

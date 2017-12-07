@@ -419,4 +419,7 @@ export class FollowupProblemPage {
     });
     modal.present();
   }
+  tel(tel: any) {
+    window.open('tel://' + tel);
+  }
 }
