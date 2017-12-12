@@ -12,8 +12,7 @@
 
 </ion-header>
 
-<ion-content>
-
+<ion-content style="padding:0;margin:0">
   <ion-tabs *ngIf="userData.user_type==1&&(userData.job_id!=2 && userData.job_id!=3 && userData.job_id!=4)" color="{{colorHeader}}">
     <ion-tab tabTitle="ติดตามผล" [root]="tab1"></ion-tab>
     <ion-tab tabTitle="รับแจ้ง" [root]="tab2"></ion-tab>

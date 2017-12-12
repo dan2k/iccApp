@@ -1,5 +1,6 @@
 import { url } from "./../../config";
-import { Component, ElementRef } from "@angular/core";
+import { Component, ElementRef, ViewChild } from "@angular/core";
+import { Content } from 'ionic-angular';
 //import { Http} from '@angular/http';
 import {
   IonicPage,
@@ -17,14 +18,13 @@ import { SafeResourceUrl, DomSanitizer } from "@angular/platform-browser";
   templateUrl: "followup-customer-map.html"
 })
 export class FollowupCustomerMapPage {
+  @ViewChild(Content) content: Content;
   userData: any;
   mapUrl: any;
   startUrl: any;
   url: SafeResourceUrl;
   first: any;
-  showControls: boolean = true;
-  scale: number = 1;
-  html:any;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -36,8 +36,10 @@ export class FollowupCustomerMapPage {
   ) {
     this.userData = JSON.parse(localStorage.getItem("userData"));
     //this.html = this.http.get('http://43.228.82.23/webrg6/iccServer/map/map.html').map(response => response.text()).subscribe(html => this.html = html);
-    console.log(this.html);
+    //console.log(this.html);
+
     let rcode: any;
+
     switch (this.userData.job_id) {
       case "1":
         this.startUrl = "";
@@ -64,12 +66,16 @@ export class FollowupCustomerMapPage {
     console.log(this.mapUrl);
   }
   ionViewDidEnter() {
+    //this.scrollToTop();
     this.loadIframe();
   }
   loadIframe() {
+    let parent = $(this._elRef.nativeElement).find("#myFrame");
+    let height = this.content.contentHeight;
+    parent.css({height: height,margin:0,padding:0 });
+
     let obj = this;
     let myFrame = $(this._elRef.nativeElement).find("#myFrame");
-
     //$(this._elRef.nativeElement).find("#myFrame").prop('src', this.mapUrl);
     $(this._elRef.nativeElement)
       .find("#myFrame")
@@ -115,12 +121,5 @@ export class FollowupCustomerMapPage {
         .sur_type_id}&rcode=${rcode}&first=${this.first}`;
       obj.attr("src", urlx);
     }
-  }
-  afterZoomIn(event) {
-    console.log("After ZoomIn Event: ", event);
-  }
-
-  afterZoomOut(event) {
-    console.log("After ZoomOut Event: ", event);
   }
 }
