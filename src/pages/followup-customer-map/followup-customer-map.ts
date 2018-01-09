@@ -39,8 +39,8 @@ export class FollowupCustomerMapPage {
     //console.log(this.html);
 
     let rcode: any;
-
-    switch (this.userData.job_id) {
+    //เปลี่ยนจาก cen_user.job_id เป็น cen_job.level
+    switch (this.userData.user_level) {
       case "1":
         this.startUrl = "";
         break;
