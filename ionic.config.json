@@ -8,7 +8,7 @@
   "proxies": [
     {
       "path": "/iccServer",
-      "proxyUrl": "http://43.228.82.23/webrg6/iccServer"
+      "proxyUrl": "http://www.controldata.co.th/mpsicc/iccServer"
     }
   ]
 }

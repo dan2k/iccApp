@@ -34,27 +34,43 @@
       <p style="color:orange;font-size:16px">ตรวจสอบไม่พบผู้ใช้งานในระบบ กรุณาระบุข้อมูลเบื้องต้นของท่านเพื่อเพิ่มข้อมูลเข้าระบบและรอการติดต่อกลับจากพนักงานอีกครั้ง</p>
     </ion-item>
     <ion-item>
+      <ion-label floating>เลขประจำตัวประชาชน:</ion-label>
+      <ion-input type="number" [(ngModel)]="user_id"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>คำนำหน้า:</ion-label>
+      <ion-select [(ngModel)]="user_title" interface="popover">
+        <ion-option value='3' >นาย</ion-option>
+        <ion-option value='4'>นางสาว</ion-option>
+        <ion-option value='5'>นาง</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
       <ion-label floating>ชื่อ:</ion-label>
-      <ion-input type="text" [(ngModel)]="fname"></ion-input>
+      <ion-input type="text" [(ngModel)]="user_fname"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>นามสกุล:</ion-label>
-      <ion-input type="text" [(ngModel)]="lname"></ion-input>
+      <ion-input type="text" [(ngModel)]="user_lname"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>เบอร์โทร:</ion-label>
-      <ion-input type="number" [(ngModel)]="tel"></ion-input>
+      <ion-input type="number" [(ngModel)]="user_tel"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>ชื่อหน่วยงาน:</ion-label>
-      <ion-input type="text" [(ngModel)]="codename"></ion-input>
+      <ion-input type="text" [(ngModel)]="cust_desc"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item >
       <ion-label floating>จังหวัด:</ion-label>
-      <ion-input type="text" [(ngModel)]="province"></ion-input>
+      <ion-select [(ngModel)]="cc"  interface="popover">
+        <ion-option *ngFor="let p of provinces" [value]="p.province_id">
+          {{p.province_name}}
+        </ion-option>
+      </ion-select>
     </ion-item>
   </ion-list>
   <ion-item>
-      <button ion-button color="primary" full (click)="save()" [disabled]="!fname&&!lname&&!tel&&!codename&&!province">บันทึกข้อมูล</button>
+      <button ion-button color="primary" full (click)="save()" [disabled]="(user_fname==='')&&(user_lname==='')&&(user_tel==='')&&(cust_desc==='')&&cc===''">บันทึกข้อมูล</button>
     </ion-item>
 </ion-content>

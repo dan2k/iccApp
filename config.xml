@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.controldata.iccApp" version="1.0.13" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.controldata.iccApp" version="1.0.14" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>iccApp</name>
     <description>inform system</description>
     <author email="seangtong.h@cdg.co.th" href="http://www.controldata.co.th">Controldata(Ltd) thailand</author>
@@ -104,4 +104,5 @@
     <plugin name="cordova-plugin-app-update" spec="^1.4.12" />
     <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
     <plugin name="cordova-plugin-secure-storage" spec="^2.6.8" />
+    <allow-navigation href="http://192.168.0.2:8100" />
 </widget>

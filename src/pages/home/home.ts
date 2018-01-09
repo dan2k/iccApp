@@ -30,15 +30,15 @@ export class HomePage {
     let userType = this.userData.user_type;
 
     if (userType == 1) {
-      //สำหรับลูกค้า แบ่งตาม jobid
+      //สำหรับลูกค้า แบ่งตาม level ซึ่งอยู่ใน cen_job.level จากเดิมใช้ cen_user.job_id
       //1=site
       //2=ศจ
       //3=ศภ
       //4=ส่วนกลาง
       this.colorHeader = 'warning';
-      let jobid = this.userData.job_id;
-      console.log("jobid=>" + jobid);
-      if (jobid == 2 || jobid == 3 || jobid == 4) {
+      let level = this.userData.user_level;
+      console.log("level=>" + level);
+      if (level == 2 || level == 3 || level == 4) {
         // สำหรับข้าราชการตั้งแต่ ศจ.เป็นต้นไป
         this.tab2 = "MainmoiPage";
         //this.tab1 = "FollowupCustomerSelfPage"

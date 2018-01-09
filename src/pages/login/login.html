@@ -17,7 +17,8 @@
         <ion-item>
             <ion-label floating *ngIf="loginType==1">เบอร์โทร:</ion-label>
             <ion-label floating *ngIf="loginType==2">IDCODE:</ion-label>
-            <ion-input type="number" [(ngModel)]="tel" maxlength="10" ></ion-input>
+            <ion-input type="number" [(ngModel)]="tel" maxlength="10" *ngIf="loginType==1"></ion-input>
+            <ion-input type="text" [(ngModel)]="tel"  *ngIf="loginType==2"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label floating>รหัสผ่าน:</ion-label>
