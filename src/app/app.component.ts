@@ -80,8 +80,10 @@ export class MyApp {
     this.msg.confirm("คุณต้องการออกจากระบบหรือไม่", data => {
       localStorage.removeItem("userData");
       localStorage.removeItem("userDataArr");
-      let nav = this.app.getRootNav();
-      nav.setRoot("LoginTypePage");
+      //let nav = this.app.getRootNav();
+     // nav.setRoot("LoginTypePage");
+      // SOLVE (getRootNav) is deprecated and will be removed in the next major release. Use getRootNavById instead.
+      this.app.getRootNavs()[0].setRoot('LoginTypePage');
     });
   }
   map() {
@@ -96,8 +98,10 @@ export class MyApp {
     modal.onDidDismiss(datax => {
       if (datax) {
         localStorage.setItem("userData", JSON.stringify(datax));
-        let nav = this.app.getRootNav();
-        nav.setRoot(HomePage);
+         //let nav = this.app.getRootNav();
+         //nav.setRoot(HomePage);
+        // SOLVE (getRootNav) is deprecated and will be removed in the next major release. Use getRootNavById instead.
+        this.app.getRootNavs()[0].setRoot(HomePage);
       }
     });
     modal.present();

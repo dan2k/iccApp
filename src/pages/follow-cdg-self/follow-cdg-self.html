@@ -59,7 +59,7 @@
         <img src="./assets/icon/other.jpg" *ngIf="i.msv_type==3">
       </ion-avatar>
       <ion-scroll scrollX="true">
-        <div style="color:red" *ngIf="i.msv_status==0">
+        <div [style.color]="getColor(i.msv_status)" >
           <!-- <ion-icon name="md-radio-button-on" style="color:red" *ngIf="i.msv_status==0"></ion-icon>
           <ion-icon name="md-radio-button-on" style="color:green" *ngIf="i.msv_status==4"></ion-icon>
           <ion-icon name="md-radio-button-on" style="color:gray" *ngIf="i.msv_status==6"></ion-icon> -->
@@ -68,33 +68,8 @@
           <b>ปัญหา:</b>{{i?.msv_detail}}
           <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
         </div>
-        <div style="color:green" *ngIf="i.msv_status==4">
-          <!-- <ion-icon name="md-radio-button-on" style="color:red" *ngIf="i.msv_status==0"></ion-icon>
-          <ion-icon name="md-radio-button-on" style="color:green" *ngIf="i.msv_status==4"></ion-icon>
-          <ion-icon name="md-radio-button-on" style="color:gray" *ngIf="i.msv_status==6"></ion-icon> -->
 
-          <!--<b>{{i?.msv_no}}</b>-->{{i?.msv_adate}}-{{i?.msv_atime}}
-          <b>ปัญหา:</b>{{i?.msv_detail}}
-          <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
-        </div>
-        <div style="color:gray" *ngIf="i.msv_status==6">
-          <!-- <ion-icon name="md-radio-button-on" style="color:red" *ngIf="i.msv_status==0"></ion-icon>
-          <ion-icon name="md-radio-button-on" style="color:green" *ngIf="i.msv_status==4"></ion-icon>
-          <ion-icon name="md-radio-button-on" style="color:gray" *ngIf="i.msv_status==6"></ion-icon> -->
 
-          <!--<b>{{i?.msv_no}}</b>-->{{i?.msv_adate}}-{{i?.msv_atime}}
-          <b>ปัญหา:</b>{{i?.msv_detail}}
-          <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
-        </div>
-        <div style="color:rgb(241, 164, 76)" *ngIf="i.msv_status==10">
-          <!-- <ion-icon name="md-radio-button-on" style="color:red" *ngIf="i.msv_status==0"></ion-icon>
-          <ion-icon name="md-radio-button-on" style="color:green" *ngIf="i.msv_status==4"></ion-icon>
-          <ion-icon name="md-radio-button-on" style="color:gray" *ngIf="i.msv_status==6"></ion-icon> -->
-
-          <!--<b>{{i?.msv_no}}</b>-->{{i?.msv_adate}}-{{i?.msv_atime}}
-          <b>ปัญหา:</b>{{i?.msv_detail}}
-          <b>ผู้แจ้ง:</b>{{i?.thiname}} {{i?.cust_ptype_desc}} {{i?.cust_pdesc}}
-        </div>
       </ion-scroll>
     </ion-item>
 

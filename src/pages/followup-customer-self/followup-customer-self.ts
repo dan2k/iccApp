@@ -32,6 +32,9 @@ export class FollowupCustomerSelfPage {
   ) {
     this.userData = JSON.parse(localStorage.getItem("userData"));
   }
+  getColor(status: any) {
+    return this.msg.getStatusColor(status);
+  }
   getJob() {
     this.items = [];
     let lastRow = 0;
@@ -40,6 +43,7 @@ export class FollowupCustomerSelfPage {
       userData: this.userData,
       lastRow: 0
     };
+
     this.msg.postApi01(`v1/getJobCustomerSelf`, params).then(
       (data: any) => {
         if (data.status) {

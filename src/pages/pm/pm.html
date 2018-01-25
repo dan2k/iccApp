@@ -1,0 +1,17 @@
+<ion-content padding>
+    <ion-list>
+        <ion-item *ngFor="let i of pmData" (click)="openDetail(i)">
+          <ion-scroll scrollX="true" >
+              <div style="color:gray" >
+                  <ion-icon name="ios-briefcase-outline"></ion-icon>
+                  <b>{{i?.msv_no}}:</b> {{i?.msv_adate}} &nbsp; {{i?.msv_atime}}
+              </div>
+
+          </ion-scroll>
+        </ion-item>
+
+      </ion-list>
+      <div  *ngIf="(pmData?.length<1)" text-center>
+          <h3 style="color:red">ไม่พบรายการ pm</h3>
+        </div>
+</ion-content>

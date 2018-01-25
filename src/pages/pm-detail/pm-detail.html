@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar color="warning">
+    <ion-title>ยืนยันการ PM</ion-title>
+    <ion-buttons end small>
+        <button ion-button icon-only color="ligth" small (click)="close()">
+           <ion-icon name="close-circle"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <b>หมายเลขปัญหา:</b>&nbsp;{{pmData?.msv_no}}<br>
+    <h4>รายการ contract</h4>
+    <ul>
+      <li *ngFor="let i of pmContract">
+        {{i?.contract_no}} {{i?.contract_name}}
+      </li>
+    </ul>
+    <h4>ผู้รับผิดชอบ</h4>
+    <ul>
+      <li >{{pmData?.emp1}}</li>
+      <li *ngIf="pmData.emp2">{{pmData?.emp2}}</li>
+      <li *ngIf="pmData.emp3">{{pmData?.emp3}}</li>
+    </ul>
+    <b>วัน/เวลา:</b>&nbsp;{{pmData?.msv_adate}} {{pmData?.msv_atime}}
+</ion-content>
+<ion-footer>
+    <button ion-button color="success" blocked small (click)="openSmile($event)">ยืนยัน</button>
+</ion-footer>

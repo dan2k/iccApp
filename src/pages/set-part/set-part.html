@@ -1,0 +1,44 @@
+<!--
+  Generated template for the SetPartPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="ptitle">
+    <ion-title>บันทึก P/N ที่พบปัญหา</ion-title>
+    <ion-buttons start small>
+      <button ion-button icon-only color="ligth" small (click)="close()">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>P/N:</ion-label>
+      <ion-select [(ngModel)]="pno" style="white-space: normal!important;"  >
+        <ion-option style="white-space: normal!important;"  *ngFor="let p of pnos" [value]="p.pno" (ionSelect)="setPnoDesc(p.pno_desc)">{{p.pno_desc}}[{{p.pno}}]</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>SN:</ion-label>
+      <ion-input type="text" [(ngModel)]="sno"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>TagNo:</ion-label>
+      <ion-input type="number" [(ngModel)]="tagno"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>อาการเสีย:</ion-label>
+      <ion-textarea [(ngModel)]="symptom"></ion-textarea>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <button ion-button full (click)="save()" >บันทึก</button>
+</ion-footer>

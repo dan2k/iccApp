@@ -27,6 +27,7 @@ export class PopEquipPage {
   problem_sub_id: any;
   problem_sub2_id: any;
   prob_gid: any;
+  appointmentdate: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -106,7 +107,11 @@ export class PopEquipPage {
   //       console.log(err);
   //     });
   // }
-  close() {
+  close(): boolean{
+    //alert(this.appointmentdate);
+
+
+    //alert(`${date}----${time}`);
     if (!this.problem_sub2_id) {
       this.msg.alert('กรุณาระบุอาการเสีย')
       return false;
@@ -115,14 +120,23 @@ export class PopEquipPage {
       this.msg.alert('กรุณาระบุรายละเอียด')
       return false;
     }
-
+    if (!this.appointmentdate) {
+      alert('กรุณาระบุวัน/เวลานัดหมาย');
+      return false;
+    }
+    let tmp = this.appointmentdate.split('T');
+    let date = tmp[0];
+    let tmpTime = tmp[1].split('Z');
+    let time = tmpTime[0];
     this.viewCtrl.dismiss({
       data: {
         equip: this.equip,
         detail: this.detail,
         problem_sub_id: this.problem_sub_id,
         problem_sub2_id: this.problem_sub2_id,
-        prob_gid: this.prob_gid
+        prob_gid: this.prob_gid,
+        appointmentdate: date,
+        appointmenttime:time
       }
     });
   }

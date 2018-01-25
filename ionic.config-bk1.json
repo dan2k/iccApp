@@ -1,0 +1,14 @@
+{
+  "name": "iccApp",
+  "app_id": "a338abcc",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  },
+  "proxies": [
+    {
+      "path": "/iccServer",
+      "proxyUrl": "http://www.controldata.co.th/mpsicc/iccServer"
+    }
+  ]
+}

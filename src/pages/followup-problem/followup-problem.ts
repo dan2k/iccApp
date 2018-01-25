@@ -62,15 +62,15 @@ export class FollowupProblemPage {
     this.preno = this.svData.msv_no.substr(0, 1);
     console.log("preno==>",this.preno);
     console.log(this.userData);
-    let jobid = this.userData.job_id;
-
-    if (jobid == 2 || jobid == 3 || jobid == 4) {
+    //let jobid = this.userData.job_id;
+    let level = this.userData.user_level;
+    if (level == 2 || level == 3 || level == 4) {
       //เอาไว้ตรวจสอบว่าเป็น สน.ท login หรือเปล่า ถ้าใช่ก็ ปิดตรงส่งจ๊อบไปก่อน
       this.isMoi = true;
-      if (jobid == 2) {
+      if (level == 2) {
         this.kpid = 2;
       }
-      if (jobid == 3) {
+      if (level == 3) {
         this.kpid = 3;
       }
     } else {
@@ -407,7 +407,22 @@ export class FollowupProblemPage {
       //   });
     }
   }
-
+  service(svData: any) {
+    let modal = this.modalController.create('ServicePage', { svData: svData });
+    modal.onDidDismiss(() => {
+      //
+      this.close();
+    });
+    modal.present();
+  }
+  sendback(svData: any) {
+    let modal = this.modalController.create('SendbackPage', { svData: svData });
+    modal.onDidDismiss(() => {
+      //
+      this.close();
+    });
+    modal.present();
+  }
   openJob(svData: any) {
     //รับจ๊อบจาก ข้าราชการเพื่อทำการวิเคราะห์และทำการแตกจ๊อบใหม่
     //let status = svData.msv_status;

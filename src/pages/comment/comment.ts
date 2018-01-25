@@ -8,6 +8,8 @@ import { Camera } from '@ionic-native/camera';
 //import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
+
 /**
  * Generated class for the CommentPage page.
  *
@@ -23,7 +25,8 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
     FileTransfer,
     Camera,
     PhotoViewer,
-    MessageProvider
+    MessageProvider,
+    ImageResizer
   ]
 })
 export class CommentPage {
@@ -39,7 +42,8 @@ export class CommentPage {
     private camera: Camera,
     private photoViewer: PhotoViewer,
     //private commentProvider: CommentProvider,
-    private msg:MessageProvider
+    private msg: MessageProvider,
+    private imageResizer: ImageResizer
 
   ) {
     this.token = localStorage.getItem('token');
@@ -122,7 +126,15 @@ export class CommentPage {
       quality: 30
     };
     this.camera.getPicture(options).then((imageData) => {
-      this.imageData = imageData;
+      //this.imageData = imageData;
+      this.imageResizer.resize({
+        uri: imageData,
+        quality: 90,
+        width: 720,
+        height: 1280
+      }).then(imageData => {
+        this.imageData = imageData;
+      });
     }).catch((err) => {
       console.log(err);
     });

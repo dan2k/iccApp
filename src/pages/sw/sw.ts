@@ -32,6 +32,7 @@ export class SwPage {
   svData: any;
   isUpdate: boolean = false;
   isFirst = true;
+  appointmentdate: any;
 
   constructor(
     public navCtrl: NavController,
@@ -201,6 +202,14 @@ export class SwPage {
       this.msg.alert('กรุณาระบุรายละเอียด');
       return false;
     }
+    if (!this.appointmentdate) {
+      alert('กรุณาระบุวัน/เวลานัดหมาย');
+      return false;
+    }
+    let tmp = this.appointmentdate.split('T');
+    let date = tmp[0];
+    let tmpTime = tmp[1].split('Z');
+    let time = tmpTime[0];
 
     let data = {
       user_id: this.userData.user_id,
@@ -210,9 +219,11 @@ export class SwPage {
       problem_sub2_id:this.problem_sub2_id,
       detail: this.detail,
       problem_type: 'P2',
-      contract_no:this.contract_no,
+      contract_no: this.contract_no,
+      appointmentdate: date,
+      appointmenttime:time
     }
-    console.log(data);
+    console.log('sw===>',data);
     if (this.isUpdate) {
       let params = data;
       this.msg.postApi01('v1/swEdit', params)
@@ -226,7 +237,10 @@ export class SwPage {
             this.svData.problem_sub2_desc = this.problem_sub2_desc;
             this.svData.msv_detail = this.detail;
             this.svData.contract_no = this.contract_no;
+            this.svData.appointmentdate = date;
+            this.svData.appointmenttime = time;
             this.view.dismiss(this.svData);
+
           }
         }, (err) => {
           console.log(err);

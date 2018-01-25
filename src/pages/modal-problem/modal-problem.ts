@@ -13,6 +13,10 @@ import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { url } from "../../config";
 import { PhotoViewer } from "@ionic-native/photo-viewer";
 import { MessageProvider } from "./../../providers/message/message";
+import {
+  ImageResizer
+  //, ImageResizerOptions
+} from "@ionic-native/image-resizer";
 /**
  * Generated class for the ModalProblemPage page.
  *
@@ -29,7 +33,8 @@ import { MessageProvider } from "./../../providers/message/message";
     FileTransfer,
     Camera,
     PhotoViewer,
-    MessageProvider
+    MessageProvider,
+    ImageResizer
   ]
 })
 export class ModalProblemPage {
@@ -47,7 +52,8 @@ export class ModalProblemPage {
     private transfer: FileTransfer,
     private camera: Camera,
     private photoViewer: PhotoViewer,
-    private msg: MessageProvider
+    private msg: MessageProvider,
+    private imageResizer: ImageResizer
   ) {
     this.ptype = this.navParams.get("type");
     this.token = localStorage.getItem("token");
@@ -68,7 +74,7 @@ export class ModalProblemPage {
       cust_ptype: this.userData.cust_ptype,
       cust_pcode: this.userData.cust_pcode,
       msv_detail: this.detail,
-      msv_type:this.ptype,
+      msv_type: this.ptype,
       userData: this.userData
     };
     this.msg.postApi01("v1/saveProblem", params).then(
@@ -128,7 +134,17 @@ export class ModalProblemPage {
     this.camera
       .getPicture(options)
       .then(imageData => {
-        this.imageData = imageData;
+        //this.imageData = imageData;
+        this.imageResizer
+          .resize({
+            uri: imageData,
+            quality: 90,
+            width: 720,
+            height: 1280
+          })
+          .then(imageData => {
+            this.imageData = imageData;
+          });
       })
       .catch(err => {
         console.log(err);

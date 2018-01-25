@@ -37,6 +37,9 @@ export class FollowCdgTotalPage {
       //this.genType();
      // this.genPcode();
   }
+  getColor(status: any) {
+    return this.msg.getStatusColor(status);
+  }
   setShow() {
     this.isShow = true;
     if (this.provinces.length < 1) {

@@ -50,6 +50,7 @@ export class ProblemBranchPage {
       (data: any) => {
         if (data.status) {
           this.svData = data.data;
+          console.log(this.svData);
           if (this.svData.length < 1) {
             this.close();
           }

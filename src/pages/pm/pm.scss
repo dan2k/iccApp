@@ -1,0 +1,24 @@
+page-pm {
+  ion-scroll[scrollx] {
+    b{
+      font-size:18px;
+    }
+    div{
+
+      font-size:18px;
+    }
+
+    //white-space: nowrap;
+    height: 40px;
+    overflow: auto;
+  }
+  .center {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+  /* Hide ion-content scrollbar */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}

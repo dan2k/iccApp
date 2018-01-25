@@ -121,6 +121,19 @@ export class MessageProvider {
         });
     });
   }
+  getStatusColor(status: any) :any{
+    let color = 'black';
+    switch (status) {
+      case '0': color = 'red'; break;
+      case '3': color='#f28c52'; break;
+      case '4': color= 'green'; break;
+      case '6': color= 'gray'; break;
+      case '9': color= 'rgb(82, 226, 202)'; break;
+      case '10': color= '#d4a017'; break;
+
+    }
+    return color;
+  }
   postApi01(endPoint:any,params?:any) {
     this.checkServer();
     return new Promise((resolve, reject) => {

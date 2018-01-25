@@ -1,9 +1,7 @@
 <ion-header>
   <ion-navbar color="{{colorHeader}}">
-
     <ion-title>
       ICC V{{version}} -- คุณ {{userData?.user_fname}} {{userData?.user_lname}}
-
     </ion-title>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
@@ -13,17 +11,19 @@
 </ion-header>
 
 <ion-content style="padding:0;margin:0">
-  <ion-tabs *ngIf="userData.user_type==1&&(userData.job_id!=2 && userData.job_id!=3 && userData.job_id!=4)" color="{{colorHeader}}">
+  <ion-tabs *ngIf="userData.user_type==1&&(userData.user_level!=2 && userData.user_level!=3 && userData.user_level!=4)" color="{{colorHeader}}">
     <ion-tab tabTitle="ติดตามผล" [root]="tab1"></ion-tab>
     <ion-tab tabTitle="รับแจ้ง" [root]="tab2"></ion-tab>
     <!-- <ion-tab tabTitle="ภาพรวม" [root]="tab3"></ion-tab> -->
     <!-- <ion-tab tabTitle="demo" [root]="tab4"></ion-tab> -->
+    <ion-tab tabTitle="ยืนยัน PM" [root]="tab5"></ion-tab>
   </ion-tabs>
-  <ion-tabs *ngIf="userData.user_type==1&&(userData.job_id==2 || userData.job_id==3||userData.job_id==4)" color="{{colorHeader}}">
-      <ion-tab tabTitle="ติดตามผล" [root]="tab1"></ion-tab>
+  <ion-tabs *ngIf="userData.user_type==1&&(userData.user_level==2 || userData.user_level==3||userData.user_level==4)" color="{{colorHeader}}">
+    <ion-tab tabTitle="ติดตามผล" [root]="tab1"></ion-tab>
     <ion-tab tabTitle="รับแจ้ง" [root]="tab2"></ion-tab>
     <!-- <ion-tab tabTitle="ภาพรวม" [root]="tab3"></ion-tab> -->
     <!-- <ion-tab tabTitle="demo" [root]="tab4"></ion-tab> -->
+    <ion-tab tabTitle="ยืนยัน PM" [root]="tab5"></ion-tab>
   </ion-tabs>
   <ion-tabs *ngIf="userData.user_type==2" color="{{colorHeader}}">
     <ion-tab tabTitle="ติดตามผล" [root]="tab2"></ion-tab>

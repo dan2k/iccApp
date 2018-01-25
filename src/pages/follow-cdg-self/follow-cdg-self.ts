@@ -80,7 +80,7 @@ export class FollowCdgSelfPage {
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
       this.items = this.tmp.filter((item) => {
-        return (item.msv_detail.toLowerCase().indexOf(val.toLowerCase()) > -1)||(item.thiname.toLowerCase().indexOf(val.toLowerCase()) > -1)||(item.cust_pdesc.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        return ((item.msv_detail+'').toLowerCase().indexOf(val.toLowerCase()) > -1)||((item.thiname+'').toLowerCase().indexOf(val.toLowerCase()) > -1)||((item.cust_pdesc+'').toLowerCase().indexOf(val.toLowerCase()) > -1);
       });
     } else {
       this.items = this.tmp;
@@ -156,6 +156,9 @@ export class FollowCdgSelfPage {
       console.log(err);
     });
   }
+  getColor(status: any) {
+    return this.msg.getStatusColor(status);
+  }
   // genPcode() {
   //   console.log('สร้างหน่วยงานของ'+this.scope+'..............');
   //   this.registerProvider.genPcode(this.uType,this.scope,this.fProvince,this.fCustptype)
@@ -186,11 +189,8 @@ export class FollowCdgSelfPage {
     this.msg.postApi01(`v1/getJobCdgSelf`,params)
       .then((data:any) => {
         if (data.status) {
-
           //this.svData = data.data;
           //console.log(this.svData);
-
-
           let datax = data.data;
           let total = data.data.length;
           this.total = data.total;

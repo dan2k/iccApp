@@ -196,7 +196,9 @@ export class JobDistributePage {
           prob_gid: data.data.prob_gid,
           problem_sub_id: data.data.problem_sub_id,
           problem_sub2_id: data.data.problem_sub2_id,
-          detail: data.data.detail
+          detail: data.data.detail,
+          appointmentdate: data.data.appointmentdate,
+          appointmenttime:data.data.appointmenttime
           //  cust_ptype: this.svData.cust_ptype,
           //  cust_pcode: this.svData.cust_pcode,
           //  user_id: this.svData.msv_uid,
@@ -291,7 +293,9 @@ export class JobDistributePage {
           problem_sub2_id: data.problem_sub2_id,
           prob_gdesc: data.prob_gdesc,
           problem_sub_desc: data.problem_sub_desc,
-          detail: data.msv_detail
+          detail: data.msv_detail,
+          appointmentdate: data.appointmentdate,
+          appointmenttime:data.appointmenttime
           // cust_ptype: this.svData.cust_ptype,
           // cust_pcode: this.svData.cust_pcode,
           // user_id: this.svData.msv_uid,
@@ -304,7 +308,11 @@ export class JobDistributePage {
     modal.present();
   }
   create() {
-    console.log(this.problems);
+    //console.log(this.problems);
+   // return false;
+
+
+
     let params = {
       data: this.problems,
       user_id: this.userData.user_id,
@@ -314,6 +322,7 @@ export class JobDistributePage {
       msv_no: this.svData.msv_no,
       userData: this.userData
     };
+
     this.msg.postApi01("v1/createSv", params).then(
       (data: any) => {
         console.log('ssssssssssssssssssss=>',data);
@@ -327,7 +336,11 @@ export class JobDistributePage {
       err => {
         console.log(err);
       }
+
     );
+
+
+
     // this.msg.postApi(this.token, "createSv", params).then(
     //   (data: any) => {
     //     if (data.status) {

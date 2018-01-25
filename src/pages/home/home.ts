@@ -12,6 +12,7 @@ export class HomePage {
   public tab2: any;
   public tab3: any;
   public tab4: any;
+  public tab5: any;
   public userData: any;
   public rootPage: any;
   public userType: any;
@@ -38,12 +39,14 @@ export class HomePage {
       this.colorHeader = 'warning';
       let level = this.userData.user_level;
       console.log("level=>" + level);
+      this.tab5 = 'PmPage';
       if (level == 2 || level == 3 || level == 4) {
         // สำหรับข้าราชการตั้งแต่ ศจ.เป็นต้นไป
         this.tab2 = "MainmoiPage";
         //this.tab1 = "FollowupCustomerSelfPage"
         this.tab1 = "FollowupCustomerMapPage";
         this.tab3 = "FollowupCustomerTotalPage";
+
 
       } else {
         // สำหรับข้าราชการ สน.ท ่job_id=1

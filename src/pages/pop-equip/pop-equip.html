@@ -13,7 +13,10 @@
       <ion-label floating>รายละเอียด</ion-label>
       <ion-textarea rows=5 cols=80 [(ngModel)]="detail"></ion-textarea>
     </ion-item>
-
+    <ion-item style="margin:0;">
+      <ion-label floating>วันเวลานัดหมาย</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY HH:mm:ss" [(ngModel)]="appointmentdate"></ion-datetime>
+    </ion-item>
     <ion-item>
       <button ion-button color="primary" full small (click)="close()">ยืนยัน</button>
     </ion-item>

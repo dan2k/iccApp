@@ -1,0 +1,132 @@
+<ion-header>
+  <ion-navbar color="ptitle">
+    <ion-title>ส่งคืน</ion-title>
+    <ion-buttons start small>
+      <button ion-button icon-only color="ligth" small (click)="close()">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content class="main">
+  <ion-list>
+    <ion-item>
+      <h2><u>รายการอุปกรณ์ที่พบปัญหา</u></h2>
+      <p><b>PNO:&nbsp;{{svData.problem_sub_desc}} SN:&nbsp;{{svData.sv_sn}}</b></p>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>วันเวลาเริ่มต้น</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY HH:mm:ss" [(ngModel)]="startdate"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>วันเวลาสิ้นสุด</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY HH:mm:ss" [(ngModel)]="enddate"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>การแก้ไข</ion-label>
+      <ion-textarea [(ngModel)]="solve"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>สาเหตุ</ion-label>
+      <ion-select [(ngModel)]="cause">
+        <ion-option *ngFor="let c of causes;" [value]="c.cause_id">{{c.cause_desc}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>ซ่อมหน้างาน</ion-label>
+      <ion-checkbox color="dark" [(ngModel)]="isRepair" (ionChange)="setHw()"></ion-checkbox>
+    </ion-item>
+    <ion-item *ngIf="svData.draw_flag==1&&svData.battery_flag!=1">
+      <h2><u>รายการอุปกรณ์เบิก service</u></h2>
+      <p><b>PNO:&nbsp;{{svData.opno}} SN:&nbsp;{{svData.osno}}</b></p>
+    </ion-item>
+    <ion-item *ngIf="!isRepair && svData.draw_flag==1&&svData.battery_flag!=1">
+      <ion-label floating>ประเภทการคืน</ion-label>
+      <ion-select [(ngModel)]="repair_type" (ionChange)="setRepairType(repair_type)" >
+        <ion-option value="1">ปกติไม่เปลี่ยนอุปกรณ์</ion-option>
+        <ion-option value="2">ปกติเปลี่ยนอุปกรณ์</ion-option>
+        <ion-option value="3">ชำรุดเปลี่ยนอุปกรณ์</ion-option>
+        <ion-option value="4">ชำรุดเปลี่ยนอุปรกร์(P/N)</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="!isRepair && (repair_type==3)">
+      <ion-label floating>TagNo:</ion-label>
+      <ion-input type="text" [(ngModel)]="tagno"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!isRepair && (repair_type==3)">
+      <ion-label floating>อาการเสีย:</ion-label>
+      <ion-textarea [(ngModel)]="symptom"></ion-textarea>
+    </ion-item>
+    <ion-item style="padding:0px;margin:0xp;" *ngIf="!isRepair && (repair_type==4)">
+      <ion-slides pager>
+        <ion-slide *ngFor="let e of equips;">
+          <ion-card class="card">
+            <ion-card-content text-left style="padding:0px;margin:0px;">
+                <ion-fab #fab top right edge  style="position:absolute;top:-6%;left:90%;">
+                    <button ion-fab mini ><ion-icon name="arrow-dropleft"></ion-icon></button>
+                    <ion-fab-list side="left">
+                      <button *ngIf="e.nsno==''" ion-fab color="primary" (click)="setPart($event, fab,e,1)"><ion-icon name="add-circle"></ion-icon></button>
+                      <button *ngIf="e.nsno!=''" ion-fab color="warning" (click)="setPart($event, fab,e,2)"><ion-icon name="md-create"></ion-icon></button>
+                      <button *ngIf="e.nsno!=''" ion-fab color="danger" (click)="setPart($event, fab,e,3)"><ion-icon name="trash"></ion-icon></button>
+                    </ion-fab-list>
+                  </ion-fab>
+              <!-- <div><button ion-button icon-only><ion-icon name="person"></ion-icon></button></div> -->
+              <ion-grid>
+                <ion-row>
+                  <ion-col class="col" text-wrap>PN:&nbsp;<u>{{e.opno_desc}}[{{e.opno}}]</u></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col class="col" text-wrap>SN:&nbsp;<u>{{e.osno}}</u></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col class="col" text-wrap>PN(เสีย):&nbsp;<u>{{e.npno_desc}}[{{e.npno}}]</u></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col class="col" text-wrap>SN(เสีย):&nbsp;<u>{{e.nsno}}</u></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col class="col" text-wrap>TagNo:&nbsp;<u>{{e.tagno}}</u></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col class="col" text-wrap>อาการเสีย:&nbsp;<u>{{e.symptom}}</u></ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </ion-item>
+    <ion-item>
+      <ion-label>ใช้รถ</ion-label>
+      <ion-checkbox color="dark" [(ngModel)]="isCar" (ionChange)="setClearCar()"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+  <ion-item *ngIf="isCar">
+    <ion-label floating>ประเภทรถ</ion-label>
+    <ion-select [(ngModel)]="car_type" (ionChange)="setCar(car_type)">
+      <ion-option value="1">รถบริษัท</ion-option>
+      <ion-option value="2">รถส่วนตัว</ion-option>
+      <ion-option value="3">รถแท็กซี่</ion-option>
+      <ion-option value="4">รถโดยสาร</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item *ngIf="isCar && car_type==1">
+    <ion-label floating>ทะเบียนรถ</ion-label>
+    <ion-select [(ngModel)]="carno" (ionChange)="setMeter(carno)">
+      <ion-option *ngFor="let c of cars ;" [value]="c">
+        {{c.car_id}}
+      </ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item *ngIf="isCar && (car_type&&car_type!=1 || (car_type && car_type==1&&carno))">
+    <ion-label floating>จาก:</ion-label>
+    <ion-input [(ngModel)]="from" type="number"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="isCar && (car_type&&car_type!=1 || (car_type && car_type==1&&carno))">
+    <ion-label floating>ถึง:</ion-label>
+    <ion-input [(ngModel)]="to" type="number"></ion-input>
+  </ion-item>
+</ion-content>
+<ion-footer>
+  <button ion-button full (click)="save()" >ยืนยัน</button>
+</ion-footer>

@@ -15,3 +15,9 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 @import '../components/ion-digit-keyboard/ion-digit-keyboard';
+/*
+ทำให้ ion-select wrap text ได้(ขึ้นบรรทัดใหม่)
+*/
+.alert-ios .alert-radio-label{white-space: pre-line;}
+.alert-md .alert-radio-label{white-space: pre-line;}
+.alert-wp .alert-radio-label{white-space: pre-line;}

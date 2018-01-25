@@ -1,0 +1,58 @@
+
+<ion-header>
+
+  <ion-navbar color="ptitle">
+    <ion-title>service</ion-title>
+    <ion-buttons start small>
+      <button ion-button icon-only color="ligth" small (click)="close()">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label stacked style="font-size:16px;">ผู้ดำเนินการ 1:</ion-label>
+      <ion-select  [(ngModel)]="assist1" interface="popover">
+        <ion-option *ngFor="let item of assists" [value]="item.emp_id">{{item.thiname}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked style="font-size:16px;">ผู้ดำเนินการ 2:</ion-label>
+      <ion-select  [(ngModel)]="assist2" interface="popover">
+        <ion-option *ngFor="let item of assists" [value]="item.emp_id">{{item.thiname}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="isBattery">
+      <ion-label>เบิกแบ็ต</ion-label>
+      <ion-checkbox [(ngModel)]="battery_flag" color="dark" (ionChange)="setBattery()" ></ion-checkbox>
+    </ion-item>
+    <ion-item *ngIf="battery_flag">
+      <ion-label stacked style="font-size:16px;">จำนวนที่ต้องการเบิก:[ยอดคงเหลือ]</ion-label>
+      <ion-input type="number" [(ngModel)]="battery_amt" ></ion-input>
+    </ion-item>
+    <ion-item *ngIf="isHW">
+      <b>PNO: {{svData.problem_sub_desc}}</b>&nbsp;<b>SN: {{svData.sv_sn}}</b>
+    </ion-item>
+    <ion-item *ngIf="isHW  && !battery_flag">
+      <ion-label>เบิกอุปกรณ์</ion-label>
+      <ion-checkbox [(ngModel)]="draw_flag" color="dark" (click)="setDraw()"></ion-checkbox>
+    </ion-item>
+    <ion-item *ngIf="draw_flag">
+      <ion-label stacked style="font-size:16px;">part อุปกรณ์:</ion-label>
+      <ion-select [(ngModel)]="pno" (ionChange)="genSno(pno)" interface="popover">
+        <ion-option *ngFor="let p of pnos" [value]="p?.pno">{{p?.pno_desc}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="draw_flag">
+      <ion-label stacked style="font-size:16px;">serial อุปกรณ์:</ion-label>
+      <ion-select [(ngModel)]="sno" interface="popover">
+        <ion-option *ngFor="let s of snos" [value]="s?.sno">{{s?.sno}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <button ion-button full color="success" (click)="save()">บันทึกออก service</button>
+</ion-footer>
