@@ -9,3 +9,16 @@ export var url: string = 'http://www.controldata.co.th/mpsicc/iccServer';
 
 
 
+// confic  ต่าง ๆ ของระบบ
+export const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyBjbxbHbiIbr2rYPUnXh1t1CEBmg1AtpUY",
+  authDomain: "web-chat-191313.firebaseapp.com",
+  databaseURL: "https://web-chat-191313.firebaseio.com",
+  projectId: "web-chat-191313",
+  storageBucket: "web-chat-191313.appspot.com",
+  messagingSenderId: "228292288539"
+}
+
+
+
+

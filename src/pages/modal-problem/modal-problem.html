@@ -33,7 +33,7 @@
         <img src="./assets/img/placeholder.png" *ngIf="!imageData">
         <ion-row>
             <ion-col>
-                <button ion-button icon-left clear small color="ptitle" (click)="takePicture()"> 
+                <button ion-button icon-left clear small color="ptitle" (click)="takePicture()">
                             <ion-icon name="camera"></ion-icon>
                             <div>จับภาพ</div>
                         </button>
@@ -51,9 +51,12 @@
         </ion-item> -->
         <ion-row>
             <ion-col>
-                <button ion-button icon-left clear small color="ptitle" (click)="takePicture()"> 
+                <button ion-button icon-left clear small color="ptitle" (click)="takePicture()">
                                 <ion-icon name="camera"></ion-icon>
                             </button>
+                            <button ion-button icon-left clear small color="ptitle" (click)="findPicture()">
+                              <ion-icon name="ios-folder-open-outline"></ion-icon>
+                          </button>
                 <button ion-button icon-left clear small color="danger" (click)="removePicture()" [disabled]="!imageData">
                                 <ion-icon name="trash"></ion-icon>
                               </button>

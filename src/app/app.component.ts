@@ -1,3 +1,4 @@
+import { UseronlineProvider } from './../providers/useronline/useronline';
 import { MessageProvider } from "./../providers/message/message";
 import { Network } from "@ionic-native/network";
 import { Component } from "@angular/core";
@@ -8,6 +9,7 @@ import { HomePage } from "../pages/home/home";
 import { AppVersion } from '@ionic-native/app-version';
 import { AppUpdate } from '@ionic-native/app-update';
 import { url } from '../config';
+
 //import { CacheService } from "ionic-cache";
 
 @Component({
@@ -19,6 +21,7 @@ export class MyApp {
   isMenu = false;
   userDataArr: any;
   userData: any;
+  version: any;
   constructor(
     platform: Platform,
     statusBar: StatusBar,
@@ -29,7 +32,8 @@ export class MyApp {
     public app: App,
     public msg: MessageProvider,
     private appVersion: AppVersion,
-    private appUpdate:AppUpdate,
+    private appUpdate: AppUpdate,
+    public userOnline:UseronlineProvider,
   ) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -56,7 +60,12 @@ export class MyApp {
       console.log('appname=', this.appVersion.getAppName());
       console.log('appversioncode=', this.appVersion.getVersionCode());
       console.log('appversionnumber=', this.appVersion.getVersionNumber());
-
+      this.appVersion.getVersionNumber().then((v) => {
+        this.version = v;
+       // console.log('vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv==>', v);
+     }).catch(e => {
+       console.log(e);
+     });
       if (this.network.type == "none") {
         // if disconnect
         console.log("connect:=>error");
@@ -80,6 +89,7 @@ export class MyApp {
     this.msg.confirm("คุณต้องการออกจากระบบหรือไม่", data => {
       localStorage.removeItem("userData");
       localStorage.removeItem("userDataArr");
+      this.userOnline.signOut();
       //let nav = this.app.getRootNav();
      // nav.setRoot("LoginTypePage");
       // SOLVE (getRootNav) is deprecated and will be removed in the next major release. Use getRootNavById instead.

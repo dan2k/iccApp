@@ -19,6 +19,17 @@ import { MessageProvider } from '../providers/message/message';
 //import { UserProvider } from '../providers/user/user';
 //import { RegisterProvider } from '../providers/register/register';
 //import { DirectivesModule } from '../directives/directives.module';
+
+
+// for firebase angularfire2
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { FIREBASE_CONFIG } from '../config';
+import { UseronlineProvider } from '../providers/useronline/useronline';
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -28,6 +39,9 @@ import { MessageProvider } from '../providers/message/message';
     BrowserModule,
     IonicModule.forRoot(MyApp, { tabsPlacement: 'top' }),
     HttpModule,
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     //CacheModule.forRoot(),
     //DirectivesModule,
   ],
@@ -46,6 +60,7 @@ import { MessageProvider } from '../providers/message/message';
     //ServiceProvider,
     //CommentProvider,
     MessageProvider,
+    UseronlineProvider,
     //HwProvider,
     //SwProvider,
     //UserProvider,

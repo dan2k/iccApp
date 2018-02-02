@@ -1,11 +1,13 @@
+import { UseronlineProvider } from './../../providers/useronline/useronline';
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
-import { AppVersion } from '@ionic-native/app-version';
+
+//import { AppVersion } from '@ionic-native/app-version';
 
 @Component({
   selector: "page-home",
   templateUrl: "home.html",
-  providers:[AppVersion]
+  //providers:[AppVersion]
 })
 export class HomePage {
   public tab1: any;
@@ -17,13 +19,23 @@ export class HomePage {
   public rootPage: any;
   public userType: any;
   public colorHeader: any;
-  public version: any;
-  constructor(public navCtrl: NavController, public appVersion: AppVersion) {
-    this.appVersion.getVersionNumber().then((v) => {
-       this.version = v;
-    }).catch(e => {
-      console.log(e);
-    });
+  public onlineC: any;
+  public onlineP: any;
+  public onlineR: any;
+  public onlineD: any;
+  public onlineG: any;
+  public onlineT: any;
+  //public version: any;
+  constructor(
+    public navCtrl: NavController,
+    public userOnline: UseronlineProvider,
+    //public appVersion: AppVersion
+  ) {
+    // this.appVersion.getVersionNumber().then((v) => {
+    //    this.version = v;
+    // }).catch(e => {
+    //   console.log(e);
+    // });
 
     this.userData = JSON.parse(localStorage.getItem("userData"));
     this.userType = this.userData.user_type;
@@ -63,6 +75,26 @@ export class HomePage {
     }
     //this.tab2 = 'Tab3Page';
     //this.tab3 = 'Tab3Page';
+
+
+    this.userOnline.initUser(this.userData);
+    //userOnline
+    this.userOnline.getOnline('1').valueChanges().subscribe(item => {
+      let tmp = this.userOnline.getFilteredList(item, 'status', 'online');
+      let tm = this.userOnline.getFilteredList(tmp, 'level', '1');
+      this.onlineD = tm.length;
+      tm = this.userOnline.getFilteredList(tmp, 'level', '2');
+      this.onlineP=tm.length
+      tm = this.userOnline.getFilteredList(tmp, 'level', '3');
+      this.onlineR=tm.length
+      tm = this.userOnline.getFilteredList(tmp, 'level', '4');
+      this.onlineC=tm.length
+      this.userOnline.getOnline('2').valueChanges().subscribe(item => {
+        let tmp = this.userOnline.getFilteredList(item, 'status', 'online');
+        this.onlineG = tmp.length;
+        this.onlineT = this.onlineC + this.onlineR + this.onlineP + this.onlineD + this.onlineG;
+      });
+    });
   }
   // logout() {
   //   this.msg.confirm('คุณต้องการออกจากระบบหรือไม่', (data) => {

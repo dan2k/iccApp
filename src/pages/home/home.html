@@ -1,7 +1,8 @@
 <ion-header>
+
   <ion-navbar color="{{colorHeader}}">
     <ion-title>
-      ICC V{{version}} -- คุณ {{userData?.user_fname}} {{userData?.user_lname}}
+      <!--ICC V{{version}} -->คุณ {{userData?.user_fname}} {{userData?.user_lname}}
     </ion-title>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
@@ -11,6 +12,36 @@
 </ion-header>
 
 <ion-content style="padding:0;margin:0">
+    <ion-fab #fab bottom left edge style="position:absolute;top:90%;left:0%;">
+        <!-- style="position:absolute;top:-6%;left:90%;" -->
+      <button ion-fab mini class="notification-button">
+        <ion-icon name="person"></ion-icon>
+        <ion-badge class="notifications-badge-m">{{onlineT}}</ion-badge>
+      </button>
+      <ion-fab-list side="right">
+        <button ion-fab color="G" class="notification-button">
+          G
+          <ion-badge class="notifications-badge">{{onlineG}}</ion-badge>
+        </button>
+        <button ion-fab color="D" class="notification-button">
+          D
+          <ion-badge class="notifications-badge">{{onlineD}}</ion-badge>
+        </button>
+        <button ion-fab color="P" class="notification-button">
+          P
+          <ion-badge class="notifications-badge">{{onlineP}}</ion-badge>
+        </button>
+        <button ion-fab color="R" class="notification-button">
+          R
+          <ion-badge class="notifications-badge">{{onlineR}}</ion-badge>
+        </button>
+        <button ion-fab color="C" class="notification-button">
+          C
+          <ion-badge class="notifications-badge">{{onlineC}}</ion-badge>
+        </button>
+
+      </ion-fab-list>
+    </ion-fab>
   <ion-tabs *ngIf="userData.user_type==1&&(userData.user_level!=2 && userData.user_level!=3 && userData.user_level!=4)" color="{{colorHeader}}">
     <ion-tab tabTitle="ติดตามผล" [root]="tab1"></ion-tab>
     <ion-tab tabTitle="รับแจ้ง" [root]="tab2"></ion-tab>

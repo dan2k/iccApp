@@ -139,6 +139,30 @@ export class CommentPage {
       console.log(err);
     });
   }
+  findPicture() {
+    let options = {
+      quality: 30,
+      sourceType:0,
+    };
+    this.camera
+      .getPicture(options)
+      .then(imageData => {
+        //this.imageData = imageData;
+        this.imageResizer
+          .resize({
+            uri: imageData,
+            quality: 90,
+            width: 720,
+            height: 1280
+          })
+          .then(imageData => {
+            this.imageData = imageData;
+          });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
   upload(svno: string,comment_no:string,pno:string) {
     // imageData is either a base64 encoded string or a file URI
     // If it's base64:
