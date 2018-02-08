@@ -1,6 +1,6 @@
 {
   "name": "iccApp",
-  "app_id": "a338abcc",
+  "app_id": "c12c3fca",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
